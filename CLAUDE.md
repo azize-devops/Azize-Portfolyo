@@ -133,5 +133,10 @@ make k8s-apply  # Deploy
 4. Admin panel
 5. Dark/Light mode
 
+## CI/CD
+- GitHub Actions ile otomatik deployment
+- Her push'ta: Test → Build → Deploy
+- SSH ile sunucuya otomatik deploy
+
 ---
 *Son güncelleme: 25 Ocak 2026*
