@@ -76,33 +76,30 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-  # Job 3: Deploy to Server
+  # Job 3: Deploy to Server (runs on self-hosted runner)
   deploy:
     name: Deploy to Server
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: build
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
 
     steps:
-      - name: Deploy via SSH
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USERNAME }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: ${{ secrets.SSH_PORT }}
-          script: |
-            cd ~/Full-stack-DevOps-portfolio
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-            # Pull latest changes
-            git pull origin main
+      - name: Deploy
+        run: |
+          cd ~/Full-stack-DevOps-portfolio
 
-            # Build and restart containers
-            docker compose down
-            docker compose up -d --build
+          # Pull latest changes
+          git pull origin main
 
-            # Clean up old images
-            docker image prune -f
+          # Build and restart containers
+          docker compose down
+          docker compose up -d --build
 
-            # Show status
-            docker compose ps
+          # Clean up old images
+          docker image prune -f
+
+          # Show status
+          docker compose ps
