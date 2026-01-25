@@ -1,0 +1,24 @@
+# AWS Terraform Variables
+# Copy this file to terraform.tfvars and fill in the values
+
+aws_region  = "eu-west-1"
+environment = "development"
+
+# Cluster
+cluster_name       = "devops-journey-eks"
+kubernetes_version = "1.28"
+
+# VPC
+vpc_cidr             = "10.0.0.0/16"
+private_subnet_cidrs = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
+public_subnet_cidrs  = ["10.0.101.0/24", "10.0.102.0/24", "10.0.103.0/24"]
+
+# Node Group
+node_instance_types = ["t3.medium"]
+node_min_size       = 1
+node_max_size       = 5
+node_desired_size   = 2
+
+# RDS (set to true for production)
+use_rds            = false
+rds_instance_class = "db.t3.micro"
