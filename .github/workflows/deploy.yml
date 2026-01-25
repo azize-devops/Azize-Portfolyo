@@ -84,15 +84,12 @@ jobs:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
       - name: Deploy
         run: |
           cd ~/Full-stack-DevOps-portfolio
 
-          # Pull latest changes
-          git pull origin main
+          # Pull latest changes using token
+          git pull https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git main
 
           # Build and restart containers
           docker compose down
