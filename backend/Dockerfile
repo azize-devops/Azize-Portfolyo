@@ -10,11 +10,11 @@ WORKDIR /app
 # Copy go mod files first for better caching
 COPY go.mod ./
 
-# Download dependencies and generate go.sum
-RUN go mod download && go mod verify || go mod tidy
-
-# Copy source code
+# Copy source code (needed for go mod tidy to resolve dependencies)
 COPY . .
+
+# Generate go.sum and download dependencies
+RUN go mod tidy && go mod download
 
 # Build the application
 # CGO_ENABLED=0 for static binary
