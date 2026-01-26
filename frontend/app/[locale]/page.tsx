@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { ArrowRight, Award, BookOpen, ExternalLink } from "lucide-react";
 import { ContactSection } from "@/components/sections/contact-section";
+import { AnimatedTimeline } from "@/components/sections/animated-timeline";
 
 const certifications = [
   {
@@ -77,8 +78,6 @@ const skills = [
     docUrl: "https://git-scm.com/doc",
   },
 ];
-
-const timelineKeys = ["linux", "docker", "kubernetes", "certs", "aws"] as const;
 
 export default function Home() {
   const t = useTranslations();
@@ -254,41 +253,7 @@ export default function Home() {
       </section>
 
       {/* Timeline Section */}
-      <section className="py-20 bg-white dark:bg-gray-950">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold">{t("timeline.title")}</h2>
-            <p className="mt-4 text-gray-600 dark:text-gray-400">
-              {t("timeline.subtitle")}
-            </p>
-          </div>
-
-          <div className="max-w-3xl mx-auto">
-            <div className="relative">
-              <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-gray-200 dark:bg-gray-800" />
-
-              {timelineKeys.map((key, index) => (
-                <div key={index} className="relative pl-12 pb-8 last:pb-0">
-                  <div className="absolute left-0 w-8 h-8 rounded-full bg-blue-600 dark:bg-blue-500 flex items-center justify-center">
-                    <div className="w-3 h-3 rounded-full bg-white" />
-                  </div>
-                  <div className="bg-gray-50 dark:bg-gray-900 rounded-lg p-4 border border-gray-200 dark:border-gray-800">
-                    <span className="text-sm text-blue-600 dark:text-blue-400 font-medium">
-                      {t(`timeline.items.${key}.date`)}
-                    </span>
-                    <h3 className="text-lg font-semibold mt-1">
-                      {t(`timeline.items.${key}.title`)}
-                    </h3>
-                    <p className="text-gray-600 dark:text-gray-400 text-sm mt-1">
-                      {t(`timeline.items.${key}.description`)}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+      <AnimatedTimeline />
 
       {/* Contact Section */}
       <ContactSection />
