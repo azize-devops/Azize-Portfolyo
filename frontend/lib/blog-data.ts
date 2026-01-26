@@ -235,9 +235,9 @@ Streamlit gerçekten kolay. Birkaç saat içinde çalışan bir uygulama yaptım
     tags: ["linux", "nginx", "web-server"],
     author: { name: "Azize" },
     content: `
-Apache'yi öğrendikten sonra [Nginx](https://nginx.org/)'i denemek istedim. Herkes "daha hafif, daha hızlı" diyordu. Ayrıca Kubernetes'te sıkça kullanıldığını biliyordum - ileride işime yarayacaktı.
+Apache'yi öğrendikten sonra [Nginx](https://nginx.org/)'i denemek istedim. Herkes "daha hafif, daha hızlı" diyordu.
 
-Görevim basitti: \`/healtz\` adresine istek geldiğinde "istek başarılı" dönen bir endpoint yapmak. Kubernetes'teki health check'lere benzer bir şey.
+Görevim basitti: \`/healtz\` adresine istek geldiğinde "istek başarılı" dönen bir endpoint yapmak. Basit bir health check endpoint'i.
 
 ## Nginx Kurulumu
 
