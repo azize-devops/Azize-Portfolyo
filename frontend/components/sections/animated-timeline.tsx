@@ -26,46 +26,53 @@ function TimelineItem({
   return (
     <div
       ref={ref}
-      className={`relative flex items-center mb-8 last:mb-0 ${
-        isRight ? "flex-row-reverse" : ""
-      }`}
+      className="relative flex items-center mb-12 last:mb-0"
     >
-      {/* Content card */}
-      <div
-        className={`w-5/12 transition-all duration-700 ease-out ${
-          isVisible
-            ? "opacity-100 translate-x-0"
-            : isRight
-            ? "opacity-0 translate-x-12"
-            : "opacity-0 -translate-x-12"
-        }`}
-        style={{ transitionDelay: `${index * 100}ms` }}
-      >
-        <div className="bg-gray-50 dark:bg-gray-900 rounded-lg p-4 border border-gray-200 dark:border-gray-800 hover:shadow-lg hover:scale-[1.02] transition-all duration-300">
-          <span className="text-sm text-blue-600 dark:text-blue-400 font-medium">
-            {t(`timeline.items.${itemKey}.date`)}
-          </span>
-          <h3 className="text-lg font-semibold mt-1">
-            {t(`timeline.items.${itemKey}.title`)}
-          </h3>
-          <p className="text-gray-600 dark:text-gray-400 text-sm mt-1">
-            {t(`timeline.items.${itemKey}.description`)}
-          </p>
-        </div>
+      {/* Left side content */}
+      <div className={`w-[calc(50%-20px)] ${isRight ? "pr-6" : "pr-6"}`}>
+        {!isRight && (
+          <div
+            className={`transition-all duration-700 ease-out ${
+              isVisible
+                ? "opacity-100 translate-x-0"
+                : "opacity-0 -translate-x-12"
+            }`}
+            style={{ transitionDelay: `${index * 100}ms` }}
+          >
+            <div className="bg-gray-50 dark:bg-gray-900 rounded-lg p-4 border border-gray-200 dark:border-gray-800 hover:shadow-lg hover:scale-[1.02] transition-all duration-300">
+              <span className="text-sm text-blue-600 dark:text-blue-400 font-medium">
+                {t(`timeline.items.${itemKey}.date`)}
+              </span>
+              <h3 className="text-lg font-semibold mt-1">
+                {t(`timeline.items.${itemKey}.title`)}
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400 text-sm mt-1">
+                {t(`timeline.items.${itemKey}.description`)}
+              </p>
+            </div>
+          </div>
+        )}
       </div>
 
-      {/* Center dot and connector */}
-      <div className="w-2/12 flex justify-center relative">
-        {/* Horizontal connector line */}
+      {/* Center dot */}
+      <div className="relative z-10 flex items-center justify-center w-10 h-10">
+        {/* Horizontal connector line - left */}
         <div
-          className={`absolute top-1/2 h-0.5 bg-gradient-to-r from-blue-500 to-cyan-500 transition-all duration-500 ${
-            isVisible ? "w-full" : "w-0"
-          } ${isRight ? "right-1/2 origin-right" : "left-1/2 origin-left"}`}
+          className={`absolute right-1/2 top-1/2 -translate-y-1/2 h-0.5 bg-gradient-to-l from-blue-500 to-cyan-400 transition-all duration-500 origin-right ${
+            isVisible && !isRight ? "w-6" : "w-0"
+          }`}
           style={{ transitionDelay: `${index * 100 + 100}ms` }}
         />
-        {/* Center dot */}
+        {/* Horizontal connector line - right */}
         <div
-          className={`relative z-10 w-5 h-5 rounded-full bg-blue-600 dark:bg-blue-500 flex items-center justify-center transition-all duration-500 ${
+          className={`absolute left-1/2 top-1/2 -translate-y-1/2 h-0.5 bg-gradient-to-r from-blue-500 to-cyan-400 transition-all duration-500 origin-left ${
+            isVisible && isRight ? "w-6" : "w-0"
+          }`}
+          style={{ transitionDelay: `${index * 100 + 100}ms` }}
+        />
+        {/* Dot */}
+        <div
+          className={`w-5 h-5 rounded-full bg-blue-600 dark:bg-blue-500 flex items-center justify-center transition-all duration-500 ${
             isVisible ? "scale-100" : "scale-0"
           }`}
           style={{ transitionDelay: `${index * 100 + 150}ms` }}
@@ -79,8 +86,31 @@ function TimelineItem({
         </div>
       </div>
 
-      {/* Empty space on opposite side */}
-      <div className="w-5/12" />
+      {/* Right side content */}
+      <div className={`w-[calc(50%-20px)] ${isRight ? "pl-6" : "pl-6"}`}>
+        {isRight && (
+          <div
+            className={`transition-all duration-700 ease-out ${
+              isVisible
+                ? "opacity-100 translate-x-0"
+                : "opacity-0 translate-x-12"
+            }`}
+            style={{ transitionDelay: `${index * 100}ms` }}
+          >
+            <div className="bg-gray-50 dark:bg-gray-900 rounded-lg p-4 border border-gray-200 dark:border-gray-800 hover:shadow-lg hover:scale-[1.02] transition-all duration-300">
+              <span className="text-sm text-blue-600 dark:text-blue-400 font-medium">
+                {t(`timeline.items.${itemKey}.date`)}
+              </span>
+              <h3 className="text-lg font-semibold mt-1">
+                {t(`timeline.items.${itemKey}.title`)}
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400 text-sm mt-1">
+                {t(`timeline.items.${itemKey}.description`)}
+              </p>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
