@@ -84,3 +84,137 @@ html {
 .animate-ping-slow {
   animation: ping-slow 2s cubic-bezier(0, 0, 0.2, 1) infinite;
 }
+
+/* Blog Content Styling */
+.blog-content {
+  /* Paragraphs */
+  p {
+    color: #4b5563;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+  }
+
+  /* Headings - visually distinct */
+  h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #111827;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #e5e7eb;
+  }
+
+  h3 {
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: #1f2937;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  /* Links - clearly clickable */
+  a {
+    color: #2563eb;
+    text-decoration: underline;
+    text-decoration-color: #93c5fd;
+    text-underline-offset: 3px;
+    transition: all 0.2s ease;
+  }
+
+  a:hover {
+    color: #1d4ed8;
+    text-decoration-color: #2563eb;
+    background-color: #eff6ff;
+    border-radius: 2px;
+  }
+
+  /* Inline code - distinct from text */
+  code:not(pre code) {
+    background-color: #f1f5f9;
+    color: #0f172a;
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    font-size: 0.9em;
+    font-weight: 500;
+    border: 1px solid #e2e8f0;
+  }
+
+  /* Code blocks */
+  pre {
+    background-color: transparent !important;
+    padding: 0 !important;
+    margin: 1.5rem 0 !important;
+  }
+
+  /* Lists */
+  ul, ol {
+    margin: 1rem 0;
+    padding-left: 1.5rem;
+  }
+
+  li {
+    color: #4b5563;
+    margin-bottom: 0.5rem;
+  }
+
+  /* Strong text */
+  strong {
+    color: #111827;
+    font-weight: 600;
+  }
+
+  /* Blockquotes */
+  blockquote {
+    border-left: 4px solid #3b82f6;
+    padding-left: 1rem;
+    margin: 1.5rem 0;
+    color: #6b7280;
+    font-style: italic;
+  }
+}
+
+/* Dark mode blog styles */
+.dark .blog-content {
+  p {
+    color: #d1d5db;
+  }
+
+  h2 {
+    color: #f9fafb;
+    border-bottom-color: #374151;
+  }
+
+  h3 {
+    color: #e5e7eb;
+  }
+
+  a {
+    color: #60a5fa;
+    text-decoration-color: #3b82f6;
+  }
+
+  a:hover {
+    color: #93c5fd;
+    text-decoration-color: #60a5fa;
+    background-color: #1e3a5f;
+  }
+
+  code:not(pre code) {
+    background-color: #1e293b;
+    color: #e2e8f0;
+    border-color: #334155;
+  }
+
+  li {
+    color: #d1d5db;
+  }
+
+  strong {
+    color: #f9fafb;
+  }
+
+  blockquote {
+    color: #9ca3af;
+  }
+}
