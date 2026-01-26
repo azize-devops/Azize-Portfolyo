@@ -89,13 +89,18 @@
     "title": "博客",
     "subtitle": "关于DevOps、Kubernetes和云的文章",
     "backHome": "返回首页",
+    "backToBlog": "返回博客",
     "searchPlaceholder": "搜索文章...",
     "allPosts": "所有文章",
     "totalPosts": "找到 {count} 篇文章",
     "postsWithTag": "{count} 篇带有 {tag} 标签的文章",
     "noPostsFound": "未找到文章",
     "noPostsDescription": "没有找到与您搜索相匹配的文章。",
-    "viewAllPosts": "查看所有文章"
+    "viewAllPosts": "查看所有文章",
+    "postNotFound": "文章未找到",
+    "share": "分享",
+    "copyLink": "复制链接",
+    "relatedPosts": "相关文章"
   },
   "footer": {
     "description": "DevOps工程师 | CKA & CKAD认证",

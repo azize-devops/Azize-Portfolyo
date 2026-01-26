@@ -89,13 +89,18 @@
     "title": "Blog",
     "subtitle": "DevOps, Kubernetes ve Cloud hakkinda yazilarim",
     "backHome": "Ana Sayfaya Don",
+    "backToBlog": "Blog'a Don",
     "searchPlaceholder": "Yazilarda ara...",
     "allPosts": "Tum Yazilar",
     "totalPosts": "{count} yazi bulundu",
     "postsWithTag": "{tag} etiketinde {count} yazi",
     "noPostsFound": "Yazi bulunamadi",
     "noPostsDescription": "Aramanizla eslesen yazi bulunamadi.",
-    "viewAllPosts": "Tum yazilari gor"
+    "viewAllPosts": "Tum yazilari gor",
+    "postNotFound": "Yazi bulunamadi",
+    "share": "Paylas",
+    "copyLink": "Linki kopyala",
+    "relatedPosts": "Ilgili Yazilar"
   },
   "footer": {
     "description": "DevOps Engineer | CKA & CKAD Certified",

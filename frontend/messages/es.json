@@ -89,13 +89,18 @@
     "title": "Blog",
     "subtitle": "Mis articulos sobre DevOps, Kubernetes y Cloud",
     "backHome": "Volver al inicio",
+    "backToBlog": "Volver al Blog",
     "searchPlaceholder": "Buscar articulos...",
     "allPosts": "Todos los articulos",
     "totalPosts": "{count} articulos encontrados",
     "postsWithTag": "{count} articulos con etiqueta {tag}",
     "noPostsFound": "No se encontraron articulos",
     "noPostsDescription": "No se encontraron articulos que coincidan con su busqueda.",
-    "viewAllPosts": "Ver todos los articulos"
+    "viewAllPosts": "Ver todos los articulos",
+    "postNotFound": "Articulo no encontrado",
+    "share": "Compartir",
+    "copyLink": "Copiar enlace",
+    "relatedPosts": "Articulos Relacionados"
   },
   "footer": {
     "description": "Ingeniero DevOps | Certificado CKA & CKAD",

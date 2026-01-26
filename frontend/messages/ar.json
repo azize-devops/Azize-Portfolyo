@@ -89,13 +89,18 @@
     "title": "المدونة",
     "subtitle": "مقالاتي حول DevOps و Kubernetes والسحابة",
     "backHome": "العودة للرئيسية",
+    "backToBlog": "العودة للمدونة",
     "searchPlaceholder": "البحث في المقالات...",
     "allPosts": "جميع المقالات",
     "totalPosts": "تم العثور على {count} مقال",
     "postsWithTag": "{count} مقال بوسم {tag}",
     "noPostsFound": "لم يتم العثور على مقالات",
     "noPostsDescription": "لم يتم العثور على مقالات تطابق بحثك.",
-    "viewAllPosts": "عرض جميع المقالات"
+    "viewAllPosts": "عرض جميع المقالات",
+    "postNotFound": "المقال غير موجود",
+    "share": "مشاركة",
+    "copyLink": "نسخ الرابط",
+    "relatedPosts": "مقالات ذات صلة"
   },
   "footer": {
     "description": "مهندس DevOps | معتمد CKA & CKAD",

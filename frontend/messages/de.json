@@ -89,13 +89,18 @@
     "title": "Blog",
     "subtitle": "Meine Artikel ueber DevOps, Kubernetes und Cloud",
     "backHome": "Zurueck zur Startseite",
+    "backToBlog": "Zurueck zum Blog",
     "searchPlaceholder": "Beitraege suchen...",
     "allPosts": "Alle Beitraege",
     "totalPosts": "{count} Beitraege gefunden",
     "postsWithTag": "{count} Beitraege mit {tag} Tag",
     "noPostsFound": "Keine Beitraege gefunden",
     "noPostsDescription": "Keine Beitraege gefunden, die Ihrer Suche entsprechen.",
-    "viewAllPosts": "Alle Beitraege anzeigen"
+    "viewAllPosts": "Alle Beitraege anzeigen",
+    "postNotFound": "Beitrag nicht gefunden",
+    "share": "Teilen",
+    "copyLink": "Link kopieren",
+    "relatedPosts": "Aehnliche Beitraege"
   },
   "footer": {
     "description": "DevOps Engineer | CKA & CKAD Zertifiziert",

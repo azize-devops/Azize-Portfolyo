@@ -89,13 +89,18 @@
     "title": "Блог",
     "subtitle": "Мои статьи о DevOps, Kubernetes и Cloud",
     "backHome": "На главную",
+    "backToBlog": "Вернуться в Блог",
     "searchPlaceholder": "Поиск статей...",
     "allPosts": "Все статьи",
     "totalPosts": "Найдено {count} статей",
     "postsWithTag": "{count} статей с тегом {tag}",
     "noPostsFound": "Статьи не найдены",
     "noPostsDescription": "Не найдено статей, соответствующих вашему запросу.",
-    "viewAllPosts": "Смотреть все статьи"
+    "viewAllPosts": "Смотреть все статьи",
+    "postNotFound": "Статья не найдена",
+    "share": "Поделиться",
+    "copyLink": "Копировать ссылку",
+    "relatedPosts": "Похожие статьи"
   },
   "footer": {
     "description": "DevOps Инженер | CKA & CKAD Сертифицирован",
