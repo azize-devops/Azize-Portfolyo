@@ -3,7 +3,7 @@
 import { useLocale } from "next-intl";
 import { useRouter, usePathname } from "@/i18n/navigation";
 import { useState, useRef, useEffect } from "react";
-import { Globe, ChevronDown } from "lucide-react";
+import { Globe } from "lucide-react";
 import { localeNames, localeFlags, locales, type Locale } from "@/i18n/config";
 
 export function LanguageSelector() {
@@ -35,15 +35,10 @@ export function LanguageSelector() {
     <div className="relative" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 px-3 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 transition-colors text-sm font-medium"
+        className="flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 transition-colors"
         aria-label="Select language"
       >
-        <Globe className="h-4 w-4" />
-        <span className="hidden sm:inline">{localeFlags[locale]}</span>
-        <span className="hidden md:inline">{localeNames[locale]}</span>
-        <ChevronDown
-          className={`h-4 w-4 transition-transform ${isOpen ? "rotate-180" : ""}`}
-        />
+        <Globe className="h-5 w-5" />
       </button>
 
       {isOpen && (
