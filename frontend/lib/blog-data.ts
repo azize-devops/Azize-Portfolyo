@@ -27,7 +27,7 @@ export const blogPosts: BlogPost[] = [
     tags: ["linux", "beginner", "bandit"],
     author: { name: "Azize" },
     content: `
-6 Ocak 2025'te bir karar aldım: Linux öğreneceğim. Ama nereden başlayacağımı bilmiyordum. YouTube'da saatlerce video izlemek yerine pratik yapabileceğim bir şey arıyordum. Araştırırken [OverTheWire Bandit](https://overthewire.org/wargames/bandit/) oyununu keşfettim ve bu oyun her şeyi değiştirdi.
+6 Ocak 2025'te bir karar aldım: Linux öğreneceğim. Ama nereden başlayacağımı bilmiyordum. Uzun yıllara dayanan sektörel tecrübesiyle Burhan'ın rehberliği beni [OverTheWire Bandit](https://overthewire.org/wargames/bandit/) oyununa yönlendirdi. Bu oyun ve hocamın yaklaşımı, geleneksel eğitim anlayışının ötesine geçen, doğrudan sektörel yetkinlik kazandırmayı amaçlayan bir öğrenme sürecinin başlangıcı oldu.
 
 ## Bandit: Oyun Oynayarak Linux Öğrenmek
 
