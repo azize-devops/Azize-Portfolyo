@@ -1,0 +1,87 @@
+{
+  "common": {
+    "home": "Главная",
+    "blog": "Блог",
+    "certifications": "Сертификаты",
+    "projects": "Проекты",
+    "contact": "Контакты",
+    "pages": "Страницы",
+    "followMe": "Подписаться",
+    "allRightsReserved": "Все права защищены",
+    "viewAll": "Смотреть все",
+    "verifyOnCredly": "Проверить на Credly"
+  },
+  "hero": {
+    "badge": "CKA & CKAD Сертифицирован",
+    "greeting": "Привет, я",
+    "name": "Азизе",
+    "title": "DevOps Инженер | Kubernetes, Docker, AWS & CI/CD",
+    "description": "Мой путь начался с основ Linux и продолжается технологиями Kubernetes и Cloud. Этот сайт - моя платформа для обмена процессом обучения и проектами.",
+    "blogPosts": "Статьи блога",
+    "myProjects": "Мои проекты"
+  },
+  "certifications": {
+    "title": "Мои сертификаты",
+    "subtitle": "Полученные профессиональные сертификаты",
+    "viewAll": "Все сертификаты",
+    "cka": {
+      "fullName": "Certified Kubernetes Administrator",
+      "issuer": "CNCF / Linux Foundation"
+    },
+    "ckad": {
+      "fullName": "Certified Kubernetes Application Developer",
+      "issuer": "CNCF / Linux Foundation"
+    },
+    "awsCcp": {
+      "fullName": "AWS Cloud Practitioner",
+      "issuer": "Amazon Web Services"
+    }
+  },
+  "skills": {
+    "title": "Технологии",
+    "subtitle": "Технологии и инструменты, с которыми я работаю"
+  },
+  "timeline": {
+    "title": "Мой путь",
+    "subtitle": "Путь обучения DevOps",
+    "items": {
+      "linux": {
+        "date": "Январь 2025",
+        "title": "Основы Linux",
+        "description": "Начал путь в Linux с Bandit Games"
+      },
+      "docker": {
+        "date": "2025",
+        "title": "Docker & Контейнеризация",
+        "description": "Изучил технологии контейнеров"
+      },
+      "kubernetes": {
+        "date": "2025",
+        "title": "Kubernetes",
+        "description": "Вошел в мир оркестрации контейнеров"
+      },
+      "certs": {
+        "date": "Январь 2026",
+        "title": "CKA & CKAD",
+        "description": "Получил сертификаты Kubernetes"
+      },
+      "aws": {
+        "date": "Январь 2026",
+        "title": "AWS Cloud",
+        "description": "Мой путь в облаке продолжается"
+      }
+    }
+  },
+  "contact": {
+    "badge": "Контакты",
+    "title": "Свяжитесь",
+    "titleHighlight": "со мной",
+    "subtitle": "Хотите поговорить о DevOps, Kubernetes или другой теме? Не стесняйтесь связаться со мной!",
+    "sendEmail": "Отправить письмо",
+    "orSendEmail": "Или отправьте email напрямую:"
+  },
+  "footer": {
+    "description": "DevOps Инженер | CKA & CKAD Сертифицирован",
+    "techStack": "Kubernetes, Docker, AWS, CI/CD"
+  }
+}

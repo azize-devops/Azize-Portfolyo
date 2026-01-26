@@ -1,0 +1,87 @@
+{
+  "common": {
+    "home": "Ana Sayfa",
+    "blog": "Blog",
+    "certifications": "Sertifikalar",
+    "projects": "Projeler",
+    "contact": "Iletisim",
+    "pages": "Sayfalar",
+    "followMe": "Beni Takip Et",
+    "allRightsReserved": "Tum haklari saklidir",
+    "viewAll": "Tumunu Gor",
+    "verifyOnCredly": "Credly'de Dogrula"
+  },
+  "hero": {
+    "badge": "CKA & CKAD Certified",
+    "greeting": "Merhaba, ben",
+    "name": "Azize",
+    "title": "DevOps Engineer | Kubernetes, Docker, AWS & CI/CD",
+    "description": "Linux temelleriyle baslayan yolculugum, Kubernetes ve Cloud teknolojileriyle devam ediyor. Bu site, ogrenme surecimi ve projelerimi paylastigim platformdur.",
+    "blogPosts": "Blog Yazilari",
+    "myProjects": "Projelerim"
+  },
+  "certifications": {
+    "title": "Sertifikalarim",
+    "subtitle": "Aldigim profesyonel sertifikalar",
+    "viewAll": "Tum sertifikalar",
+    "cka": {
+      "fullName": "Certified Kubernetes Administrator",
+      "issuer": "CNCF / Linux Foundation"
+    },
+    "ckad": {
+      "fullName": "Certified Kubernetes Application Developer",
+      "issuer": "CNCF / Linux Foundation"
+    },
+    "awsCcp": {
+      "fullName": "AWS Cloud Practitioner",
+      "issuer": "Amazon Web Services"
+    }
+  },
+  "skills": {
+    "title": "Teknolojiler",
+    "subtitle": "Calistigim teknolojiler ve araclar"
+  },
+  "timeline": {
+    "title": "Yolculugum",
+    "subtitle": "DevOps ogrenme sureci",
+    "items": {
+      "linux": {
+        "date": "Ocak 2025",
+        "title": "Linux Temelleri",
+        "description": "Bandit Games ile Linux yolculuguna basladim"
+      },
+      "docker": {
+        "date": "2025",
+        "title": "Docker & Containerization",
+        "description": "Container teknolojilerini ogrendim"
+      },
+      "kubernetes": {
+        "date": "2025",
+        "title": "Kubernetes",
+        "description": "Container orchestration dunyasina girdim"
+      },
+      "certs": {
+        "date": "Ocak 2026",
+        "title": "CKA & CKAD",
+        "description": "Kubernetes sertifikalarimi aldim"
+      },
+      "aws": {
+        "date": "Ocak 2026",
+        "title": "AWS Cloud",
+        "description": "Cloud yolculugum devam ediyor"
+      }
+    }
+  },
+  "contact": {
+    "badge": "Iletisim",
+    "title": "Bana",
+    "titleHighlight": "Ulasin",
+    "subtitle": "DevOps, Kubernetes veya herhangi bir konu hakkinda sohbet etmek ister misiniz? Benimle iletisime gecmekten cekinmeyin!",
+    "sendEmail": "E-posta Gonderin",
+    "orSendEmail": "Veya dogrudan email gonderin:"
+  },
+  "footer": {
+    "description": "DevOps Engineer | CKA & CKAD Certified",
+    "techStack": "Kubernetes, Docker, AWS, CI/CD"
+  }
+}

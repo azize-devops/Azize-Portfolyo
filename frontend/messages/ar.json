@@ -1,0 +1,87 @@
+{
+  "common": {
+    "home": "الرئيسية",
+    "blog": "المدونة",
+    "certifications": "الشهادات",
+    "projects": "المشاريع",
+    "contact": "اتصل بنا",
+    "pages": "الصفحات",
+    "followMe": "تابعني",
+    "allRightsReserved": "جميع الحقوق محفوظة",
+    "viewAll": "عرض الكل",
+    "verifyOnCredly": "تحقق على Credly"
+  },
+  "hero": {
+    "badge": "معتمد CKA & CKAD",
+    "greeting": "مرحباً، أنا",
+    "name": "عزيزة",
+    "title": "مهندس DevOps | Kubernetes, Docker, AWS & CI/CD",
+    "description": "بدأت رحلتي مع أساسيات Linux وتستمر مع تقنيات Kubernetes والسحابة. هذا الموقع هو منصتي لمشاركة عملية التعلم والمشاريع.",
+    "blogPosts": "مقالات المدونة",
+    "myProjects": "مشاريعي"
+  },
+  "certifications": {
+    "title": "شهاداتي",
+    "subtitle": "الشهادات المهنية التي حصلت عليها",
+    "viewAll": "جميع الشهادات",
+    "cka": {
+      "fullName": "مدير Kubernetes معتمد",
+      "issuer": "CNCF / Linux Foundation"
+    },
+    "ckad": {
+      "fullName": "مطور تطبيقات Kubernetes معتمد",
+      "issuer": "CNCF / Linux Foundation"
+    },
+    "awsCcp": {
+      "fullName": "ممارس سحابة AWS",
+      "issuer": "Amazon Web Services"
+    }
+  },
+  "skills": {
+    "title": "التقنيات",
+    "subtitle": "التقنيات والأدوات التي أعمل بها"
+  },
+  "timeline": {
+    "title": "رحلتي",
+    "subtitle": "مسار تعلم DevOps",
+    "items": {
+      "linux": {
+        "date": "يناير 2025",
+        "title": "أساسيات Linux",
+        "description": "بدأت رحلة Linux مع Bandit Games"
+      },
+      "docker": {
+        "date": "2025",
+        "title": "Docker والحاويات",
+        "description": "تعلمت تقنيات الحاويات"
+      },
+      "kubernetes": {
+        "date": "2025",
+        "title": "Kubernetes",
+        "description": "دخلت عالم تنسيق الحاويات"
+      },
+      "certs": {
+        "date": "يناير 2026",
+        "title": "CKA & CKAD",
+        "description": "حصلت على شهادات Kubernetes"
+      },
+      "aws": {
+        "date": "يناير 2026",
+        "title": "AWS Cloud",
+        "description": "رحلتي في السحابة مستمرة"
+      }
+    }
+  },
+  "contact": {
+    "badge": "اتصل بنا",
+    "title": "تواصل",
+    "titleHighlight": "معي",
+    "subtitle": "هل تريد التحدث عن DevOps أو Kubernetes أو أي موضوع آخر؟ لا تتردد في التواصل معي!",
+    "sendEmail": "إرسال بريد",
+    "orSendEmail": "أو أرسل بريداً إلكترونياً مباشرة:"
+  },
+  "footer": {
+    "description": "مهندس DevOps | معتمد CKA & CKAD",
+    "techStack": "Kubernetes, Docker, AWS, CI/CD"
+  }
+}

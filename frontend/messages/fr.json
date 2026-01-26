@@ -1,0 +1,87 @@
+{
+  "common": {
+    "home": "Accueil",
+    "blog": "Blog",
+    "certifications": "Certifications",
+    "projects": "Projets",
+    "contact": "Contact",
+    "pages": "Pages",
+    "followMe": "Suivez-moi",
+    "allRightsReserved": "Tous droits reserves",
+    "viewAll": "Voir tout",
+    "verifyOnCredly": "Verifier sur Credly"
+  },
+  "hero": {
+    "badge": "Certifie CKA & CKAD",
+    "greeting": "Bonjour, je suis",
+    "name": "Azize",
+    "title": "Ingenieur DevOps | Kubernetes, Docker, AWS & CI/CD",
+    "description": "Mon parcours a commence avec les fondamentaux de Linux et continue avec Kubernetes et les technologies Cloud. Ce site est ma plateforme pour partager mon processus d'apprentissage et mes projets.",
+    "blogPosts": "Articles de blog",
+    "myProjects": "Mes projets"
+  },
+  "certifications": {
+    "title": "Mes certifications",
+    "subtitle": "Certifications professionnelles obtenues",
+    "viewAll": "Toutes les certifications",
+    "cka": {
+      "fullName": "Certified Kubernetes Administrator",
+      "issuer": "CNCF / Linux Foundation"
+    },
+    "ckad": {
+      "fullName": "Certified Kubernetes Application Developer",
+      "issuer": "CNCF / Linux Foundation"
+    },
+    "awsCcp": {
+      "fullName": "AWS Cloud Practitioner",
+      "issuer": "Amazon Web Services"
+    }
+  },
+  "skills": {
+    "title": "Technologies",
+    "subtitle": "Technologies et outils avec lesquels je travaille"
+  },
+  "timeline": {
+    "title": "Mon parcours",
+    "subtitle": "Chemin d'apprentissage DevOps",
+    "items": {
+      "linux": {
+        "date": "Janvier 2025",
+        "title": "Fondamentaux Linux",
+        "description": "J'ai commence mon voyage Linux avec Bandit Games"
+      },
+      "docker": {
+        "date": "2025",
+        "title": "Docker & Conteneurisation",
+        "description": "J'ai appris les technologies de conteneurs"
+      },
+      "kubernetes": {
+        "date": "2025",
+        "title": "Kubernetes",
+        "description": "Entre dans le monde de l'orchestration de conteneurs"
+      },
+      "certs": {
+        "date": "Janvier 2026",
+        "title": "CKA & CKAD",
+        "description": "Obtenu mes certifications Kubernetes"
+      },
+      "aws": {
+        "date": "Janvier 2026",
+        "title": "AWS Cloud",
+        "description": "Mon voyage dans le cloud continue"
+      }
+    }
+  },
+  "contact": {
+    "badge": "Contact",
+    "title": "Contactez",
+    "titleHighlight": "-moi",
+    "subtitle": "Vous souhaitez discuter de DevOps, Kubernetes ou d'un autre sujet? N'hesitez pas a me contacter!",
+    "sendEmail": "Envoyer un email",
+    "orSendEmail": "Ou envoyez directement un email:"
+  },
+  "footer": {
+    "description": "Ingenieur DevOps | Certifie CKA & CKAD",
+    "techStack": "Kubernetes, Docker, AWS, CI/CD"
+  }
+}

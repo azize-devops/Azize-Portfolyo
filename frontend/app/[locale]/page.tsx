@@ -1,35 +1,33 @@
 import Link from "next/link";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 import { ArrowRight, Award, BookOpen, ExternalLink } from "lucide-react";
 import { ContactSection } from "@/components/sections/contact-section";
 
 const certifications = [
   {
     name: "CKA",
-    fullName: "Certified Kubernetes Administrator",
-    issuer: "CNCF / Linux Foundation",
+    key: "cka",
     date: "Ocak 2026",
     color: "from-blue-500 to-blue-600",
     badge: "/badges/cka-badge.svg",
-    credlyUrl: "", // Credly link will be added later
+    credlyUrl: "",
   },
   {
     name: "CKAD",
-    fullName: "Certified Kubernetes Application Developer",
-    issuer: "CNCF / Linux Foundation",
+    key: "ckad",
     date: "Ocak 2026",
     color: "from-cyan-500 to-cyan-600",
     badge: "/badges/ckad-badge.svg",
-    credlyUrl: "", // Credly link will be added later
+    credlyUrl: "",
   },
   {
     name: "AWS CCP",
-    fullName: "AWS Cloud Practitioner",
-    issuer: "Amazon Web Services",
+    key: "awsCcp",
     date: "Ocak 2026",
     color: "from-orange-500 to-orange-600",
     badge: "/badges/aws-ccp-badge.svg",
-    credlyUrl: "", // Credly link will be added later
+    credlyUrl: "",
   },
 ];
 
@@ -72,35 +70,11 @@ const skills = [
   },
 ];
 
-const timeline = [
-  {
-    date: "Ocak 2025",
-    title: "Linux Temelleri",
-    description: "Bandit Games ile Linux yolculuguna basladim",
-  },
-  {
-    date: "2025",
-    title: "Docker & Containerization",
-    description: "Container teknolojilerini ogrendim",
-  },
-  {
-    date: "2025",
-    title: "Kubernetes",
-    description: "Container orchestration dunyasina girdim",
-  },
-  {
-    date: "Ocak 2026",
-    title: "CKA & CKAD",
-    description: "Kubernetes sertifikalarimi aldim",
-  },
-  {
-    date: "Ocak 2026",
-    title: "AWS Cloud",
-    description: "Cloud yolculugum devam ediyor",
-  },
-];
+const timelineKeys = ["linux", "docker", "kubernetes", "certs", "aws"] as const;
 
 export default function Home() {
+  const t = useTranslations();
+
   return (
     <>
       {/* Hero Section */}
@@ -112,24 +86,22 @@ export default function Home() {
           <div className="text-center">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-sm font-medium mb-6">
               <Award className="h-4 w-4" />
-              CKA & CKAD Certified
+              {t("hero.badge")}
             </div>
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight">
-              Merhaba, ben{" "}
+              {t("hero.greeting")}{" "}
               <span className="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
-                Azize
+                {t("hero.name")}
               </span>
             </h1>
 
             <p className="mt-6 text-xl sm:text-2xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-              DevOps Engineer | Kubernetes, Docker, AWS & CI/CD
+              {t("hero.title")}
             </p>
 
             <p className="mt-4 text-lg text-gray-500 dark:text-gray-500 max-w-2xl mx-auto">
-              Linux temelleriyle baslayan yolculugum, Kubernetes ve Cloud
-              teknolojileriyle devam ediyor. Bu site, ogrenme surecimi ve
-              projelerimi paylastigim platformdur.
+              {t("hero.description")}
             </p>
 
             <div className="mt-10 flex flex-wrap justify-center gap-4">
@@ -138,13 +110,13 @@ export default function Home() {
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium transition-colors"
               >
                 <BookOpen className="h-5 w-5" />
-                Blog Yazilari
+                {t("hero.blogPosts")}
               </Link>
               <Link
                 href="/projects"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-gray-300 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 font-medium transition-colors"
               >
-                Projelerim
+                {t("hero.myProjects")}
                 <ArrowRight className="h-5 w-5" />
               </Link>
             </div>
@@ -156,9 +128,9 @@ export default function Home() {
       <section className="py-20 bg-white dark:bg-gray-950">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold">Sertifikalarim</h2>
+            <h2 className="text-3xl font-bold">{t("certifications.title")}</h2>
             <p className="mt-4 text-gray-600 dark:text-gray-400">
-              Aldigim profesyonel sertifikalar
+              {t("certifications.subtitle")}
             </p>
           </div>
 
@@ -170,7 +142,6 @@ export default function Home() {
                     className={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r ${cert.color}`}
                   />
                   <div className="flex flex-col items-center text-center h-full">
-                    {/* Badge Image */}
                     <div className="relative w-28 h-28 mb-4">
                       <Image
                         src={cert.badge}
@@ -182,11 +153,13 @@ export default function Home() {
 
                     <h3 className="text-xl font-bold">{cert.name}</h3>
                     <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-                      {cert.fullName}
+                      {t(`certifications.${cert.key}.fullName`)}
                     </p>
 
                     <div className="mt-auto pt-4">
-                      <p className="text-xs text-gray-400">{cert.issuer}</p>
+                      <p className="text-xs text-gray-400">
+                        {t(`certifications.${cert.key}.issuer`)}
+                      </p>
                       <p className="text-sm font-medium text-blue-600 dark:text-blue-400">
                         {cert.date}
                       </p>
@@ -194,7 +167,7 @@ export default function Home() {
 
                     {cert.credlyUrl && (
                       <span className="mt-3 text-xs text-blue-500 group-hover:underline flex items-center gap-1">
-                        Credly&apos;de Dogrula
+                        {t("common.verifyOnCredly")}
                         <ExternalLink className="h-3 w-3" />
                       </span>
                     )}
@@ -224,7 +197,7 @@ export default function Home() {
               href="/certifications"
               className="inline-flex items-center gap-2 text-blue-600 dark:text-blue-400 hover:underline"
             >
-              Tum sertifikalar
+              {t("certifications.viewAll")}
               <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
@@ -235,9 +208,9 @@ export default function Home() {
       <section className="py-20 bg-gray-50 dark:bg-gray-900">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold">Teknolojiler</h2>
+            <h2 className="text-3xl font-bold">{t("skills.title")}</h2>
             <p className="mt-4 text-gray-600 dark:text-gray-400">
-              Calistigim teknolojiler ve araclar
+              {t("skills.subtitle")}
             </p>
           </div>
 
@@ -276,9 +249,9 @@ export default function Home() {
       <section className="py-20 bg-white dark:bg-gray-950">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold">Yolculugum</h2>
+            <h2 className="text-3xl font-bold">{t("timeline.title")}</h2>
             <p className="mt-4 text-gray-600 dark:text-gray-400">
-              DevOps ogrenme sureci
+              {t("timeline.subtitle")}
             </p>
           </div>
 
@@ -286,18 +259,20 @@ export default function Home() {
             <div className="relative">
               <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-gray-200 dark:bg-gray-800" />
 
-              {timeline.map((item, index) => (
+              {timelineKeys.map((key, index) => (
                 <div key={index} className="relative pl-12 pb-8 last:pb-0">
                   <div className="absolute left-0 w-8 h-8 rounded-full bg-blue-600 dark:bg-blue-500 flex items-center justify-center">
                     <div className="w-3 h-3 rounded-full bg-white" />
                   </div>
                   <div className="bg-gray-50 dark:bg-gray-900 rounded-lg p-4 border border-gray-200 dark:border-gray-800">
                     <span className="text-sm text-blue-600 dark:text-blue-400 font-medium">
-                      {item.date}
+                      {t(`timeline.items.${key}.date`)}
                     </span>
-                    <h3 className="text-lg font-semibold mt-1">{item.title}</h3>
+                    <h3 className="text-lg font-semibold mt-1">
+                      {t(`timeline.items.${key}.title`)}
+                    </h3>
                     <p className="text-gray-600 dark:text-gray-400 text-sm mt-1">
-                      {item.description}
+                      {t(`timeline.items.${key}.description`)}
                     </p>
                   </div>
                 </div>

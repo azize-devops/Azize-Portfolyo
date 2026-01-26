@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -34,6 +35,7 @@ const socialLinks = [
 ];
 
 export function ContactSection() {
+  const t = useTranslations("contact");
   const { ref: headerRef, isVisible: headerVisible } =
     useScrollAnimation<HTMLDivElement>();
   const { ref: cardRef, isVisible: cardVisible } =
@@ -53,14 +55,16 @@ export function ContactSection() {
             }`}
           >
             <Badge variant="outline" className="mb-4">
-              Iletisim
+              {t("badge")}
             </Badge>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Bana <span className="text-blue-600 dark:text-blue-400">Ulasin</span>
+              {t("title")}{" "}
+              <span className="text-blue-600 dark:text-blue-400">
+                {t("titleHighlight")}
+              </span>
             </h2>
             <p className="text-gray-600 dark:text-gray-400 mb-12">
-              DevOps, Kubernetes veya herhangi bir konu hakkinda sohbet etmek
-              ister misiniz? Benimle iletisime gecmekten cekinmeyin!
+              {t("subtitle")}
             </p>
           </div>
 
@@ -91,7 +95,7 @@ export function ContactSection() {
 
               <div className="border-t border-gray-200 dark:border-gray-800 pt-8">
                 <p className="text-sm text-gray-500 dark:text-gray-500 mb-4">
-                  Veya dogrudan email gonderin:
+                  {t("orSendEmail")}
                 </p>
                 <Button size="lg" className="gap-2" asChild>
                   <a href="mailto:azizecakir16@gmail.com">

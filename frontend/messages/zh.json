@@ -1,0 +1,87 @@
+{
+  "common": {
+    "home": "首页",
+    "blog": "博客",
+    "certifications": "证书",
+    "projects": "项目",
+    "contact": "联系",
+    "pages": "页面",
+    "followMe": "关注我",
+    "allRightsReserved": "保留所有权利",
+    "viewAll": "查看全部",
+    "verifyOnCredly": "在Credly验证"
+  },
+  "hero": {
+    "badge": "CKA & CKAD 认证",
+    "greeting": "你好，我是",
+    "name": "Azize",
+    "title": "DevOps工程师 | Kubernetes, Docker, AWS & CI/CD",
+    "description": "我的旅程从Linux基础开始，继续学习Kubernetes和云技术。这个网站是我分享学习过程和项目的平台。",
+    "blogPosts": "博客文章",
+    "myProjects": "我的项目"
+  },
+  "certifications": {
+    "title": "我的证书",
+    "subtitle": "获得的专业证书",
+    "viewAll": "所有证书",
+    "cka": {
+      "fullName": "Kubernetes管理员认证",
+      "issuer": "CNCF / Linux基金会"
+    },
+    "ckad": {
+      "fullName": "Kubernetes应用开发者认证",
+      "issuer": "CNCF / Linux基金会"
+    },
+    "awsCcp": {
+      "fullName": "AWS云从业者",
+      "issuer": "亚马逊云服务"
+    }
+  },
+  "skills": {
+    "title": "技术栈",
+    "subtitle": "我使用的技术和工具"
+  },
+  "timeline": {
+    "title": "我的旅程",
+    "subtitle": "DevOps学习之路",
+    "items": {
+      "linux": {
+        "date": "2025年1月",
+        "title": "Linux基础",
+        "description": "通过Bandit Games开始Linux之旅"
+      },
+      "docker": {
+        "date": "2025",
+        "title": "Docker与容器化",
+        "description": "学习容器技术"
+      },
+      "kubernetes": {
+        "date": "2025",
+        "title": "Kubernetes",
+        "description": "进入容器编排的世界"
+      },
+      "certs": {
+        "date": "2026年1月",
+        "title": "CKA & CKAD",
+        "description": "获得Kubernetes认证"
+      },
+      "aws": {
+        "date": "2026年1月",
+        "title": "AWS云",
+        "description": "我的云之旅继续"
+      }
+    }
+  },
+  "contact": {
+    "badge": "联系方式",
+    "title": "与我",
+    "titleHighlight": "联系",
+    "subtitle": "想聊聊DevOps、Kubernetes或其他话题吗？欢迎随时联系我！",
+    "sendEmail": "发送邮件",
+    "orSendEmail": "或直接发送邮件："
+  },
+  "footer": {
+    "description": "DevOps工程师 | CKA & CKAD认证",
+    "techStack": "Kubernetes, Docker, AWS, CI/CD"
+  }
+}

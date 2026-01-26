@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { Github, Linkedin, Mail, Terminal } from "lucide-react";
 
 const socialLinks = [
@@ -19,15 +22,17 @@ const socialLinks = [
   },
 ];
 
-const footerLinks = [
-  { name: "Blog", href: "/blog" },
-  { name: "Sertifikalar", href: "/certifications" },
-  { name: "Projeler", href: "/projects" },
-  { name: "Iletisim", href: "/contact" },
-];
-
 export function Footer() {
+  const t = useTranslations("common");
+  const tFooter = useTranslations("footer");
   const currentYear = new Date().getFullYear();
+
+  const footerLinks = [
+    { name: t("blog"), href: "/blog" },
+    { name: t("certifications"), href: "/certifications" },
+    { name: t("projects"), href: "/projects" },
+    { name: t("contact"), href: "/contact" },
+  ];
 
   return (
     <footer className="border-t border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-950">
@@ -35,23 +40,26 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Brand */}
           <div className="space-y-4">
-            <Link href="/" className="flex items-center gap-2 font-bold text-xl">
+            <Link
+              href="/"
+              className="flex items-center gap-2 font-bold text-xl"
+            >
               <Terminal className="h-6 w-6 text-blue-600 dark:text-blue-400" />
               <span className="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
                 Ops Chronicle
               </span>
             </Link>
             <p className="text-sm text-gray-600 dark:text-gray-400">
-              DevOps Engineer | CKA & CKAD Certified
+              {tFooter("description")}
               <br />
-              Kubernetes, Docker, AWS, CI/CD
+              {tFooter("techStack")}
             </p>
           </div>
 
           {/* Links */}
           <div>
             <h3 className="font-semibold text-gray-900 dark:text-white mb-4">
-              Sayfalar
+              {t("pages")}
             </h3>
             <ul className="space-y-2">
               {footerLinks.map((link) => (
@@ -70,7 +78,7 @@ export function Footer() {
           {/* Social */}
           <div>
             <h3 className="font-semibold text-gray-900 dark:text-white mb-4">
-              Beni Takip Et
+              {t("followMe")}
             </h3>
             <div className="flex gap-4">
               {socialLinks.map((link) => (
@@ -92,7 +100,7 @@ export function Footer() {
         {/* Copyright */}
         <div className="mt-8 pt-8 border-t border-gray-200 dark:border-gray-800">
           <p className="text-center text-sm text-gray-500 dark:text-gray-500">
-            &copy; {currentYear} Ops Chronicle. Tum haklari saklidir.
+            &copy; {currentYear} Ops Chronicle. {t("allRightsReserved")}.
           </p>
         </div>
       </div>
