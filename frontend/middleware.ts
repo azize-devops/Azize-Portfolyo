@@ -8,5 +8,16 @@ export default createMiddleware({
 });
 
 export const config = {
-  matcher: ["/", "/(tr|en|ru|zh|de|fr|ar|es)/:path*"],
+  matcher: [
+    // Root
+    "/",
+    // Locale prefixed routes
+    "/(tr|en|ru|zh|de|fr|ar|es)/:path*",
+    // Non-prefixed routes (blog, projects, certifications, etc.)
+    "/(blog|projects|certifications|contact)/:path*",
+    "/blog",
+    "/projects",
+    "/certifications",
+    "/contact",
+  ],
 };
