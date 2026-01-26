@@ -85,6 +85,18 @@
     "sendEmail": "Enviar email",
     "orSendEmail": "O envia un email directamente:"
   },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Mis articulos sobre DevOps, Kubernetes y Cloud",
+    "backHome": "Volver al inicio",
+    "searchPlaceholder": "Buscar articulos...",
+    "allPosts": "Todos los articulos",
+    "totalPosts": "{count} articulos encontrados",
+    "postsWithTag": "{count} articulos con etiqueta {tag}",
+    "noPostsFound": "No se encontraron articulos",
+    "noPostsDescription": "No se encontraron articulos que coincidan con su busqueda.",
+    "viewAllPosts": "Ver todos los articulos"
+  },
   "footer": {
     "description": "Ingeniero DevOps | Certificado CKA & CKAD",
     "techStack": "Kubernetes, Docker, AWS, CI/CD"

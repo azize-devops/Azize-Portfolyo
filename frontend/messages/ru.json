@@ -85,6 +85,18 @@
     "sendEmail": "Отправить письмо",
     "orSendEmail": "Или отправьте email напрямую:"
   },
+  "blog": {
+    "title": "Блог",
+    "subtitle": "Мои статьи о DevOps, Kubernetes и Cloud",
+    "backHome": "На главную",
+    "searchPlaceholder": "Поиск статей...",
+    "allPosts": "Все статьи",
+    "totalPosts": "Найдено {count} статей",
+    "postsWithTag": "{count} статей с тегом {tag}",
+    "noPostsFound": "Статьи не найдены",
+    "noPostsDescription": "Не найдено статей, соответствующих вашему запросу.",
+    "viewAllPosts": "Смотреть все статьи"
+  },
   "footer": {
     "description": "DevOps Инженер | CKA & CKAD Сертифицирован",
     "techStack": "Kubernetes, Docker, AWS, CI/CD"

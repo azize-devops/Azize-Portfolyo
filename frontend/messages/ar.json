@@ -85,6 +85,18 @@
     "sendEmail": "إرسال بريد",
     "orSendEmail": "أو أرسل بريداً إلكترونياً مباشرة:"
   },
+  "blog": {
+    "title": "المدونة",
+    "subtitle": "مقالاتي حول DevOps و Kubernetes والسحابة",
+    "backHome": "العودة للرئيسية",
+    "searchPlaceholder": "البحث في المقالات...",
+    "allPosts": "جميع المقالات",
+    "totalPosts": "تم العثور على {count} مقال",
+    "postsWithTag": "{count} مقال بوسم {tag}",
+    "noPostsFound": "لم يتم العثور على مقالات",
+    "noPostsDescription": "لم يتم العثور على مقالات تطابق بحثك.",
+    "viewAllPosts": "عرض جميع المقالات"
+  },
   "footer": {
     "description": "مهندس DevOps | معتمد CKA & CKAD",
     "techStack": "Kubernetes, Docker, AWS, CI/CD"

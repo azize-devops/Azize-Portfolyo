@@ -85,6 +85,18 @@
     "sendEmail": "Send Email",
     "orSendEmail": "Or send an email directly:"
   },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "My articles about DevOps, Kubernetes and Cloud",
+    "backHome": "Back to Home",
+    "searchPlaceholder": "Search posts...",
+    "allPosts": "All Posts",
+    "totalPosts": "{count} posts found",
+    "postsWithTag": "{count} posts with {tag} tag",
+    "noPostsFound": "No posts found",
+    "noPostsDescription": "No posts matching your search were found.",
+    "viewAllPosts": "View all posts"
+  },
   "footer": {
     "description": "DevOps Engineer | CKA & CKAD Certified",
     "techStack": "Kubernetes, Docker, AWS, CI/CD"

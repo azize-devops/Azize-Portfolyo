@@ -85,6 +85,18 @@
     "sendEmail": "E-posta Gonderin",
     "orSendEmail": "Veya dogrudan email gonderin:"
   },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "DevOps, Kubernetes ve Cloud hakkinda yazilarim",
+    "backHome": "Ana Sayfaya Don",
+    "searchPlaceholder": "Yazilarda ara...",
+    "allPosts": "Tum Yazilar",
+    "totalPosts": "{count} yazi bulundu",
+    "postsWithTag": "{tag} etiketinde {count} yazi",
+    "noPostsFound": "Yazi bulunamadi",
+    "noPostsDescription": "Aramanizla eslesen yazi bulunamadi.",
+    "viewAllPosts": "Tum yazilari gor"
+  },
   "footer": {
     "description": "DevOps Engineer | CKA & CKAD Certified",
     "techStack": "Kubernetes, Docker, AWS, CI/CD"
