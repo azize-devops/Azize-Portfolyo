@@ -1,16 +1,24 @@
 "use client";
 
+import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 import { useEffect, useRef, useState } from "react";
+import { ArrowRight } from "lucide-react";
 
-const timelineKeys = ["linux", "docker", "kubernetes", "certs", "aws"] as const;
+const timelineItems = [
+  { key: "linux", tag: "linux" },
+  { key: "docker", tag: "docker" },
+  { key: "kubernetes", tag: "kubernetes" },
+  { key: "certs", tag: "certifications" },
+  { key: "aws", tag: "aws" },
+] as const;
 
 function TimelineItem({
-  itemKey,
+  item,
   index,
 }: {
-  itemKey: (typeof timelineKeys)[number];
+  item: (typeof timelineItems)[number];
   index: number;
 }) {
   const t = useTranslations();
@@ -22,6 +30,26 @@ function TimelineItem({
 
   // Alternate sides: even on left, odd on right
   const isRight = index % 2 === 1;
+
+  const CardContent = (
+    <div className="group bg-gray-50 dark:bg-gray-900 rounded-lg p-4 border border-gray-200 dark:border-gray-800 hover:shadow-lg hover:scale-[1.02] hover:border-blue-300 dark:hover:border-blue-600 transition-all duration-300 cursor-pointer">
+      <div className="flex items-start justify-between">
+        <span className="text-sm text-blue-600 dark:text-blue-400 font-medium">
+          {t(`timeline.items.${item.key}.date`)}
+        </span>
+        <ArrowRight className="h-4 w-4 text-gray-400 group-hover:text-blue-500 group-hover:translate-x-1 transition-all" />
+      </div>
+      <h3 className="text-lg font-semibold mt-1 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+        {t(`timeline.items.${item.key}.title`)}
+      </h3>
+      <p className="text-gray-600 dark:text-gray-400 text-sm mt-1">
+        {t(`timeline.items.${item.key}.description`)}
+      </p>
+      <span className="inline-block mt-2 text-xs text-blue-500 group-hover:underline">
+        {t("timeline.viewPosts")}
+      </span>
+    </div>
+  );
 
   return (
     <div
@@ -39,17 +67,9 @@ function TimelineItem({
             }`}
             style={{ transitionDelay: `${index * 100}ms` }}
           >
-            <div className="bg-gray-50 dark:bg-gray-900 rounded-lg p-4 border border-gray-200 dark:border-gray-800 hover:shadow-lg hover:scale-[1.02] transition-all duration-300">
-              <span className="text-sm text-blue-600 dark:text-blue-400 font-medium">
-                {t(`timeline.items.${itemKey}.date`)}
-              </span>
-              <h3 className="text-lg font-semibold mt-1">
-                {t(`timeline.items.${itemKey}.title`)}
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400 text-sm mt-1">
-                {t(`timeline.items.${itemKey}.description`)}
-              </p>
-            </div>
+            <Link href={`/blog?tag=${item.tag}`}>
+              {CardContent}
+            </Link>
           </div>
         )}
       </div>
@@ -97,17 +117,9 @@ function TimelineItem({
             }`}
             style={{ transitionDelay: `${index * 100}ms` }}
           >
-            <div className="bg-gray-50 dark:bg-gray-900 rounded-lg p-4 border border-gray-200 dark:border-gray-800 hover:shadow-lg hover:scale-[1.02] transition-all duration-300">
-              <span className="text-sm text-blue-600 dark:text-blue-400 font-medium">
-                {t(`timeline.items.${itemKey}.date`)}
-              </span>
-              <h3 className="text-lg font-semibold mt-1">
-                {t(`timeline.items.${itemKey}.title`)}
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400 text-sm mt-1">
-                {t(`timeline.items.${itemKey}.description`)}
-              </p>
-            </div>
+            <Link href={`/blog?tag=${item.tag}`}>
+              {CardContent}
+            </Link>
           </div>
         )}
       </div>
@@ -191,8 +203,8 @@ export function AnimatedTimeline() {
               }}
             />
 
-            {timelineKeys.map((key, index) => (
-              <TimelineItem key={key} itemKey={key} index={index} />
+            {timelineItems.map((item, index) => (
+              <TimelineItem key={item.key} item={item} index={index} />
             ))}
           </div>
         </div>

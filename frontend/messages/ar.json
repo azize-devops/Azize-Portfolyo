@@ -48,6 +48,7 @@
   "timeline": {
     "title": "رحلتي",
     "subtitle": "مسار تعلم DevOps",
+    "viewPosts": "عرض المنشورات",
     "items": {
       "linux": {
         "date": "يناير 2025",

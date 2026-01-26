@@ -48,6 +48,7 @@
   "timeline": {
     "title": "Meine Reise",
     "subtitle": "DevOps Lernpfad",
+    "viewPosts": "Beitraege anzeigen",
     "items": {
       "linux": {
         "date": "Januar 2025",

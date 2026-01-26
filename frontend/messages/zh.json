@@ -48,6 +48,7 @@
   "timeline": {
     "title": "我的旅程",
     "subtitle": "DevOps学习之路",
+    "viewPosts": "查看文章",
     "items": {
       "linux": {
         "date": "2025年1月",

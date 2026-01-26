@@ -48,6 +48,7 @@
   "timeline": {
     "title": "Мой путь",
     "subtitle": "Путь обучения DevOps",
+    "viewPosts": "Смотреть статьи",
     "items": {
       "linux": {
         "date": "Январь 2025",

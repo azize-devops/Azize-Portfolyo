@@ -48,6 +48,7 @@
   "timeline": {
     "title": "Mi viaje",
     "subtitle": "Camino de aprendizaje DevOps",
+    "viewPosts": "Ver publicaciones",
     "items": {
       "linux": {
         "date": "Enero 2025",
