@@ -32,9 +32,13 @@
       "fullName": "Certified Kubernetes Application Developer",
       "issuer": "CNCF / Linux Foundation"
     },
-    "awsCcp": {
-      "fullName": "AWS Cloud Practitioner",
-      "issuer": "Amazon Web Services"
+    "lfs158": {
+      "fullName": "Einfuehrung in Kubernetes",
+      "issuer": "Linux Foundation"
+    },
+    "awsGenai": {
+      "fullName": "Einfuehrung in Generative KI",
+      "issuer": "AWS Educate"
     }
   },
   "skills": {

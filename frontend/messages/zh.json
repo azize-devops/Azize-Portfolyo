@@ -32,9 +32,13 @@
       "fullName": "Kubernetes应用开发者认证",
       "issuer": "CNCF / Linux基金会"
     },
-    "awsCcp": {
-      "fullName": "AWS云从业者",
-      "issuer": "亚马逊云服务"
+    "lfs158": {
+      "fullName": "Kubernetes入门",
+      "issuer": "Linux基金会"
+    },
+    "awsGenai": {
+      "fullName": "生成式人工智能入门",
+      "issuer": "AWS Educate"
     }
   },
   "skills": {
