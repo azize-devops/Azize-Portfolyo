@@ -17,7 +17,7 @@
     "name": "Azize",
     "title": "DevOps Engineer | Kubernetes, Docker, AWS & CI/CD",
     "description": "Meine Reise begann mit Linux-Grundlagen und setzt sich mit Kubernetes- und Cloud-Technologien fort. Diese Website ist meine Plattform, um meinen Lernprozess und meine Projekte zu teilen.",
-    "blogPosts": "Blog-Beitraege",
+    "blogPosts": "Blog-Beiträge",
     "myProjects": "Meine Projekte"
   },
   "certifications": {
@@ -33,11 +33,11 @@
       "issuer": "CNCF / Linux Foundation"
     },
     "lfs158": {
-      "fullName": "Einfuehrung in Kubernetes",
+      "fullName": "Einführung in Kubernetes",
       "issuer": "Linux Foundation"
     },
     "awsGenai": {
-      "fullName": "Einfuehrung in Generative KI",
+      "fullName": "Einführung in Generative KI",
       "issuer": "AWS Educate"
     }
   },
@@ -48,7 +48,7 @@
   "timeline": {
     "title": "Meine Reise",
     "subtitle": "DevOps Lernpfad",
-    "viewPosts": "Beitraege anzeigen",
+    "viewPosts": "Beiträge anzeigen",
     "items": {
       "linux": {
         "date": "Januar 2025",
@@ -81,26 +81,26 @@
     "badge": "Kontakt",
     "title": "Kontaktieren",
     "titleHighlight": "Sie mich",
-    "subtitle": "Moechten Sie ueber DevOps, Kubernetes oder andere Themen sprechen? Kontaktieren Sie mich gerne!",
+    "subtitle": "Möchten Sie über DevOps, Kubernetes oder andere Themen sprechen? Kontaktieren Sie mich gerne!",
     "sendEmail": "E-Mail senden",
     "orSendEmail": "Oder senden Sie direkt eine E-Mail:"
   },
   "blog": {
     "title": "Blog",
-    "subtitle": "Meine Artikel ueber DevOps, Kubernetes und Cloud",
-    "backHome": "Zurueck zur Startseite",
-    "backToBlog": "Zurueck zum Blog",
-    "searchPlaceholder": "Beitraege suchen...",
-    "allPosts": "Alle Beitraege",
-    "totalPosts": "{count} Beitraege gefunden",
-    "postsWithTag": "{count} Beitraege mit {tag} Tag",
-    "noPostsFound": "Keine Beitraege gefunden",
-    "noPostsDescription": "Keine Beitraege gefunden, die Ihrer Suche entsprechen.",
-    "viewAllPosts": "Alle Beitraege anzeigen",
+    "subtitle": "Meine Artikel über DevOps, Kubernetes und Cloud",
+    "backHome": "Zurück zur Startseite",
+    "backToBlog": "Zurück zum Blog",
+    "searchPlaceholder": "Beiträge suchen...",
+    "allPosts": "Alle Beiträge",
+    "totalPosts": "{count} Beiträge gefunden",
+    "postsWithTag": "{count} Beiträge mit {tag} Tag",
+    "noPostsFound": "Keine Beiträge gefunden",
+    "noPostsDescription": "Keine Beiträge gefunden, die Ihrer Suche entsprechen.",
+    "viewAllPosts": "Alle Beiträge anzeigen",
     "postNotFound": "Beitrag nicht gefunden",
     "share": "Teilen",
     "copyLink": "Link kopieren",
-    "relatedPosts": "Aehnliche Beitraege"
+    "relatedPosts": "Ähnliche Beiträge"
   },
   "footer": {
     "description": "DevOps Engineer | CKA & CKAD Zertifiziert",

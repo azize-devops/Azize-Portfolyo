@@ -5,8 +5,8 @@
     "certifications": "Certificaciones",
     "projects": "Proyectos",
     "contact": "Contacto",
-    "pages": "Paginas",
-    "followMe": "Sigueme",
+    "pages": "Páginas",
+    "followMe": "Sígueme",
     "allRightsReserved": "Todos los derechos reservados",
     "viewAll": "Ver todo",
     "verifyOnCredly": "Verificar en Credly"
@@ -16,8 +16,8 @@
     "greeting": "Hola, soy",
     "name": "Azize",
     "title": "Ingeniero DevOps | Kubernetes, Docker, AWS & CI/CD",
-    "description": "Mi viaje comenzo con los fundamentos de Linux y continua con tecnologias Kubernetes y Cloud. Este sitio es mi plataforma para compartir mi proceso de aprendizaje y proyectos.",
-    "blogPosts": "Articulos del blog",
+    "description": "Mi viaje comenzó con los fundamentos de Linux y continúa con tecnologías Kubernetes y Cloud. Este sitio es mi plataforma para compartir mi proceso de aprendizaje y proyectos.",
+    "blogPosts": "Artículos del blog",
     "myProjects": "Mis proyectos"
   },
   "certifications": {
@@ -33,17 +33,17 @@
       "issuer": "CNCF / Linux Foundation"
     },
     "lfs158": {
-      "fullName": "Introduccion a Kubernetes",
+      "fullName": "Introducción a Kubernetes",
       "issuer": "Linux Foundation"
     },
     "awsGenai": {
-      "fullName": "Introduccion a la IA Generativa",
+      "fullName": "Introducción a la IA Generativa",
       "issuer": "AWS Educate"
     }
   },
   "skills": {
-    "title": "Tecnologias",
-    "subtitle": "Tecnologias y herramientas con las que trabajo"
+    "title": "Tecnologías",
+    "subtitle": "Tecnologías y herramientas con las que trabajo"
   },
   "timeline": {
     "title": "Mi viaje",
@@ -53,17 +53,17 @@
       "linux": {
         "date": "Enero 2025",
         "title": "Fundamentos de Linux",
-        "description": "Comence mi viaje en Linux con Bandit Games"
+        "description": "Comencé mi viaje en Linux con Bandit Games"
       },
       "docker": {
         "date": "2025",
         "title": "Docker y Contenedores",
-        "description": "Aprendi tecnologias de contenedores"
+        "description": "Aprendí tecnologías de contenedores"
       },
       "kubernetes": {
         "date": "2025",
         "title": "Kubernetes",
-        "description": "Entre en el mundo de la orquestacion de contenedores"
+        "description": "Entré en el mundo de la orquestación de contenedores"
       },
       "certs": {
         "date": "Enero 2026",
@@ -73,7 +73,7 @@
       "aws": {
         "date": "Enero 2026",
         "title": "AWS Cloud",
-        "description": "Mi viaje en la nube continua"
+        "description": "Mi viaje en la nube continúa"
       }
     }
   },
@@ -81,26 +81,26 @@
     "badge": "Contacto",
     "title": "Contacta",
     "titleHighlight": "conmigo",
-    "subtitle": "Quieres hablar sobre DevOps, Kubernetes o cualquier otro tema? No dudes en contactarme!",
+    "subtitle": "¿Quieres hablar sobre DevOps, Kubernetes o cualquier otro tema? ¡No dudes en contactarme!",
     "sendEmail": "Enviar email",
-    "orSendEmail": "O envia un email directamente:"
+    "orSendEmail": "O envía un email directamente:"
   },
   "blog": {
     "title": "Blog",
-    "subtitle": "Mis articulos sobre DevOps, Kubernetes y Cloud",
+    "subtitle": "Mis artículos sobre DevOps, Kubernetes y Cloud",
     "backHome": "Volver al inicio",
     "backToBlog": "Volver al Blog",
-    "searchPlaceholder": "Buscar articulos...",
-    "allPosts": "Todos los articulos",
-    "totalPosts": "{count} articulos encontrados",
-    "postsWithTag": "{count} articulos con etiqueta {tag}",
-    "noPostsFound": "No se encontraron articulos",
-    "noPostsDescription": "No se encontraron articulos que coincidan con su busqueda.",
-    "viewAllPosts": "Ver todos los articulos",
-    "postNotFound": "Articulo no encontrado",
+    "searchPlaceholder": "Buscar artículos...",
+    "allPosts": "Todos los artículos",
+    "totalPosts": "{count} artículos encontrados",
+    "postsWithTag": "{count} artículos con etiqueta {tag}",
+    "noPostsFound": "No se encontraron artículos",
+    "noPostsDescription": "No se encontraron artículos que coincidan con su búsqueda.",
+    "viewAllPosts": "Ver todos los artículos",
+    "postNotFound": "Artículo no encontrado",
     "share": "Compartir",
     "copyLink": "Copiar enlace",
-    "relatedPosts": "Articulos Relacionados"
+    "relatedPosts": "Artículos Relacionados"
   },
   "footer": {
     "description": "Ingeniero DevOps | Certificado CKA & CKAD",

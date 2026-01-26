@@ -7,16 +7,16 @@
     "contact": "Contact",
     "pages": "Pages",
     "followMe": "Suivez-moi",
-    "allRightsReserved": "Tous droits reserves",
+    "allRightsReserved": "Tous droits réservés",
     "viewAll": "Voir tout",
-    "verifyOnCredly": "Verifier sur Credly"
+    "verifyOnCredly": "Vérifier sur Credly"
   },
   "hero": {
-    "badge": "Certifie CKA & CKAD",
+    "badge": "Certifié CKA & CKAD",
     "greeting": "Bonjour, je suis",
     "name": "Azize",
-    "title": "Ingenieur DevOps | Kubernetes, Docker, AWS & CI/CD",
-    "description": "Mon parcours a commence avec les fondamentaux de Linux et continue avec Kubernetes et les technologies Cloud. Ce site est ma plateforme pour partager mon processus d'apprentissage et mes projets.",
+    "title": "Ingénieur DevOps | Kubernetes, Docker, AWS & CI/CD",
+    "description": "Mon parcours a commencé avec les fondamentaux de Linux et continue avec Kubernetes et les technologies Cloud. Ce site est ma plateforme pour partager mon processus d'apprentissage et mes projets.",
     "blogPosts": "Articles de blog",
     "myProjects": "Mes projets"
   },
@@ -33,11 +33,11 @@
       "issuer": "CNCF / Linux Foundation"
     },
     "lfs158": {
-      "fullName": "Introduction a Kubernetes",
+      "fullName": "Introduction à Kubernetes",
       "issuer": "Linux Foundation"
     },
     "awsGenai": {
-      "fullName": "Introduction a l'IA Generative",
+      "fullName": "Introduction à l'IA Générative",
       "issuer": "AWS Educate"
     }
   },
@@ -53,7 +53,7 @@
       "linux": {
         "date": "Janvier 2025",
         "title": "Fondamentaux Linux",
-        "description": "J'ai commence mon voyage Linux avec Bandit Games"
+        "description": "J'ai commencé mon voyage Linux avec Bandit Games"
       },
       "docker": {
         "date": "2025",
@@ -63,7 +63,7 @@
       "kubernetes": {
         "date": "2025",
         "title": "Kubernetes",
-        "description": "Entre dans le monde de l'orchestration de conteneurs"
+        "description": "Entré dans le monde de l'orchestration de conteneurs"
       },
       "certs": {
         "date": "Janvier 2026",
@@ -81,29 +81,29 @@
     "badge": "Contact",
     "title": "Contactez",
     "titleHighlight": "-moi",
-    "subtitle": "Vous souhaitez discuter de DevOps, Kubernetes ou d'un autre sujet? N'hesitez pas a me contacter!",
+    "subtitle": "Vous souhaitez discuter de DevOps, Kubernetes ou d'un autre sujet? N'hésitez pas à me contacter!",
     "sendEmail": "Envoyer un email",
     "orSendEmail": "Ou envoyez directement un email:"
   },
   "blog": {
     "title": "Blog",
     "subtitle": "Mes articles sur DevOps, Kubernetes et Cloud",
-    "backHome": "Retour a l'accueil",
+    "backHome": "Retour à l'accueil",
     "backToBlog": "Retour au Blog",
     "searchPlaceholder": "Rechercher des articles...",
     "allPosts": "Tous les articles",
-    "totalPosts": "{count} articles trouves",
+    "totalPosts": "{count} articles trouvés",
     "postsWithTag": "{count} articles avec le tag {tag}",
-    "noPostsFound": "Aucun article trouve",
-    "noPostsDescription": "Aucun article ne correspond a votre recherche.",
+    "noPostsFound": "Aucun article trouvé",
+    "noPostsDescription": "Aucun article ne correspond à votre recherche.",
     "viewAllPosts": "Voir tous les articles",
-    "postNotFound": "Article non trouve",
+    "postNotFound": "Article non trouvé",
     "share": "Partager",
     "copyLink": "Copier le lien",
     "relatedPosts": "Articles Similaires"
   },
   "footer": {
-    "description": "Ingenieur DevOps | Certifie CKA & CKAD",
+    "description": "Ingénieur DevOps | Certifié CKA & CKAD",
     "techStack": "Kubernetes, Docker, AWS, CI/CD"
   }
 }

@@ -4,26 +4,26 @@
     "blog": "Blog",
     "certifications": "Sertifikalar",
     "projects": "Projeler",
-    "contact": "Iletisim",
+    "contact": "İletişim",
     "pages": "Sayfalar",
     "followMe": "Beni Takip Et",
-    "allRightsReserved": "Tum haklari saklidir",
-    "viewAll": "Tumunu Gor",
-    "verifyOnCredly": "Credly'de Dogrula"
+    "allRightsReserved": "Tüm hakları saklıdır",
+    "viewAll": "Tümünü Gör",
+    "verifyOnCredly": "Credly'de Doğrula"
   },
   "hero": {
     "badge": "CKA & CKAD Certified",
     "greeting": "Merhaba, ben",
     "name": "Azize",
     "title": "DevOps Engineer | Kubernetes, Docker, AWS & CI/CD",
-    "description": "Linux temelleriyle baslayan yolculugum, Kubernetes ve Cloud teknolojileriyle devam ediyor. Bu site, ogrenme surecimi ve projelerimi paylastigim platformdur.",
-    "blogPosts": "Blog Yazilari",
+    "description": "Linux temelleriyle başlayan yolculuğum, Kubernetes ve Cloud teknolojileriyle devam ediyor. Bu site, öğrenme sürecimi ve projelerimi paylaştığım platformdur.",
+    "blogPosts": "Blog Yazıları",
     "myProjects": "Projelerim"
   },
   "certifications": {
-    "title": "Sertifikalarim",
-    "subtitle": "Aldigim profesyonel sertifikalar",
-    "viewAll": "Tum sertifikalar",
+    "title": "Sertifikalarım",
+    "subtitle": "Aldığım profesyonel sertifikalar",
+    "viewAll": "Tüm sertifikalar",
     "cka": {
       "fullName": "Certified Kubernetes Administrator",
       "issuer": "CNCF / Linux Foundation"
@@ -33,74 +33,74 @@
       "issuer": "CNCF / Linux Foundation"
     },
     "lfs158": {
-      "fullName": "Kubernetes'e Giris",
+      "fullName": "Kubernetes'e Giriş",
       "issuer": "Linux Foundation"
     },
     "awsGenai": {
-      "fullName": "Uretken Yapay Zekaya Giris",
+      "fullName": "Üretken Yapay Zekaya Giriş",
       "issuer": "AWS Educate"
     }
   },
   "skills": {
     "title": "Teknolojiler",
-    "subtitle": "Calistigim teknolojiler ve araclar"
+    "subtitle": "Çalıştığım teknolojiler ve araçlar"
   },
   "timeline": {
-    "title": "Yolculugum",
-    "subtitle": "DevOps ogrenme sureci",
-    "viewPosts": "Yazilari gor",
+    "title": "Yolculuğum",
+    "subtitle": "DevOps öğrenme süreci",
+    "viewPosts": "Yazıları gör",
     "items": {
       "linux": {
         "date": "Ocak 2025",
         "title": "Linux Temelleri",
-        "description": "Bandit Games ile Linux yolculuguna basladim"
+        "description": "Bandit Games ile Linux yolculuğuna başladım"
       },
       "docker": {
         "date": "2025",
         "title": "Docker & Containerization",
-        "description": "Container teknolojilerini ogrendim"
+        "description": "Container teknolojilerini öğrendim"
       },
       "kubernetes": {
         "date": "2025",
         "title": "Kubernetes",
-        "description": "Container orchestration dunyasina girdim"
+        "description": "Container orchestration dünyasına girdim"
       },
       "certs": {
         "date": "Ocak 2026",
         "title": "CKA & CKAD",
-        "description": "Kubernetes sertifikalarimi aldim"
+        "description": "Kubernetes sertifikalarımı aldım"
       },
       "aws": {
         "date": "Ocak 2026",
         "title": "AWS Cloud",
-        "description": "Cloud yolculugum devam ediyor"
+        "description": "Cloud yolculuğum devam ediyor"
       }
     }
   },
   "contact": {
-    "badge": "Iletisim",
+    "badge": "İletişim",
     "title": "Bana",
-    "titleHighlight": "Ulasin",
-    "subtitle": "DevOps, Kubernetes veya herhangi bir konu hakkinda sohbet etmek ister misiniz? Benimle iletisime gecmekten cekinmeyin!",
-    "sendEmail": "E-posta Gonderin",
-    "orSendEmail": "Veya dogrudan email gonderin:"
+    "titleHighlight": "Ulaşın",
+    "subtitle": "DevOps, Kubernetes veya herhangi bir konu hakkında sohbet etmek ister misiniz? Benimle iletişime geçmekten çekinmeyin!",
+    "sendEmail": "E-posta Gönderin",
+    "orSendEmail": "Veya doğrudan email gönderin:"
   },
   "blog": {
     "title": "Blog",
-    "subtitle": "DevOps, Kubernetes ve Cloud hakkinda yazilarim",
-    "backHome": "Ana Sayfaya Don",
-    "backToBlog": "Blog'a Don",
-    "searchPlaceholder": "Yazilarda ara...",
-    "allPosts": "Tum Yazilar",
-    "totalPosts": "{count} yazi bulundu",
-    "postsWithTag": "{tag} etiketinde {count} yazi",
-    "noPostsFound": "Yazi bulunamadi",
-    "noPostsDescription": "Aramanizla eslesen yazi bulunamadi.",
-    "viewAllPosts": "Tum yazilari gor",
-    "postNotFound": "Yazi bulunamadi",
-    "share": "Paylas",
+    "subtitle": "DevOps, Kubernetes ve Cloud hakkında yazılarım",
+    "backHome": "Ana Sayfaya Dön",
+    "backToBlog": "Blog'a Dön",
+    "searchPlaceholder": "Yazılarda ara...",
+    "allPosts": "Tüm Yazılar",
+    "totalPosts": "{count} yazı bulundu",
+    "postsWithTag": "{tag} etiketinde {count} yazı",
+    "noPostsFound": "Yazı bulunamadı",
+    "noPostsDescription": "Aramanızla eşleşen yazı bulunamadı.",
+    "viewAllPosts": "Tüm yazıları gör",
+    "postNotFound": "Yazı bulunamadı",
+    "share": "Paylaş",
     "copyLink": "Linki kopyala",
-    "relatedPosts": "Ilgili Yazilar"
+    "relatedPosts": "İlgili Yazılar"
   },
   "footer": {
     "description": "DevOps Engineer | CKA & CKAD Certified",
