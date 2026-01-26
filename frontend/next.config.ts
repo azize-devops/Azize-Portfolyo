@@ -7,6 +7,17 @@ const nextConfig: NextConfig = {
   // Output standalone for Docker
   output: "standalone",
 
+  // Allow remote images from Credly
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "images.credly.com",
+        pathname: "/images/**",
+      },
+    ],
+  },
+
   // Security headers
   async headers() {
     return [
