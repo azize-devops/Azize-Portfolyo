@@ -127,10 +127,10 @@ Meğer daha önce test için kurduğum başka bir web sunucusu hala çalışıyo
 Apache'yi başlattığımda yeni bir hata:
 
 \`\`\`
-AH02297: Cannot access directory "/etc/apache2/${APACHE_LOG_DIR]"
+AH02297: Cannot access directory "/etc/apache2/\${APACHE_LOG_DIR]"
 \`\`\`
 
-Dikkatli bakınca fark ettim: \`${APACHE_LOG_DIR]\` - süslü parantez yerine köşeli parantez kullanmışım! Bir karakterlik hata, yarım saatimi aldı. \`sudo apache2ctl configtest\` komutunu öğrendim - her değişiklikten sonra syntax kontrolü yapmak şart.
+Dikkatli bakınca fark ettim: \`\${APACHE_LOG_DIR]\` - süslü parantez yerine köşeli parantez kullanmışım! Bir karakterlik hata, yarım saatimi aldı. \`sudo apache2ctl configtest\` komutunu öğrendim - her değişiklikten sonra syntax kontrolü yapmak şart.
 
 ## Web Sitesi Oluşturma
 
