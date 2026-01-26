@@ -9,12 +9,12 @@ const socialLinks = [
   },
   {
     name: "LinkedIn",
-    href: "https://linkedin.com/in/azize",
+    href: "https://www.linkedin.com/in/azize-dursun-",
     icon: Linkedin,
   },
   {
     name: "Email",
-    href: "mailto:contact@azize.dev",
+    href: "mailto:azizecakir16@gmail.com",
     icon: Mail,
   },
 ];
@@ -38,7 +38,7 @@ export function Footer() {
             <Link href="/" className="flex items-center gap-2 font-bold text-xl">
               <Terminal className="h-6 w-6 text-blue-600 dark:text-blue-400" />
               <span className="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
-                Azize.dev
+                Ops Chronicle
               </span>
             </Link>
             <p className="text-sm text-gray-600 dark:text-gray-400">
@@ -92,7 +92,7 @@ export function Footer() {
         {/* Copyright */}
         <div className="mt-8 pt-8 border-t border-gray-200 dark:border-gray-800">
           <p className="text-center text-sm text-gray-500 dark:text-gray-500">
-            &copy; {currentYear} Azize. Tum haklari saklidir.
+            &copy; {currentYear} Ops Chronicle. Tum haklari saklidir.
           </p>
         </div>
       </div>

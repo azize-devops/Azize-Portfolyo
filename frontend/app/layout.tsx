@@ -9,8 +9,8 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: {
-    default: "Azize | DevOps Engineer",
-    template: "%s | Azize",
+    default: "Ops Chronicle | DevOps Engineer",
+    template: "%s | Ops Chronicle",
   },
   description:
     "DevOps yolculugum, sertifikalarim ve projelerim. CKA, CKAD, AWS sertifikali DevOps muhendisi.",
@@ -25,20 +25,21 @@ export const metadata: Metadata = {
     "Cloud",
     "Linux",
     "Terraform",
+    "Ops Chronicle",
   ],
-  authors: [{ name: "Azize" }],
-  creator: "Azize",
+  authors: [{ name: "Ops Chronicle" }],
+  creator: "Ops Chronicle",
   openGraph: {
-    title: "Azize | DevOps Engineer",
+    title: "Ops Chronicle | DevOps Engineer",
     description: "DevOps yolculugum, sertifikalarim ve projelerim",
-    url: "https://azize.dev",
-    siteName: "Azize.dev",
+    url: "https://opschronicle.dev",
+    siteName: "Ops Chronicle",
     locale: "tr_TR",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Azize | DevOps Engineer",
+    title: "Ops Chronicle | DevOps Engineer",
     description: "DevOps yolculugum, sertifikalarim ve projelerim",
   },
   robots: {

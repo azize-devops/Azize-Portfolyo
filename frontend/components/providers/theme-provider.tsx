@@ -8,6 +8,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       attribute="class"
       defaultTheme="system"
       enableSystem
+      storageKey="ops-chronicle-theme"
       disableTransitionOnChange
     >
       {children}
