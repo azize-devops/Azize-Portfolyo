@@ -1,10 +1,10 @@
 "use client";
 
 import { useLocale } from "next-intl";
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter, usePathname } from "@/i18n/navigation";
 import { useState, useRef, useEffect } from "react";
 import { Globe, ChevronDown } from "lucide-react";
-import { locales, localeNames, localeFlags, type Locale } from "@/i18n/config";
+import { localeNames, localeFlags, locales, type Locale } from "@/i18n/config";
 
 export function LanguageSelector() {
   const locale = useLocale() as Locale;
@@ -27,26 +27,7 @@ export function LanguageSelector() {
   }, []);
 
   const handleLocaleChange = (newLocale: Locale) => {
-    // Remove current locale prefix and add new one
-    const segments = pathname.split("/");
-    const currentLocaleIndex = locales.indexOf(segments[1] as Locale);
-
-    let newPath: string;
-    if (currentLocaleIndex !== -1) {
-      // Replace current locale
-      segments[1] = newLocale;
-      newPath = segments.join("/");
-    } else {
-      // Add new locale
-      newPath = `/${newLocale}${pathname}`;
-    }
-
-    // For default locale (tr), we can omit the prefix
-    if (newLocale === "tr") {
-      newPath = newPath.replace(/^\/tr/, "") || "/";
-    }
-
-    router.push(newPath);
+    router.replace(pathname, { locale: newLocale });
     setIsOpen(false);
   };
 
