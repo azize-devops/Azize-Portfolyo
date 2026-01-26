@@ -27,179 +27,69 @@ export const blogPosts: BlogPost[] = [
     tags: ["linux", "beginner", "bandit"],
     author: { name: "Azize" },
     content: `
-## Linux Yolculuğum Nasıl Başladı?
+6 Ocak 2025'te bir karar aldım: Linux öğreneceğim. Ama nereden başlayacağımı bilmiyordum. YouTube'da saatlerce video izlemek yerine pratik yapabileceğim bir şey arıyordum. Araştırırken [OverTheWire Bandit](https://overthewire.org/wargames/bandit/) oyununu keşfettim ve bu oyun her şeyi değiştirdi.
 
-6 Ocak 2025'te Linux öğrenmeye karar verdim. Peki nereden başlamalıydım? Araştırmalarım sonucu **OverTheWire Bandit** oyununu keşfettim. Bu oyun, Linux komutlarını eğlenceli bir şekilde öğretiyordu.
+## Bandit: Oyun Oynayarak Linux Öğrenmek
 
-## OverTheWire Bandit Nedir?
+Bandit bir "wargame" - her seviyede bir sonraki seviyenin şifresini bulmanız gerekiyor. Kulağa basit geliyor ama işin güzel yanı şu: şifreyi bulmak için Linux komutlarını kullanmak zorundasınız. Oyun sizi öğrenmeye zorluyor.
 
-[Bandit](https://overthewire.org/wargames/bandit/) bir "wargame" - yani savaş oyunu. Amacı basit: Her seviyede bir sonraki seviyenin şifresini bulmak. Ama bunu yaparken Linux komutlarını öğreniyorsunuz.
-
-### Bandit'e Nasıl Başlanır?
+İlk bağlantıyı kurmak bile bir ders:
 
 \`\`\`bash
-# Bandit Level 0'a SSH ile bağlanma
 ssh bandit0@bandit.labs.overthewire.org -p 2220
-# Şifre: bandit0
 \`\`\`
 
-### Öğrendiğim İlk Komutlar (Level 0-5)
+İlk seviyeler basitti. \`cat readme\` ile dosya okumak, \`ls -la\` ile gizli dosyaları görmek... Ama ilerledikçe işler zorlaştı. Mesela dosya adı sadece \`-\` olunca \`cat -\` çalışmıyor, \`cat ./-\` yazmanız gerekiyor. Boşluklu dosya isimleri için tırnak kullanmak gerektiğini de burada öğrendim.
 
-**Level 0 → 1: Dosya okuma**
-\`\`\`bash
-cat readme
-# Şifre dosyada gizli!
-\`\`\`
+5-10 arasındaki seviyelerde \`find\`, \`grep\`, \`sort\` gibi güçlü araçlarla tanıştım. Özellikle \`find\` komutu hayat kurtarıcı - belirli boyutta, belirli izinlere sahip dosyaları bulmak için mükemmel.
 
-**Level 1 → 2: Özel karakterli dosya isimleri**
-\`\`\`bash
-cat ./-
-# Dosya adı "-" olunca cat - çalışmaz, ./ eklemeliyiz
-\`\`\`
+4 günde ilk 10 seviyeyi bitirdim. Kafamda artık temel Linux komutları oturmuştu.
 
-**Level 2 → 3: Boşluklu dosya isimleri**
-\`\`\`bash
-cat "spaces in this filename"
-# Ya da
-cat spaces\\ in\\ this\\ filename
-\`\`\`
+## Gerçek Bir Linux Sisteme İhtiyaç Vardı
 
-**Level 3 → 4: Gizli dosyalar**
-\`\`\`bash
-ls -la
-cat .hidden
-# Gizli dosyalar . ile başlar
-\`\`\`
+Bandit güzeldi ama başkasının sunucusunda oynamak yetmiyordu. Kendi sistemime ihtiyacım vardı - bir şeyleri kurup bozabileceğim, deneyebileceğim bir ortam.
 
-**Level 4 → 5: Dosya türünü bulma**
-\`\`\`bash
-file ./-file*
-# Hangi dosya ASCII text? O bizim şifremiz
-\`\`\`
+Windows 11 bilgisayarıma [VirtualBox](https://www.virtualbox.org/) kurdum ve [Ubuntu Server](https://ubuntu.com/download/server) yükledim. Neden Desktop değil de Server? Çünkü amacım komut satırını öğrenmekti, güzel arayüzlere bakmak değil.
 
-### Bandit'ten Öğrendiklerim (6-10 Ocak)
+VM ayarlarım basitti: 2 GB RAM, 20 GB disk. Ağ ayarını "Bridged Adapter" yaptım ki Windows'tan Ubuntu'ya erişebileyim.
 
-| Seviye | Öğrendiğim Komut | Ne İşe Yarar |
-|--------|------------------|--------------|
-| 5 | \`find\` | Dosya arama |
-| 6 | \`grep\` | Metin arama |
-| 7 | \`sort\`, \`uniq\` | Sıralama, tekil satır |
-| 8 | \`strings\` | Binary'den metin çıkarma |
-| 9 | \`base64\` | Encoding/Decoding |
-| 10 | \`tr\` | Karakter dönüştürme |
+## İlk Günler: Her Şeyi Keşfetmek
 
----
-
-## VirtualBox ile Ubuntu Kurulumu (11-21 Ocak)
-
-Bandit güzeldi ama gerçek bir Linux sisteme ihtiyacım vardı. Windows 11 bilgisayarıma VirtualBox kurarak Ubuntu çalıştırmaya karar verdim.
-
-### Neden VirtualBox?
-
-- **Ücretsiz** ve açık kaynak
-- Windows'u bozmadan Linux deneyimi
-- Snapshot alabilme (hata yapınca geri dönüş)
-- Network ayarlarını öğrenme
-
-### Kurulum Adımları
-
-1. [VirtualBox](https://www.virtualbox.org/wiki/Downloads) indir ve kur
-2. [Ubuntu Server ISO](https://ubuntu.com/download/server) indir
-3. Yeni VM oluştur:
-   - RAM: 2048 MB
-   - Disk: 20 GB (Dynamic)
-   - Network: Bridged Adapter
-
-### İlk Yapılandırmalar
+Ubuntu kurulunca ilk yaptığım şey sistemi güncellemek oldu:
 
 \`\`\`bash
-# Sistem güncellemesi
 sudo apt update && sudo apt upgrade -y
-
-# Temel araçları kur
 sudo apt install -y net-tools curl wget vim git
-
-# IP adresini öğren
-ip addr
-# veya
-hostname -I
 \`\`\`
 
-### Dosya Sistemi Keşfi
+Sonra dosya sistemini keşfetmeye başladım. Windows'taki C:, D: mantığı burada yok. Her şey tek bir kök dizinden (\`/\`) başlıyor. \`/home\` kullanıcı dosyaları için, \`/etc\` ayar dosyaları için, \`/var\` loglar için...
 
-Linux dosya sistemi Windows'tan çok farklı:
-
-\`\`\`
-/           → Kök dizin (C:\\ gibi)
-├── home/   → Kullanıcı klasörleri
-├── etc/    → Yapılandırma dosyaları
-├── var/    → Log dosyaları, değişken veriler
-├── usr/    → Programlar
-├── tmp/    → Geçici dosyalar
-└── bin/    → Temel komutlar
-\`\`\`
-
-### Temel Komutlar Pratiği
+En çok kullandığım komutlar şunlar oldu:
 
 \`\`\`bash
-# Dizin işlemleri
-pwd                    # Neredeyim?
-ls -la                 # Detaylı listeleme
-cd /var/log           # Dizin değiştir
-mkdir test-klasor     # Yeni klasör
-
-# Dosya işlemleri
-touch dosya.txt       # Boş dosya oluştur
-cp dosya.txt kopya.txt # Kopyala
-mv kopya.txt yeni.txt  # Taşı/Yeniden adlandır
-rm yeni.txt           # Sil
-
-# İçerik görüntüleme
-cat /etc/passwd       # Tüm içerik
-head -5 /etc/passwd   # İlk 5 satır
-tail -f /var/log/syslog # Canlı log takibi
+pwd           # Neredeyim?
+ls -la        # Klasör içeriği (gizli dosyalar dahil)
+cd /var/log   # Dizin değiştir
+cat dosya.txt # Dosya içeriğini göster
 \`\`\`
 
-### Dosya İzinleri
+## İzinler: Linux'un Kalbi
 
-Linux'ta her dosyanın 3 izin türü var:
-- **r** (read) - Okuma
-- **w** (write) - Yazma
-- **x** (execute) - Çalıştırma
+Bir dosyayı çalıştıramayınca izinleri öğrenmek zorunda kaldım. Linux'ta her dosyanın sahibi var ve üç tür izin var: okuma (r), yazma (w), çalıştırma (x).
 
-\`\`\`bash
-ls -l dosya.txt
-# -rw-r--r-- 1 azize azize 0 Jan 15 10:00 dosya.txt
-#  ↑↑↑ ↑↑↑ ↑↑↑
-#  │   │   └── Diğerleri: sadece okuma
-#  │   └────── Grup: sadece okuma
-#  └────────── Sahip: okuma + yazma
+\`ls -l\` çıktısındaki \`-rw-r--r--\` gibi garip harfler artık anlam kazandı. İlk üçlü dosya sahibi için, ikinci üçlü grup için, son üçlü herkes için.
 
-# İzin değiştirme
-chmod 755 script.sh   # rwxr-xr-x
-chmod +x script.sh    # Çalıştırma izni ekle
-\`\`\`
+\`chmod +x script.sh\` ile bir script'e çalıştırma izni vermek, \`chmod 755\` ile tam kontrol... Bunlar artık refleks oldu.
 
----
+## İki Haftanın Sonunda
 
-## Sonraki Adımlar
+21 Ocak'a geldiğimde elimde somut bir şeyler vardı: Bandit'in ilk 10 seviyesini bitirmiştim, kendi Ubuntu sunucum çalışıyordu, temel komutları ezbere biliyordum.
 
-Bu 2 haftalık yoğun çalışmanın ardından:
-- ✅ Linux temel komutlarını öğrendim
-- ✅ Dosya sistemi mantığını kavradım
-- ✅ VirtualBox ile VM yönetimini deneyimledim
+Ama asıl öğrendiğim şey şuydu: Linux'u öğrenmenin en iyi yolu bir şeyleri bozmak. Snapshot alın, deneyin, bozun, geri alın, tekrar deneyin.
 
-Şimdi sıra **web sunucusu** kurmakta! Apache ve Nginx ile tanışma zamanı.
+Şimdi sıra web sunucusu kurmakta. Apache ve Nginx beni bekliyor.
 
-> **İpucu:** Linux öğrenirken hata yapmaktan korkmayın. VirtualBox'ta snapshot alın, bozun, düzeltin, tekrar bozun. En iyi öğrenme yöntemi bu!
-
----
-
-## Faydalı Kaynaklar
-
-- [OverTheWire Bandit](https://overthewire.org/wargames/bandit/) - Oyunla Linux öğren
-- [Linux Man Pages](https://man7.org/linux/man-pages/index.html) - Resmi dokümantasyon
-- [VirtualBox Manual](https://www.virtualbox.org/manual/) - VM kurulum rehberi
+**Faydalı linkler:** [Bandit Oyunu](https://overthewire.org/wargames/bandit/) | [Linux Man Pages](https://man7.org/linux/man-pages/index.html) | [VirtualBox](https://www.virtualbox.org/)
     `,
   },
   {
