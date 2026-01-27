@@ -14,7 +14,8 @@ import {
   Copy,
   Check,
 } from "lucide-react";
-import { getPostBySlug, blogPosts } from "@/lib/blog-data";
+import { getPostBySlug, getBlogPosts } from "@/lib/blog-data";
+import { type Locale } from "@/i18n/config";
 import { useState, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
@@ -24,7 +25,9 @@ export default function BlogPostPage() {
   const t = useTranslations();
   const params = useParams();
   const slug = params.slug as string;
-  const post = getPostBySlug(slug);
+  const locale = (params.locale as Locale) || "tr";
+  const post = getPostBySlug(slug, locale);
+  const blogPosts = getBlogPosts(locale);
   const [copied, setCopied] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -132,7 +135,7 @@ export default function BlogPostPage() {
               </div>
               <span className="flex items-center gap-1">
                 <Calendar className="h-4 w-4" />
-                {new Date(post.date).toLocaleDateString("tr-TR", {
+                {new Date(post.date).toLocaleDateString(locale === "zh" ? "zh-CN" : locale === "ar" ? "ar-SA" : locale, {
                   year: "numeric",
                   month: "long",
                   day: "numeric",

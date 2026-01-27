@@ -2,13 +2,14 @@
 
 import Link from "next/link";
 import { useTranslations } from "next-intl";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useParams } from "next/navigation";
 import { Calendar, Clock, Tag, ArrowLeft, Search } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 import { useState, useMemo } from "react";
-import { blogPosts, allTags, type BlogPost } from "@/lib/blog-data";
+import { getBlogPosts, allTags, type BlogPost } from "@/lib/blog-data";
+import { type Locale } from "@/i18n/config";
 
-function BlogPostCard({ post, index }: { post: BlogPost; index: number }) {
+function BlogPostCard({ post, index, locale }: { post: BlogPost; index: number; locale: Locale }) {
   const { ref, isVisible } = useScrollAnimation<HTMLDivElement>({
     threshold: 0.1,
     triggerOnce: false,
@@ -62,7 +63,7 @@ function BlogPostCard({ post, index }: { post: BlogPost; index: number }) {
             <div className="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-500">
               <span className="flex items-center gap-1">
                 <Calendar className="h-4 w-4" />
-                {new Date(post.date).toLocaleDateString("tr-TR", {
+                {new Date(post.date).toLocaleDateString(locale === "zh" ? "zh-CN" : locale === "ar" ? "ar-SA" : locale, {
                   year: "numeric",
                   month: "short",
                   day: "numeric",
@@ -82,9 +83,14 @@ function BlogPostCard({ post, index }: { post: BlogPost; index: number }) {
 
 export default function BlogPage() {
   const t = useTranslations();
+  const params = useParams();
+  const locale = (params.locale as Locale) || "tr";
   const searchParams = useSearchParams();
   const tagFilter = searchParams.get("tag");
   const [searchQuery, setSearchQuery] = useState("");
+
+  // Get localized blog posts
+  const blogPosts = useMemo(() => getBlogPosts(locale), [locale]);
 
   const { ref: headerRef, isVisible: headerVisible } =
     useScrollAnimation<HTMLDivElement>({
@@ -104,7 +110,7 @@ export default function BlogPage() {
         );
       return matchesTag && matchesSearch;
     });
-  }, [tagFilter, searchQuery]);
+  }, [blogPosts, tagFilter, searchQuery]);
 
   return (
     <main className="min-h-screen bg-gray-50 dark:bg-gray-950">
@@ -205,7 +211,7 @@ export default function BlogPage() {
               {/* Grid */}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {filteredPosts.map((post, index) => (
-                  <BlogPostCard key={post.id} post={post} index={index} />
+                  <BlogPostCard key={post.id} post={post} index={index} locale={locale} />
                 ))}
               </div>
             </>

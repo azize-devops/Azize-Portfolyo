@@ -1,4 +1,22 @@
-// Blog post type
+import { type Locale } from "@/i18n/config";
+
+// Localized string type
+type LocalizedString = Record<Locale, string>;
+
+// Internal blog post structure with all translations
+interface BlogPostData {
+  id: string;
+  slug: string;
+  title: LocalizedString;
+  excerpt: LocalizedString;
+  content: LocalizedString;
+  date: string;
+  readTime: LocalizedString;
+  tags: string[];
+  author: { name: string };
+}
+
+// Public blog post type for display
 export interface BlogPost {
   id: string;
   slug: string;
@@ -8,25 +26,49 @@ export interface BlogPost {
   date: string;
   readTime: string;
   tags: string[];
-  author: {
-    name: string;
-    avatar?: string;
-  };
+  author: { name: string };
 }
 
-// Blog posts data
-export const blogPosts: BlogPost[] = [
+// Blog posts data with all translations
+const blogPostsData: BlogPostData[] = [
   {
     id: "1",
     slug: "linux-temelleri-baslangic",
-    title: "Linux Temelleri: Bandit ile Başlangıç Rehberim",
-    excerpt:
-      "Linux yolculuğuma OverTheWire Bandit oyunu ile başladım. VirtualBox üzerinde Ubuntu kurarak pratik yaptım.",
+    title: {
+      tr: "Linux Temelleri: Bandit ile Başlangıç Rehberim",
+      en: "Linux Basics: My Beginner's Guide with Bandit",
+      ru: "Основы Linux: Мое руководство для начинающих с Bandit",
+      zh: "Linux基础：我的Bandit入门指南",
+      de: "Linux-Grundlagen: Mein Anfängerleitfaden mit Bandit",
+      fr: "Les bases de Linux : Mon guide du débutant avec Bandit",
+      ar: "أساسيات لينكس: دليلي للمبتدئين مع Bandit",
+      es: "Fundamentos de Linux: Mi guía para principiantes con Bandit",
+    },
+    excerpt: {
+      tr: "Linux yolculuğuma OverTheWire Bandit oyunu ile başladım. VirtualBox üzerinde Ubuntu kurarak pratik yaptım.",
+      en: "I started my Linux journey with the OverTheWire Bandit game. I practiced by setting up Ubuntu on VirtualBox.",
+      ru: "Я начал свой путь в Linux с игры OverTheWire Bandit. Практиковался, настраивая Ubuntu на VirtualBox.",
+      zh: "我通过OverTheWire Bandit游戏开始了Linux之旅。我在VirtualBox上安装Ubuntu进行练习。",
+      de: "Ich begann meine Linux-Reise mit dem OverTheWire Bandit-Spiel. Ich übte, indem ich Ubuntu auf VirtualBox einrichtete.",
+      fr: "J'ai commencé mon parcours Linux avec le jeu OverTheWire Bandit. J'ai pratiqué en installant Ubuntu sur VirtualBox.",
+      ar: "بدأت رحلتي مع لينكس بلعبة OverTheWire Bandit. تدربت من خلال إعداد أوبونتو على VirtualBox.",
+      es: "Comencé mi viaje en Linux con el juego OverTheWire Bandit. Practiqué configurando Ubuntu en VirtualBox.",
+    },
     date: "2025-01-06",
-    readTime: "8 min",
+    readTime: {
+      tr: "8 dk",
+      en: "8 min",
+      ru: "8 мин",
+      zh: "8 分钟",
+      de: "8 Min",
+      fr: "8 min",
+      ar: "8 دقائق",
+      es: "8 min",
+    },
     tags: ["linux", "beginner", "bandit"],
     author: { name: "Azize" },
-    content: `
+    content: {
+      tr: `
 6 Ocak 2025'te bir karar aldım: Linux öğreneceğim. Ama nereden başlayacağımı bilmiyordum. Uzun yıllara dayanan sektörel tecrübesiyle Burhan'ın rehberliği beni [OverTheWire Bandit](https://overthewire.org/wargames/bandit/) oyununa yönlendirdi. Bu oyun ve hocamın yaklaşımı, geleneksel eğitim anlayışının ötesine geçen, doğrudan sektörel yetkinlik kazandırmayı amaçlayan bir öğrenme sürecinin başlangıcı oldu.
 
 ## Bandit: Oyun Oynayarak Linux Öğrenmek
@@ -79,19 +121,425 @@ Ama asıl öğrendiğim şey şuydu: Linux'u öğrenmenin en iyi yolu bir şeyle
 Şimdi sıra web sunucusu kurmakta. Apache ve Nginx beni bekliyor.
 
 **Faydalı linkler:** [Bandit Oyunu](https://overthewire.org/wargames/bandit/) | [Linux Man Pages](https://man7.org/linux/man-pages/index.html) | [VirtualBox](https://www.virtualbox.org/)
-    `,
+      `,
+      en: `
+On January 6, 2025, I made a decision: I would learn Linux. But I didn't know where to start. With years of industry experience, Burhan's guidance led me to the [OverTheWire Bandit](https://overthewire.org/wargames/bandit/) game. This game and my mentor's approach marked the beginning of a learning journey that goes beyond traditional education, aiming to provide direct industry competence.
+
+## Bandit: Learning Linux by Playing
+
+Bandit is a "wargame" - at each level, you need to find the password for the next level. It sounds simple, but here's the beauty: you have to use Linux commands to find the password. The game forces you to learn.
+
+Even making the first connection is a lesson:
+
+\`\`\`bash
+ssh bandit0@bandit.labs.overthewire.org -p 2220
+\`\`\`
+
+The first levels were easy. Reading files with \`cat readme\`, seeing hidden files with \`ls -la\`... But as I progressed, things got harder. For example, when a filename is just \`-\`, \`cat -\` doesn't work, you need to write \`cat ./-\`. I also learned here that you need quotes for filenames with spaces.
+
+In levels 5-10, I got acquainted with powerful tools like \`find\`, \`grep\`, \`sort\`. Especially the \`find\` command is a lifesaver - perfect for finding files of a specific size or with specific permissions.
+
+I completed the first 10 levels in 4 days. The basic Linux commands had settled in my mind.
+
+## I Needed a Real Linux System
+
+Bandit was great, but playing on someone else's server wasn't enough. I needed my own system - an environment where I could set things up and break them.
+
+I installed [VirtualBox](https://www.virtualbox.org/) on my Windows 11 computer and set up [Ubuntu Server](https://ubuntu.com/download/server). Why Server instead of Desktop? Because my goal was to learn the command line, not to look at pretty interfaces.
+
+My VM settings were simple: 2 GB RAM, 20 GB disk. I set the network to "Bridged Adapter" so I could access Ubuntu from Windows.
+
+## First Days: Discovering Everything
+
+Once Ubuntu was installed, the first thing I did was update the system:
+
+\`\`\`bash
+sudo apt update && sudo apt upgrade -y
+sudo apt install -y net-tools curl wget vim git
+\`\`\`
+
+Then I started exploring the file system. There's no C:, D: logic like in Windows. Everything starts from a single root directory (\`/\`). \`/home\` for user files, \`/etc\` for configuration files, \`/var\` for logs...
+
+## Permissions: The Heart of Linux
+
+When I couldn't run a file, I had to learn about permissions. In Linux, every file has an owner and there are three types of permissions: read (r), write (w), execute (x).
+
+The strange letters like \`-rw-r--r--\` in the \`ls -l\` output now made sense. Giving execute permission to a script with \`chmod +x script.sh\`, full control with \`chmod 755\`... These became reflexes.
+
+## At the End of Two Weeks
+
+By January 21st, I had something concrete: I had completed the first 10 levels of Bandit, my own Ubuntu server was running, and I knew the basic commands by heart.
+
+But the main thing I learned was this: the best way to learn Linux is to break things. Take snapshots, experiment, break, restore, try again.
+
+Now it's time to set up a web server. Apache and Nginx are waiting for me.
+
+**Useful links:** [Bandit Game](https://overthewire.org/wargames/bandit/) | [Linux Man Pages](https://man7.org/linux/man-pages/index.html) | [VirtualBox](https://www.virtualbox.org/)
+      `,
+      ru: `
+6 января 2025 года я принял решение: буду изучать Linux. Но я не знал, с чего начать. Благодаря многолетнему опыту работы в отрасли, наставничество Бурхана привело меня к игре [OverTheWire Bandit](https://overthewire.org/wargames/bandit/). Эта игра и подход моего наставника ознаменовали начало пути обучения, выходящего за рамки традиционного образования и направленного на получение прямой отраслевой компетенции.
+
+## Bandit: Изучение Linux через игру
+
+Bandit - это "варгейм" - на каждом уровне вам нужно найти пароль для следующего уровня. Звучит просто, но вот в чём прелесть: чтобы найти пароль, нужно использовать команды Linux. Игра заставляет вас учиться.
+
+Даже первое подключение - это урок:
+
+\`\`\`bash
+ssh bandit0@bandit.labs.overthewire.org -p 2220
+\`\`\`
+
+Первые уровни были лёгкими. Чтение файлов с помощью \`cat readme\`, просмотр скрытых файлов с \`ls -la\`... Но по мере продвижения становилось сложнее. Например, когда имя файла просто \`-\`, \`cat -\` не работает, нужно писать \`cat ./-\`. Здесь же я узнал, что для имён файлов с пробелами нужны кавычки.
+
+На уровнях 5-10 я познакомился с мощными инструментами: \`find\`, \`grep\`, \`sort\`. Особенно команда \`find\` - настоящий спаситель для поиска файлов определённого размера или с определёнными правами доступа.
+
+За 4 дня я прошёл первые 10 уровней. Базовые команды Linux закрепились в моей голове.
+
+## Мне нужна была настоящая система Linux
+
+Bandit был отличным, но играть на чужом сервере было недостаточно. Мне нужна была своя система - среда, где я мог бы что-то настраивать и ломать.
+
+Я установил [VirtualBox](https://www.virtualbox.org/) на свой компьютер с Windows 11 и настроил [Ubuntu Server](https://ubuntu.com/download/server). Почему Server, а не Desktop? Потому что моей целью было изучить командную строку, а не смотреть на красивые интерфейсы.
+
+Настройки ВМ были простыми: 2 ГБ RAM, 20 ГБ диск. Сеть настроил на "Bridged Adapter", чтобы иметь доступ к Ubuntu из Windows.
+
+## Первые дни: Исследование всего
+
+После установки Ubuntu первое, что я сделал - обновил систему:
+
+\`\`\`bash
+sudo apt update && sudo apt upgrade -y
+sudo apt install -y net-tools curl wget vim git
+\`\`\`
+
+Затем начал изучать файловую систему. Здесь нет логики C:, D: как в Windows. Всё начинается с одного корневого каталога (\`/\`). \`/home\` для файлов пользователей, \`/etc\` для конфигурационных файлов, \`/var\` для логов...
+
+## Права доступа: Сердце Linux
+
+Когда я не смог запустить файл, пришлось изучить права доступа. В Linux у каждого файла есть владелец и три типа прав: чтение (r), запись (w), выполнение (x).
+
+Странные буквы вроде \`-rw-r--r--\` в выводе \`ls -l\` теперь обрели смысл. Дать скрипту права на выполнение через \`chmod +x script.sh\`, полный контроль через \`chmod 755\`... Это стало рефлексом.
+
+## В конце двух недель
+
+К 21 января у меня было что-то конкретное: я прошёл первые 10 уровней Bandit, мой собственный сервер Ubuntu работал, и я знал базовые команды наизусть.
+
+Но главное, что я понял: лучший способ изучить Linux - это что-то сломать. Делайте снимки, экспериментируйте, ломайте, восстанавливайте, пробуйте снова.
+
+Теперь пора настроить веб-сервер. Apache и Nginx ждут меня.
+
+**Полезные ссылки:** [Игра Bandit](https://overthewire.org/wargames/bandit/) | [Linux Man Pages](https://man7.org/linux/man-pages/index.html) | [VirtualBox](https://www.virtualbox.org/)
+      `,
+      zh: `
+2025年1月6日，我做出了一个决定：我要学习Linux。但我不知道从哪里开始。凭借多年的行业经验，Burhan的指导让我接触到了[OverTheWire Bandit](https://overthewire.org/wargames/bandit/)游戏。这个游戏和我导师的方法标志着一段超越传统教育、旨在提供直接行业能力的学习之旅的开始。
+
+## Bandit：通过游戏学习Linux
+
+Bandit是一个"战争游戏"——在每个级别，你需要找到下一个级别的密码。听起来很简单，但妙处在于：你必须使用Linux命令来找到密码。游戏迫使你学习。
+
+即使是建立第一个连接也是一堂课：
+
+\`\`\`bash
+ssh bandit0@bandit.labs.overthewire.org -p 2220
+\`\`\`
+
+前几关很简单。用\`cat readme\`读取文件，用\`ls -la\`查看隐藏文件...但随着进展，事情变得更难了。例如，当文件名只是\`-\`时，\`cat -\`不起作用，你需要写\`cat ./-\`。我还在这里学到了带空格的文件名需要引号。
+
+在5-10级，我接触了强大的工具，如\`find\`、\`grep\`、\`sort\`。特别是\`find\`命令是救星——非常适合查找特定大小或特定权限的文件。
+
+我在4天内完成了前10个级别。基本的Linux命令已经在我脑海中扎根。
+
+## 我需要一个真正的Linux系统
+
+Bandit很棒，但在别人的服务器上玩是不够的。我需要自己的系统——一个可以设置和破坏东西的环境。
+
+我在Windows 11电脑上安装了[VirtualBox](https://www.virtualbox.org/)并设置了[Ubuntu Server](https://ubuntu.com/download/server)。为什么选Server而不是Desktop？因为我的目标是学习命令行，而不是看漂亮的界面。
+
+我的虚拟机设置很简单：2 GB内存，20 GB磁盘。网络设置为"桥接适配器"，这样我就可以从Windows访问Ubuntu。
+
+## 最初的日子：探索一切
+
+Ubuntu安装后，我做的第一件事是更新系统：
+
+\`\`\`bash
+sudo apt update && sudo apt upgrade -y
+sudo apt install -y net-tools curl wget vim git
+\`\`\`
+
+然后我开始探索文件系统。这里没有Windows中的C:、D:逻辑。一切都从单个根目录（\`/\`）开始。\`/home\`用于用户文件，\`/etc\`用于配置文件，\`/var\`用于日志...
+
+## 权限：Linux的核心
+
+当我无法运行文件时，我不得不学习权限。在Linux中，每个文件都有所有者，有三种类型的权限：读取(r)、写入(w)、执行(x)。
+
+\`ls -l\`输出中像\`-rw-r--r--\`这样的奇怪字母现在有意义了。用\`chmod +x script.sh\`给脚本执行权限，用\`chmod 755\`完全控制...这些已经成为反射动作。
+
+## 两周结束时
+
+到1月21日，我有了具体的成果：我完成了Bandit的前10个级别，我自己的Ubuntu服务器在运行，我熟记了基本命令。
+
+但我学到的最重要的事情是：学习Linux的最好方法是破坏东西。拍快照，实验，破坏，恢复，再试。
+
+现在是设置Web服务器的时候了。Apache和Nginx在等着我。
+
+**有用链接：** [Bandit游戏](https://overthewire.org/wargames/bandit/) | [Linux Man Pages](https://man7.org/linux/man-pages/index.html) | [VirtualBox](https://www.virtualbox.org/)
+      `,
+      de: `
+Am 6. Januar 2025 traf ich eine Entscheidung: Ich würde Linux lernen. Aber ich wusste nicht, wo ich anfangen sollte. Mit jahrelanger Branchenerfahrung führte mich Burhans Anleitung zum [OverTheWire Bandit](https://overthewire.org/wargames/bandit/)-Spiel. Dieses Spiel und der Ansatz meines Mentors markierten den Beginn einer Lernreise, die über die traditionelle Bildung hinausgeht und darauf abzielt, direkte Branchenkompetenz zu vermitteln.
+
+## Bandit: Linux lernen durch Spielen
+
+Bandit ist ein "Wargame" - auf jeder Ebene müssen Sie das Passwort für die nächste Ebene finden. Es klingt einfach, aber hier ist das Schöne daran: Sie müssen Linux-Befehle verwenden, um das Passwort zu finden. Das Spiel zwingt Sie zum Lernen.
+
+Selbst die erste Verbindung herzustellen ist eine Lektion:
+
+\`\`\`bash
+ssh bandit0@bandit.labs.overthewire.org -p 2220
+\`\`\`
+
+Die ersten Level waren einfach. Dateien mit \`cat readme\` lesen, versteckte Dateien mit \`ls -la\` sehen... Aber je weiter ich kam, desto schwieriger wurde es. Wenn zum Beispiel ein Dateiname nur \`-\` ist, funktioniert \`cat -\` nicht, man muss \`cat ./-\` schreiben. Hier lernte ich auch, dass man für Dateinamen mit Leerzeichen Anführungszeichen braucht.
+
+In den Leveln 5-10 lernte ich mächtige Werkzeuge wie \`find\`, \`grep\`, \`sort\` kennen. Besonders der \`find\`-Befehl ist ein Lebensretter - perfekt um Dateien einer bestimmten Größe oder mit bestimmten Berechtigungen zu finden.
+
+Ich habe die ersten 10 Level in 4 Tagen abgeschlossen. Die grundlegenden Linux-Befehle hatten sich in meinem Kopf festgesetzt.
+
+## Ich brauchte ein echtes Linux-System
+
+Bandit war großartig, aber auf dem Server von jemand anderem zu spielen reichte nicht aus. Ich brauchte mein eigenes System - eine Umgebung, in der ich Dinge einrichten und kaputt machen konnte.
+
+Ich installierte [VirtualBox](https://www.virtualbox.org/) auf meinem Windows 11-Computer und richtete [Ubuntu Server](https://ubuntu.com/download/server) ein. Warum Server statt Desktop? Weil mein Ziel war, die Kommandozeile zu lernen, nicht schöne Oberflächen anzuschauen.
+
+Meine VM-Einstellungen waren einfach: 2 GB RAM, 20 GB Festplatte. Ich stellte das Netzwerk auf "Bridged Adapter", damit ich von Windows aus auf Ubuntu zugreifen konnte.
+
+## Erste Tage: Alles erkunden
+
+Nach der Installation von Ubuntu war das Erste, was ich tat, das System zu aktualisieren:
+
+\`\`\`bash
+sudo apt update && sudo apt upgrade -y
+sudo apt install -y net-tools curl wget vim git
+\`\`\`
+
+Dann begann ich, das Dateisystem zu erkunden. Es gibt keine C:, D:-Logik wie in Windows. Alles beginnt von einem einzigen Wurzelverzeichnis (\`/\`). \`/home\` für Benutzerdateien, \`/etc\` für Konfigurationsdateien, \`/var\` für Logs...
+
+## Berechtigungen: Das Herz von Linux
+
+Als ich eine Datei nicht ausführen konnte, musste ich die Berechtigungen lernen. In Linux hat jede Datei einen Besitzer und es gibt drei Arten von Berechtigungen: Lesen (r), Schreiben (w), Ausführen (x).
+
+Die seltsamen Buchstaben wie \`-rw-r--r--\` in der \`ls -l\`-Ausgabe ergaben jetzt Sinn. Einem Skript mit \`chmod +x script.sh\` Ausführungsrechte geben, volle Kontrolle mit \`chmod 755\`... Das wurde zum Reflex.
+
+## Am Ende von zwei Wochen
+
+Bis zum 21. Januar hatte ich etwas Konkretes: Ich hatte die ersten 10 Level von Bandit abgeschlossen, mein eigener Ubuntu-Server lief, und ich kannte die grundlegenden Befehle auswendig.
+
+Aber die wichtigste Erkenntnis war: Der beste Weg, Linux zu lernen, ist Dinge kaputt zu machen. Machen Sie Snapshots, experimentieren Sie, machen Sie kaputt, stellen Sie wieder her, versuchen Sie es erneut.
+
+Jetzt ist es Zeit, einen Webserver einzurichten. Apache und Nginx warten auf mich.
+
+**Nützliche Links:** [Bandit-Spiel](https://overthewire.org/wargames/bandit/) | [Linux Man Pages](https://man7.org/linux/man-pages/index.html) | [VirtualBox](https://www.virtualbox.org/)
+      `,
+      fr: `
+Le 6 janvier 2025, j'ai pris une décision : j'allais apprendre Linux. Mais je ne savais pas par où commencer. Fort de nombreuses années d'expérience dans l'industrie, les conseils de Burhan m'ont conduit au jeu [OverTheWire Bandit](https://overthewire.org/wargames/bandit/). Ce jeu et l'approche de mon mentor ont marqué le début d'un parcours d'apprentissage qui va au-delà de l'éducation traditionnelle, visant à fournir une compétence industrielle directe.
+
+## Bandit : Apprendre Linux en jouant
+
+Bandit est un "wargame" - à chaque niveau, vous devez trouver le mot de passe pour le niveau suivant. Ça semble simple, mais voici la beauté : vous devez utiliser des commandes Linux pour trouver le mot de passe. Le jeu vous force à apprendre.
+
+Même établir la première connexion est une leçon :
+
+\`\`\`bash
+ssh bandit0@bandit.labs.overthewire.org -p 2220
+\`\`\`
+
+Les premiers niveaux étaient faciles. Lire des fichiers avec \`cat readme\`, voir les fichiers cachés avec \`ls -la\`... Mais au fur et à mesure, les choses devenaient plus difficiles. Par exemple, quand un nom de fichier est juste \`-\`, \`cat -\` ne fonctionne pas, il faut écrire \`cat ./-\`. J'ai aussi appris ici qu'il faut des guillemets pour les noms de fichiers avec des espaces.
+
+Dans les niveaux 5-10, j'ai découvert des outils puissants comme \`find\`, \`grep\`, \`sort\`. Surtout la commande \`find\` est un sauveur - parfaite pour trouver des fichiers d'une taille spécifique ou avec des permissions spécifiques.
+
+J'ai terminé les 10 premiers niveaux en 4 jours. Les commandes Linux de base s'étaient installées dans mon esprit.
+
+## J'avais besoin d'un vrai système Linux
+
+Bandit était génial, mais jouer sur le serveur de quelqu'un d'autre ne suffisait pas. J'avais besoin de mon propre système - un environnement où je pouvais configurer et casser des choses.
+
+J'ai installé [VirtualBox](https://www.virtualbox.org/) sur mon ordinateur Windows 11 et configuré [Ubuntu Server](https://ubuntu.com/download/server). Pourquoi Server au lieu de Desktop ? Parce que mon objectif était d'apprendre la ligne de commande, pas de regarder de jolies interfaces.
+
+Mes paramètres VM étaient simples : 2 Go de RAM, 20 Go de disque. J'ai mis le réseau en "Bridged Adapter" pour pouvoir accéder à Ubuntu depuis Windows.
+
+## Premiers jours : Tout découvrir
+
+Une fois Ubuntu installé, la première chose que j'ai faite a été de mettre à jour le système :
+
+\`\`\`bash
+sudo apt update && sudo apt upgrade -y
+sudo apt install -y net-tools curl wget vim git
+\`\`\`
+
+Puis j'ai commencé à explorer le système de fichiers. Il n'y a pas de logique C:, D: comme dans Windows. Tout commence à partir d'un seul répertoire racine (\`/\`). \`/home\` pour les fichiers utilisateurs, \`/etc\` pour les fichiers de configuration, \`/var\` pour les logs...
+
+## Permissions : Le cœur de Linux
+
+Quand je n'ai pas pu exécuter un fichier, j'ai dû apprendre les permissions. Sous Linux, chaque fichier a un propriétaire et il y a trois types de permissions : lecture (r), écriture (w), exécution (x).
+
+Les lettres étranges comme \`-rw-r--r--\` dans la sortie de \`ls -l\` avaient maintenant du sens. Donner la permission d'exécution à un script avec \`chmod +x script.sh\`, contrôle total avec \`chmod 755\`... C'est devenu un réflexe.
+
+## À la fin de deux semaines
+
+Le 21 janvier, j'avais quelque chose de concret : j'avais terminé les 10 premiers niveaux de Bandit, mon propre serveur Ubuntu fonctionnait, et je connaissais les commandes de base par cœur.
+
+Mais la chose principale que j'ai apprise était : la meilleure façon d'apprendre Linux est de casser des choses. Faites des snapshots, expérimentez, cassez, restaurez, réessayez.
+
+Maintenant il est temps de configurer un serveur web. Apache et Nginx m'attendent.
+
+**Liens utiles :** [Jeu Bandit](https://overthewire.org/wargames/bandit/) | [Linux Man Pages](https://man7.org/linux/man-pages/index.html) | [VirtualBox](https://www.virtualbox.org/)
+      `,
+      ar: `
+في 6 يناير 2025، اتخذت قراراً: سأتعلم Linux. لكنني لم أكن أعرف من أين أبدأ. بفضل سنوات من الخبرة في المجال، قادني إرشاد برهان إلى لعبة [OverTheWire Bandit](https://overthewire.org/wargames/bandit/). هذه اللعبة ونهج معلمي شكّلا بداية رحلة تعلم تتجاوز التعليم التقليدي، بهدف توفير كفاءة صناعية مباشرة.
+
+## Bandit: تعلم Linux من خلال اللعب
+
+Bandit هي "لعبة حرب" - في كل مستوى، تحتاج إلى إيجاد كلمة المرور للمستوى التالي. يبدو بسيطاً، لكن هنا الجمال: يجب أن تستخدم أوامر Linux للعثور على كلمة المرور. اللعبة تجبرك على التعلم.
+
+حتى إجراء الاتصال الأول هو درس:
+
+\`\`\`bash
+ssh bandit0@bandit.labs.overthewire.org -p 2220
+\`\`\`
+
+المستويات الأولى كانت سهلة. قراءة الملفات بـ \`cat readme\`، رؤية الملفات المخفية بـ \`ls -la\`... لكن مع التقدم، أصبحت الأمور أصعب. مثلاً، عندما يكون اسم الملف فقط \`-\`، \`cat -\` لا يعمل، تحتاج لكتابة \`cat ./-\`. تعلمت هنا أيضاً أنك تحتاج علامات اقتباس لأسماء الملفات التي تحتوي مسافات.
+
+في المستويات 5-10، تعرفت على أدوات قوية مثل \`find\`، \`grep\`، \`sort\`. خاصة أمر \`find\` منقذ للحياة - مثالي للعثور على ملفات بحجم معين أو بصلاحيات معينة.
+
+أكملت أول 10 مستويات في 4 أيام. استقرت أوامر Linux الأساسية في ذهني.
+
+## كنت بحاجة لنظام Linux حقيقي
+
+Bandit كان رائعاً، لكن اللعب على خادم شخص آخر لم يكن كافياً. كنت بحاجة لنظامي الخاص - بيئة يمكنني فيها إعداد الأشياء وتخريبها.
+
+قمت بتثبيت [VirtualBox](https://www.virtualbox.org/) على حاسوبي Windows 11 وأعددت [Ubuntu Server](https://ubuntu.com/download/server). لماذا Server بدلاً من Desktop؟ لأن هدفي كان تعلم سطر الأوامر، وليس النظر إلى واجهات جميلة.
+
+إعدادات VM كانت بسيطة: 2 GB RAM، 20 GB قرص. ضبطت الشبكة على "Bridged Adapter" لأتمكن من الوصول إلى Ubuntu من Windows.
+
+## الأيام الأولى: اكتشاف كل شيء
+
+بعد تثبيت Ubuntu، أول شيء فعلته هو تحديث النظام:
+
+\`\`\`bash
+sudo apt update && sudo apt upgrade -y
+sudo apt install -y net-tools curl wget vim git
+\`\`\`
+
+ثم بدأت في استكشاف نظام الملفات. لا يوجد منطق C:، D: كما في Windows. كل شيء يبدأ من دليل جذر واحد (\`/\`). \`/home\` لملفات المستخدم، \`/etc\` لملفات الإعداد، \`/var\` للسجلات...
+
+## الصلاحيات: قلب Linux
+
+عندما لم أتمكن من تشغيل ملف، اضطررت لتعلم الصلاحيات. في Linux، لكل ملف مالك وهناك ثلاثة أنواع من الصلاحيات: قراءة (r)، كتابة (w)، تنفيذ (x).
+
+الحروف الغريبة مثل \`-rw-r--r--\` في مخرجات \`ls -l\` أصبحت الآن منطقية. منح صلاحية التنفيذ لسكريبت بـ \`chmod +x script.sh\`، التحكم الكامل بـ \`chmod 755\`... هذه أصبحت ردود فعل تلقائية.
+
+## في نهاية أسبوعين
+
+بحلول 21 يناير، كان لدي شيء ملموس: أكملت أول 10 مستويات من Bandit، خادم Ubuntu الخاص بي يعمل، وأعرف الأوامر الأساسية عن ظهر قلب.
+
+لكن الشيء الرئيسي الذي تعلمته هو: أفضل طريقة لتعلم Linux هي تخريب الأشياء. خذ لقطات، جرّب، خرّب، استعد، حاول مرة أخرى.
+
+الآن حان وقت إعداد خادم ويب. Apache و Nginx ينتظرانني.
+
+**روابط مفيدة:** [لعبة Bandit](https://overthewire.org/wargames/bandit/) | [Linux Man Pages](https://man7.org/linux/man-pages/index.html) | [VirtualBox](https://www.virtualbox.org/)
+      `,
+      es: `
+El 6 de enero de 2025, tomé una decisión: aprendería Linux. Pero no sabía por dónde empezar. Con años de experiencia en la industria, la guía de Burhan me llevó al juego [OverTheWire Bandit](https://overthewire.org/wargames/bandit/). Este juego y el enfoque de mi mentor marcaron el comienzo de un viaje de aprendizaje que va más allá de la educación tradicional, con el objetivo de proporcionar competencia industrial directa.
+
+## Bandit: Aprendiendo Linux jugando
+
+Bandit es un "wargame" - en cada nivel, necesitas encontrar la contraseña para el siguiente nivel. Suena simple, pero aquí está la belleza: tienes que usar comandos de Linux para encontrar la contraseña. El juego te obliga a aprender.
+
+Incluso hacer la primera conexión es una lección:
+
+\`\`\`bash
+ssh bandit0@bandit.labs.overthewire.org -p 2220
+\`\`\`
+
+Los primeros niveles fueron fáciles. Leer archivos con \`cat readme\`, ver archivos ocultos con \`ls -la\`... Pero a medida que avanzaba, las cosas se volvieron más difíciles. Por ejemplo, cuando un nombre de archivo es solo \`-\`, \`cat -\` no funciona, necesitas escribir \`cat ./-\`. También aprendí aquí que necesitas comillas para nombres de archivos con espacios.
+
+En los niveles 5-10, conocí herramientas poderosas como \`find\`, \`grep\`, \`sort\`. Especialmente el comando \`find\` es un salvavidas - perfecto para encontrar archivos de un tamaño específico o con permisos específicos.
+
+Completé los primeros 10 niveles en 4 días. Los comandos básicos de Linux se habían asentado en mi mente.
+
+## Necesitaba un sistema Linux real
+
+Bandit era genial, pero jugar en el servidor de otra persona no era suficiente. Necesitaba mi propio sistema - un entorno donde pudiera configurar y romper cosas.
+
+Instalé [VirtualBox](https://www.virtualbox.org/) en mi computadora Windows 11 y configuré [Ubuntu Server](https://ubuntu.com/download/server). ¿Por qué Server en lugar de Desktop? Porque mi objetivo era aprender la línea de comandos, no mirar interfaces bonitas.
+
+Mis configuraciones de VM fueron simples: 2 GB de RAM, 20 GB de disco. Configuré la red como "Bridged Adapter" para poder acceder a Ubuntu desde Windows.
+
+## Primeros días: Descubriendo todo
+
+Una vez instalado Ubuntu, lo primero que hice fue actualizar el sistema:
+
+\`\`\`bash
+sudo apt update && sudo apt upgrade -y
+sudo apt install -y net-tools curl wget vim git
+\`\`\`
+
+Luego comencé a explorar el sistema de archivos. No hay lógica C:, D: como en Windows. Todo comienza desde un único directorio raíz (\`/\`). \`/home\` para archivos de usuario, \`/etc\` para archivos de configuración, \`/var\` para logs...
+
+## Permisos: El corazón de Linux
+
+Cuando no pude ejecutar un archivo, tuve que aprender sobre permisos. En Linux, cada archivo tiene un propietario y hay tres tipos de permisos: lectura (r), escritura (w), ejecución (x).
+
+Las letras extrañas como \`-rw-r--r--\` en la salida de \`ls -l\` ahora tenían sentido. Dar permiso de ejecución a un script con \`chmod +x script.sh\`, control total con \`chmod 755\`... Esto se volvió un reflejo.
+
+## Al final de dos semanas
+
+Para el 21 de enero, tenía algo concreto: había completado los primeros 10 niveles de Bandit, mi propio servidor Ubuntu estaba funcionando, y conocía los comandos básicos de memoria.
+
+Pero lo principal que aprendí fue: la mejor manera de aprender Linux es romper cosas. Toma snapshots, experimenta, rompe, restaura, intenta de nuevo.
+
+Ahora es tiempo de configurar un servidor web. Apache y Nginx me esperan.
+
+**Enlaces útiles:** [Juego Bandit](https://overthewire.org/wargames/bandit/) | [Linux Man Pages](https://man7.org/linux/man-pages/index.html) | [VirtualBox](https://www.virtualbox.org/)
+      `,
+    },
   },
   {
     id: "2",
     slug: "ubuntu-apache-web-server",
-    title: "Ubuntu'da Apache ile İlk Web Sitem",
-    excerpt:
-      "VirtualBox üzerinde Ubuntu sunucuda Apache kurulumu ve karşılaştığım hatalar. Port çakışmasından konfigürasyon sorunlarına kadar her şey.",
+    title: {
+      tr: "Ubuntu'da Apache ile İlk Web Sitem",
+      en: "My First Website with Apache on Ubuntu",
+      ru: "Мой первый сайт на Apache в Ubuntu",
+      zh: "在Ubuntu上用Apache搭建我的第一个网站",
+      de: "Meine erste Website mit Apache auf Ubuntu",
+      fr: "Mon premier site web avec Apache sur Ubuntu",
+      ar: "موقعي الأول مع Apache على Ubuntu",
+      es: "Mi primer sitio web con Apache en Ubuntu",
+    },
+    excerpt: {
+      tr: "VirtualBox üzerinde Ubuntu sunucuda Apache kurulumu ve karşılaştığım hatalar. Port çakışmasından konfigürasyon sorunlarına kadar her şey.",
+      en: "Apache installation on Ubuntu server in VirtualBox and the errors I encountered. From port conflicts to configuration issues.",
+      ru: "Установка Apache на сервер Ubuntu в VirtualBox и ошибки, с которыми я столкнулся. От конфликтов портов до проблем с конфигурацией.",
+      zh: "在VirtualBox上的Ubuntu服务器上安装Apache以及我遇到的错误。从端口冲突到配置问题。",
+      de: "Apache-Installation auf Ubuntu-Server in VirtualBox und die Fehler, die ich erlebt habe. Von Port-Konflikten bis zu Konfigurationsproblemen.",
+      fr: "Installation d'Apache sur serveur Ubuntu dans VirtualBox et les erreurs rencontrées. Des conflits de ports aux problèmes de configuration.",
+      ar: "تثبيت Apache على خادم Ubuntu في VirtualBox والأخطاء التي واجهتها. من تعارض المنافذ إلى مشاكل الإعداد.",
+      es: "Instalación de Apache en servidor Ubuntu en VirtualBox y los errores que encontré. Desde conflictos de puertos hasta problemas de configuración.",
+    },
     date: "2025-01-22",
-    readTime: "10 min",
+    readTime: {
+      tr: "10 dk",
+      en: "10 min",
+      ru: "10 мин",
+      zh: "10 分钟",
+      de: "10 Min",
+      fr: "10 min",
+      ar: "10 دقائق",
+      es: "10 min",
+    },
     tags: ["linux", "apache", "web-server"],
     author: { name: "Azize" },
-    content: `
+    content: {
+      tr: `
 Linux temellerini öğrendikten sonra sıra gerçek bir şey yapmaya geldi: web sunucusu kurmak. Hedefim basitti - Ubuntu VM'de bir web sitesi ayağa kaldırıp Windows'tan erişmek. Kulağa kolay geliyor, değil mi? Öyle olmadı.
 
 ## Apache Kurulumu: Kolay Kısım
@@ -155,694 +603,507 @@ Bu deneyimden çıkardığım dersler:
 Sırada Nginx var. Daha hafif, daha hızlı diyorlar. Bakalım.
 
 **Faydalı linkler:** [Apache Docs](https://httpd.apache.org/docs/) | [Ubuntu Server Guide](https://ubuntu.com/server/docs)
-    `,
-  },
-  {
-    id: "3",
-    slug: "ubuntu-streamlit-uygulama",
-    title: "Ubuntu'da Streamlit Uygulaması",
-    excerpt:
-      "Python virtual environment nedir, neden önemli? Streamlit ile basit bir web uygulaması oluşturma deneyimim.",
-    date: "2025-01-23",
-    readTime: "8 min",
-    tags: ["linux", "python", "streamlit"],
-    author: { name: "Azize" },
-    content: `
-Apache'den sonra farklı bir şey denemek istedim. Python biliyordum ama web uygulaması yapmamıştım. [Streamlit](https://streamlit.io/)'i keşfedince hemen denemeye karar verdim - birkaç satır Python ile web uygulaması yapabiliyorsunuz.
+      `,
+      en: `
+After learning Linux basics, it was time to do something real: set up a web server. My goal was simple - get a website running on Ubuntu VM and access it from Windows. Sounds easy, right? It wasn't.
 
-## Virtual Environment: Neden Önemli?
+## Apache Installation: The Easy Part
 
-Python'da bir şey kurmadan önce virtual environment (sanal ortam) oluşturmak lazım. Neden mi? Çünkü farklı projeler farklı paket versiyonları isteyebilir. Birinde \`pandas 1.5\`, diğerinde \`pandas 2.0\` gerekebilir. Sanal ortam olmadan sistem Python'ını kirletirsiniz.
-
-\`\`\`bash
-mkdir ~/streamlit-app && cd ~/streamlit-app
-python3 -m venv env
-source env/bin/activate
-\`\`\`
-
-Terminal'de \`(env)\` yazısını görünce sanal ortamdasınız demektir. Artık \`pip install\` ile ne kurarsanız kurun, sadece bu klasörü etkiler.
-
-## İlk Streamlit Uygulaması
-
-\`pip install streamlit\` ile kurulum yaptım. Sonra basit bir \`app.py\` oluşturdum:
-
-\`\`\`python
-import streamlit as st
-
-st.title("Merhaba Streamlit!")
-name = st.text_input("Adınız nedir?")
-if name:
-    st.write(f"Merhaba, {name}!")
-\`\`\`
-
-\`streamlit run app.py --server.address 0.0.0.0\` ile çalıştırdım. \`--server.address 0.0.0.0\` parametresi önemli - bu olmadan sadece localhost'tan erişebilirsiniz.
-
-Windows'tan \`http://192.0.2.100:8501\` açtığımda uygulamayı gördüm. Birkaç satır kodla interaktif bir web uygulaması! Slider ekledim, buton ekledim, hatta \`st.balloons()\` ile konfeti bile attırdım.
-
-## GitHub'dan Proje Çalıştırma
-
-Kendi uygulamam çalışınca merak ettim: başkalarının projelerini de çalıştırabilir miyim? Streamlit'in örnek bir projesini klonladım:
-
-\`\`\`bash
-git clone https://github.com/streamlit/demo-uber-nyc-pickups.git
-cd demo-uber-nyc-pickups
-pip install -r requirements.txt
-streamlit run streamlit_app.py --server.address 0.0.0.0
-\`\`\`
-
-Çalıştı! New York'taki Uber verilerini gösteren interaktif bir harita. \`requirements.txt\` dosyasının önemini burada anladım - projenin hangi paketlere ihtiyacı olduğunu söylüyor.
-
-## Çıkarımlar
-
-- \`python3 -m venv env\` ile sanal ortam oluştur
-- \`source env/bin/activate\` ile aktifleştir
-- \`deactivate\` ile çık
-- \`pip freeze > requirements.txt\` ile bağımlılıkları kaydet
-
-Streamlit gerçekten kolay. Birkaç saat içinde çalışan bir uygulama yaptım. Sırada Nginx ile API endpoint oluşturmak var.
-
-**Faydalı linkler:** [Streamlit Docs](https://docs.streamlit.io/) | [Python venv](https://docs.python.org/3/library/venv.html)
-    `,
-  },
-  {
-    id: "4",
-    slug: "nginx-healtz-endpoint",
-    title: "Nginx ile Health Check Endpoint",
-    excerpt:
-      "Nginx kurulumu ve /healtz endpoint oluşturma. Location block nedir, nasıl çalışır?",
-    date: "2025-01-24",
-    readTime: "7 min",
-    tags: ["linux", "nginx", "web-server"],
-    author: { name: "Azize" },
-    content: `
-Apache'yi öğrendikten sonra [Nginx](https://nginx.org/)'i denemek istedim. Herkes "daha hafif, daha hızlı" diyordu.
-
-Görevim basitti: \`/healtz\` adresine istek geldiğinde "istek başarılı" dönen bir endpoint yapmak. Basit bir health check endpoint'i.
-
-## Nginx Kurulumu
+[Apache](https://httpd.apache.org/) installation was really simple:
 
 \`\`\`bash
 sudo apt update
-sudo apt install nginx
-sudo systemctl status nginx
+sudo apt install apache2
+sudo systemctl status apache2
 \`\`\`
 
-Tarayıcıda VM'in IP'sini açtığımda Nginx'in "Welcome" sayfası geldi. Apache'den farklı olarak port sorunu yaşamadım çünkü Apache'yi durdurmuştum.
+I was happy when I saw \`active (running)\`. I opened the VM's IP in the browser and... nothing. That's where the adventure began.
 
-## Location Block
+## First Error: Port Conflict
 
-Nginx'te routing \`location\` blokları ile yapılıyor. \`/etc/nginx/sites-available/default\` dosyasını düzenledim:
+When I tried to restart Apache, red text appeared in the terminal:
 
-\`\`\`nginx
-location /healtz {
-    return 200 "istek başarılı\\n";
-    add_header Content-Type text/plain;
-}
+\`\`\`
+Address already in use: AH00072: make_sock: could not bind to address 0.0.0.0:80
 \`\`\`
 
-Bu kadar basit! \`return 200\` ile HTTP 200 OK döndürüyoruz, yanında da mesajımız var.
-
-## Test
-
-Değişiklikten sonra \`sudo nginx -t\` ile syntax kontrolü yaptım (Apache'deki \`configtest\` gibi). Hata yoksa \`sudo systemctl reload nginx\` ile yükledim.
+Port 80 was already in use. I checked who was using it:
 
 \`\`\`bash
-curl http://localhost/healtz
-# Çıktı: istek başarılı
+sudo lsof -i :80
 \`\`\`
 
-Windows'tan da denedim - çalıştı. \`curl -v\` ile detaylı çıktıya baktığımda HTTP/1.1 200 OK görünce mutlu oldum.
+Turns out another web server I had installed earlier for testing was still running. I had two options: stop it or change Apache's port. I chose to change the port - changed \`Listen 80\` to \`Listen 8080\` in \`/etc/apache2/ports.conf\`.
 
-## sites-available vs sites-enabled
+## Second Error: Typo!
 
-Nginx'in yapısı ilginç: \`sites-available\` klasöründe tüm site yapılandırmaları var, \`sites-enabled\` klasöründe ise aktif olanların symlink'leri. Site aktifleştirmek için:
+When I started Apache, a new error:
+
+\`\`\`
+AH02297: Cannot access directory "/etc/apache2/\${APACHE_LOG_DIR]"
+\`\`\`
+
+Looking carefully, I noticed: \`\${APACHE_LOG_DIR]\` - I had used a square bracket instead of a curly brace! A one-character error took half an hour of my time. I learned the \`sudo apache2ctl configtest\` command - syntax checking after every change is a must.
+
+## Creating the Website
+
+Once errors were resolved, it was time for content. I created the \`/var/www/mysite\` folder and wrote a simple HTML file. Then Virtual Host configuration:
 
 \`\`\`bash
-sudo ln -s /etc/nginx/sites-available/mysite /etc/nginx/sites-enabled/
+sudo nano /etc/apache2/sites-available/mysite.conf
 \`\`\`
 
-Devre dışı bırakmak için symlink'i silmek yeterli. Apache'deki \`a2ensite\` / \`a2dissite\` mantığının manuel versiyonu.
+I activated the site with \`a2ensite mysite.conf\`, disabled the default with \`a2dissite 000-default.conf\`. \`sudo systemctl reload apache2\` and...
 
-## Öğrendiklerim
+I opened \`http://192.0.2.100:8080\` in the Windows browser. When I saw "Hello World!", I was really happy. A simple HTML page but a big step for me.
 
-- Nginx gerçekten daha basit ve hafif hissettiriyor
-- \`location\` blokları güçlü - regex bile kullanabiliyorsunuz
-- \`nginx -t\` ile her zaman test et
-- Access log'lar \`/var/log/nginx/access.log\`'da
+## Lessons Learned
 
-Sırada Socket.io ile gerçek zamanlı bir uygulama var.
+Lessons from this experience:
+- **Actually** reading error messages is important
+- Always use \`apache2ctl configtest\`
+- Check ports with \`lsof -i :port\`
+- Don't forget the firewall: \`sudo ufw allow 8080/tcp\`
 
-**Faydalı linkler:** [Nginx Docs](https://nginx.org/en/docs/) | [Nginx Beginner's Guide](https://nginx.org/en/docs/beginners_guide.html)
-    `,
+Nginx is next. They say it's lighter, faster. Let's see.
+
+**Useful links:** [Apache Docs](https://httpd.apache.org/docs/) | [Ubuntu Server Guide](https://ubuntu.com/server/docs)
+      `,
+      ru: `
+После изучения основ Linux пришло время сделать что-то реальное: настроить веб-сервер. Моя цель была проста - запустить сайт на Ubuntu VM и получить к нему доступ из Windows. Звучит легко, правда? Не тут-то было.
+
+## Установка Apache: Простая часть
+
+Установка [Apache](https://httpd.apache.org/) была действительно простой:
+
+\`\`\`bash
+sudo apt update
+sudo apt install apache2
+sudo systemctl status apache2
+\`\`\`
+
+Я обрадовался, увидев \`active (running)\`. Открыл IP виртуальной машины в браузере и... ничего. Вот тут и началось приключение.
+
+## Первая ошибка: Конфликт портов
+
+Когда я попытался перезапустить Apache, в терминале появился красный текст:
+
+\`\`\`
+Address already in use: AH00072: make_sock: could not bind to address 0.0.0.0:80
+\`\`\`
+
+Порт 80 уже был занят. Я проверил, кто его использует:
+
+\`\`\`bash
+sudo lsof -i :80
+\`\`\`
+
+Оказалось, что другой веб-сервер, который я установил ранее для тестирования, всё ещё работал. У меня было два варианта: остановить его или изменить порт Apache. Я выбрал изменение порта - поменял \`Listen 80\` на \`Listen 8080\` в \`/etc/apache2/ports.conf\`.
+
+## Вторая ошибка: Опечатка!
+
+Когда я запустил Apache, новая ошибка:
+
+\`\`\`
+AH02297: Cannot access directory "/etc/apache2/\${APACHE_LOG_DIR]"
+\`\`\`
+
+Внимательно посмотрев, я заметил: \`\${APACHE_LOG_DIR]\` - я использовал квадратную скобку вместо фигурной! Ошибка в один символ отняла полчаса моего времени. Я узнал команду \`sudo apache2ctl configtest\` - проверка синтаксиса после каждого изменения обязательна.
+
+## Создание сайта
+
+Когда ошибки были устранены, пришло время для контента. Я создал папку \`/var/www/mysite\` и написал простой HTML-файл. Затем настройка Virtual Host:
+
+\`\`\`bash
+sudo nano /etc/apache2/sites-available/mysite.conf
+\`\`\`
+
+Активировал сайт командой \`a2ensite mysite.conf\`, отключил стандартный через \`a2dissite 000-default.conf\`. \`sudo systemctl reload apache2\` и...
+
+Открыл \`http://192.0.2.100:8080\` в браузере Windows. Когда увидел "Привет, мир!", был по-настоящему счастлив. Простая HTML-страница, но большой шаг для меня.
+
+## Уроки
+
+Выводы из этого опыта:
+- **Действительно** читать сообщения об ошибках важно
+- Всегда используй \`apache2ctl configtest\`
+- Проверяй порты с \`lsof -i :port\`
+- Не забывай про файрвол: \`sudo ufw allow 8080/tcp\`
+
+Следующий - Nginx. Говорят, он легче и быстрее. Посмотрим.
+
+**Полезные ссылки:** [Apache Docs](https://httpd.apache.org/docs/) | [Ubuntu Server Guide](https://ubuntu.com/server/docs)
+      `,
+      zh: `
+学习了Linux基础之后，是时候做一些真正的事情了：搭建Web服务器。我的目标很简单——在Ubuntu虚拟机上运行一个网站，并从Windows访问它。听起来很简单，对吧？并没有。
+
+## Apache安装：简单的部分
+
+[Apache](https://httpd.apache.org/)的安装真的很简单：
+
+\`\`\`bash
+sudo apt update
+sudo apt install apache2
+sudo systemctl status apache2
+\`\`\`
+
+看到\`active (running)\`我很高兴。我在浏览器中打开虚拟机的IP，然后...什么都没有。冒险就此开始。
+
+## 第一个错误：端口冲突
+
+当我尝试重启Apache时，终端出现红色文字：
+
+\`\`\`
+Address already in use: AH00072: make_sock: could not bind to address 0.0.0.0:80
+\`\`\`
+
+80端口已被占用。我检查了谁在使用它：
+
+\`\`\`bash
+sudo lsof -i :80
+\`\`\`
+
+原来我之前为测试安装的另一个Web服务器还在运行。我有两个选择：停止它或更改Apache的端口。我选择更改端口——将\`/etc/apache2/ports.conf\`中的\`Listen 80\`改为\`Listen 8080\`。
+
+## 第二个错误：打字错误！
+
+当我启动Apache时，新的错误：
+
+\`\`\`
+AH02297: Cannot access directory "/etc/apache2/\${APACHE_LOG_DIR]"
+\`\`\`
+
+仔细看，我注意到：\`\${APACHE_LOG_DIR]\`——我用了方括号而不是花括号！一个字符的错误花了我半小时。我学会了\`sudo apache2ctl configtest\`命令——每次更改后进行语法检查是必须的。
+
+## 创建网站
+
+错误解决后，是时候创建内容了。我创建了\`/var/www/mysite\`文件夹并写了一个简单的HTML文件。然后是虚拟主机配置：
+
+\`\`\`bash
+sudo nano /etc/apache2/sites-available/mysite.conf
+\`\`\`
+
+用\`a2ensite mysite.conf\`激活网站，用\`a2dissite 000-default.conf\`禁用默认站点。\`sudo systemctl reload apache2\`然后...
+
+我在Windows浏览器中打开\`http://192.0.2.100:8080\`。当我看到"Hello World!"时，真的很高兴。一个简单的HTML页面，但对我来说是一大步。
+
+## 经验教训
+
+从这次经历中得到的教训：
+- **真正**阅读错误信息很重要
+- 始终使用\`apache2ctl configtest\`
+- 用\`lsof -i :port\`检查端口
+- 不要忘记防火墙：\`sudo ufw allow 8080/tcp\`
+
+下一个是Nginx。他们说它更轻、更快。让我们看看。
+
+**有用链接：** [Apache文档](https://httpd.apache.org/docs/) | [Ubuntu服务器指南](https://ubuntu.com/server/docs)
+      `,
+      de: `
+Nach dem Erlernen der Linux-Grundlagen war es Zeit, etwas Echtes zu tun: einen Webserver einrichten. Mein Ziel war einfach - eine Website auf Ubuntu VM zum Laufen bringen und von Windows darauf zugreifen. Klingt einfach, oder? War es nicht.
+
+## Apache-Installation: Der einfache Teil
+
+Die [Apache](https://httpd.apache.org/)-Installation war wirklich einfach:
+
+\`\`\`bash
+sudo apt update
+sudo apt install apache2
+sudo systemctl status apache2
+\`\`\`
+
+Ich freute mich, als ich \`active (running)\` sah. Ich öffnete die IP der VM im Browser und... nichts. Dort begann das Abenteuer.
+
+## Erster Fehler: Port-Konflikt
+
+Als ich versuchte, Apache neu zu starten, erschien roter Text im Terminal:
+
+\`\`\`
+Address already in use: AH00072: make_sock: could not bind to address 0.0.0.0:80
+\`\`\`
+
+Port 80 war bereits in Verwendung. Ich prüfte, wer ihn benutzte:
+
+\`\`\`bash
+sudo lsof -i :80
+\`\`\`
+
+Es stellte sich heraus, dass ein anderer Webserver, den ich früher zum Testen installiert hatte, noch lief. Ich hatte zwei Optionen: ihn stoppen oder Apaches Port ändern. Ich entschied mich für die Portänderung - änderte \`Listen 80\` zu \`Listen 8080\` in \`/etc/apache2/ports.conf\`.
+
+## Zweiter Fehler: Tippfehler!
+
+Als ich Apache startete, ein neuer Fehler:
+
+\`\`\`
+AH02297: Cannot access directory "/etc/apache2/\${APACHE_LOG_DIR]"
+\`\`\`
+
+Bei genauerem Hinsehen bemerkte ich: \`\${APACHE_LOG_DIR]\` - ich hatte eine eckige Klammer statt einer geschweiften verwendet! Ein Ein-Zeichen-Fehler kostete mich eine halbe Stunde. Ich lernte den Befehl \`sudo apache2ctl configtest\` - Syntaxprüfung nach jeder Änderung ist ein Muss.
+
+## Die Website erstellen
+
+Sobald die Fehler behoben waren, war es Zeit für Inhalt. Ich erstellte den Ordner \`/var/www/mysite\` und schrieb eine einfache HTML-Datei. Dann die Virtual Host-Konfiguration:
+
+\`\`\`bash
+sudo nano /etc/apache2/sites-available/mysite.conf
+\`\`\`
+
+Ich aktivierte die Site mit \`a2ensite mysite.conf\`, deaktivierte die Standardseite mit \`a2dissite 000-default.conf\`. \`sudo systemctl reload apache2\` und...
+
+Ich öffnete \`http://192.0.2.100:8080\` im Windows-Browser. Als ich "Hallo Welt!" sah, war ich wirklich glücklich. Eine einfache HTML-Seite, aber ein großer Schritt für mich.
+
+## Gelernte Lektionen
+
+Lektionen aus dieser Erfahrung:
+- Fehlermeldungen **wirklich** zu lesen ist wichtig
+- Immer \`apache2ctl configtest\` verwenden
+- Ports mit \`lsof -i :port\` prüfen
+- Firewall nicht vergessen: \`sudo ufw allow 8080/tcp\`
+
+Als nächstes kommt Nginx. Sie sagen, er ist leichter und schneller. Mal sehen.
+
+**Nützliche Links:** [Apache Docs](https://httpd.apache.org/docs/) | [Ubuntu Server Guide](https://ubuntu.com/server/docs)
+      `,
+      fr: `
+Après avoir appris les bases de Linux, il était temps de faire quelque chose de concret : configurer un serveur web. Mon objectif était simple - faire fonctionner un site web sur Ubuntu VM et y accéder depuis Windows. Ça semble facile, non ? Ça ne l'était pas.
+
+## Installation d'Apache : La partie facile
+
+L'installation d'[Apache](https://httpd.apache.org/) était vraiment simple :
+
+\`\`\`bash
+sudo apt update
+sudo apt install apache2
+sudo systemctl status apache2
+\`\`\`
+
+J'étais content de voir \`active (running)\`. J'ai ouvert l'IP de la VM dans le navigateur et... rien. C'est là que l'aventure a commencé.
+
+## Première erreur : Conflit de port
+
+Quand j'ai essayé de redémarrer Apache, du texte rouge est apparu dans le terminal :
+
+\`\`\`
+Address already in use: AH00072: make_sock: could not bind to address 0.0.0.0:80
+\`\`\`
+
+Le port 80 était déjà utilisé. J'ai vérifié qui l'utilisait :
+
+\`\`\`bash
+sudo lsof -i :80
+\`\`\`
+
+Il s'avère qu'un autre serveur web que j'avais installé plus tôt pour des tests tournait encore. J'avais deux options : l'arrêter ou changer le port d'Apache. J'ai choisi de changer le port - changé \`Listen 80\` en \`Listen 8080\` dans \`/etc/apache2/ports.conf\`.
+
+## Deuxième erreur : Faute de frappe !
+
+Quand j'ai démarré Apache, une nouvelle erreur :
+
+\`\`\`
+AH02297: Cannot access directory "/etc/apache2/\${APACHE_LOG_DIR]"
+\`\`\`
+
+En regardant attentivement, j'ai remarqué : \`\${APACHE_LOG_DIR]\` - j'avais utilisé un crochet au lieu d'une accolade ! Une erreur d'un caractère m'a pris une demi-heure. J'ai appris la commande \`sudo apache2ctl configtest\` - la vérification de syntaxe après chaque modification est indispensable.
+
+## Création du site web
+
+Une fois les erreurs résolues, il était temps pour le contenu. J'ai créé le dossier \`/var/www/mysite\` et écrit un simple fichier HTML. Puis la configuration Virtual Host :
+
+\`\`\`bash
+sudo nano /etc/apache2/sites-available/mysite.conf
+\`\`\`
+
+J'ai activé le site avec \`a2ensite mysite.conf\`, désactivé celui par défaut avec \`a2dissite 000-default.conf\`. \`sudo systemctl reload apache2\` et...
+
+J'ai ouvert \`http://192.0.2.100:8080\` dans le navigateur Windows. Quand j'ai vu "Bonjour le monde !", j'étais vraiment heureux. Une simple page HTML mais un grand pas pour moi.
+
+## Leçons apprises
+
+Les leçons de cette expérience :
+- **Vraiment** lire les messages d'erreur est important
+- Toujours utiliser \`apache2ctl configtest\`
+- Vérifier les ports avec \`lsof -i :port\`
+- Ne pas oublier le pare-feu : \`sudo ufw allow 8080/tcp\`
+
+Nginx est le suivant. On dit qu'il est plus léger, plus rapide. On verra.
+
+**Liens utiles :** [Apache Docs](https://httpd.apache.org/docs/) | [Ubuntu Server Guide](https://ubuntu.com/server/docs)
+      `,
+      ar: `
+بعد تعلم أساسيات Linux، حان الوقت لفعل شيء حقيقي: إعداد خادم ويب. كان هدفي بسيطاً - تشغيل موقع ويب على Ubuntu VM والوصول إليه من Windows. يبدو سهلاً، أليس كذلك؟ لم يكن كذلك.
+
+## تثبيت Apache: الجزء السهل
+
+كان تثبيت [Apache](https://httpd.apache.org/) بسيطاً حقاً:
+
+\`\`\`bash
+sudo apt update
+sudo apt install apache2
+sudo systemctl status apache2
+\`\`\`
+
+فرحت عندما رأيت \`active (running)\`. فتحت IP الـ VM في المتصفح و... لا شيء. هنا بدأت المغامرة.
+
+## الخطأ الأول: تعارض المنافذ
+
+عندما حاولت إعادة تشغيل Apache، ظهر نص أحمر في الطرفية:
+
+\`\`\`
+Address already in use: AH00072: make_sock: could not bind to address 0.0.0.0:80
+\`\`\`
+
+المنفذ 80 كان مستخدماً بالفعل. تحققت من يستخدمه:
+
+\`\`\`bash
+sudo lsof -i :80
+\`\`\`
+
+اتضح أن خادم ويب آخر كنت قد ثبته سابقاً للاختبار كان لا يزال يعمل. كان لدي خياران: إيقافه أو تغيير منفذ Apache. اخترت تغيير المنفذ - غيرت \`Listen 80\` إلى \`Listen 8080\` في \`/etc/apache2/ports.conf\`.
+
+## الخطأ الثاني: خطأ مطبعي!
+
+عندما شغلت Apache، خطأ جديد:
+
+\`\`\`
+AH02297: Cannot access directory "/etc/apache2/\${APACHE_LOG_DIR]"
+\`\`\`
+
+بالنظر بعناية، لاحظت: \`\${APACHE_LOG_DIR]\` - استخدمت قوس مربع بدلاً من قوس منحني! خطأ حرف واحد أخذ نصف ساعة من وقتي. تعلمت الأمر \`sudo apache2ctl configtest\` - فحص الصياغة بعد كل تغيير ضروري.
+
+## إنشاء الموقع
+
+بعد حل الأخطاء، حان وقت المحتوى. أنشأت مجلد \`/var/www/mysite\` وكتبت ملف HTML بسيط. ثم تكوين Virtual Host:
+
+\`\`\`bash
+sudo nano /etc/apache2/sites-available/mysite.conf
+\`\`\`
+
+فعّلت الموقع بـ \`a2ensite mysite.conf\`، وأوقفت الافتراضي بـ \`a2dissite 000-default.conf\`. \`sudo systemctl reload apache2\` ثم...
+
+فتحت \`http://192.0.2.100:8080\` في متصفح Windows. عندما رأيت "مرحباً بالعالم!"، كنت سعيداً حقاً. صفحة HTML بسيطة لكنها خطوة كبيرة بالنسبة لي.
+
+## الدروس المستفادة
+
+دروس من هذه التجربة:
+- قراءة رسائل الخطأ **فعلياً** مهم
+- استخدم دائماً \`apache2ctl configtest\`
+- تحقق من المنافذ بـ \`lsof -i :port\`
+- لا تنس جدار الحماية: \`sudo ufw allow 8080/tcp\`
+
+التالي هو Nginx. يقولون أنه أخف وأسرع. لنرى.
+
+**روابط مفيدة:** [Apache Docs](https://httpd.apache.org/docs/) | [Ubuntu Server Guide](https://ubuntu.com/server/docs)
+      `,
+      es: `
+Después de aprender los fundamentos de Linux, era hora de hacer algo real: configurar un servidor web. Mi objetivo era simple - tener un sitio web funcionando en Ubuntu VM y acceder desde Windows. Suena fácil, ¿verdad? No lo fue.
+
+## Instalación de Apache: La parte fácil
+
+La instalación de [Apache](https://httpd.apache.org/) fue realmente simple:
+
+\`\`\`bash
+sudo apt update
+sudo apt install apache2
+sudo systemctl status apache2
+\`\`\`
+
+Me alegré cuando vi \`active (running)\`. Abrí la IP de la VM en el navegador y... nada. Ahí es donde comenzó la aventura.
+
+## Primer error: Conflicto de puertos
+
+Cuando intenté reiniciar Apache, apareció texto rojo en la terminal:
+
+\`\`\`
+Address already in use: AH00072: make_sock: could not bind to address 0.0.0.0:80
+\`\`\`
+
+El puerto 80 ya estaba en uso. Comprobé quién lo estaba usando:
+
+\`\`\`bash
+sudo lsof -i :80
+\`\`\`
+
+Resulta que otro servidor web que había instalado antes para pruebas todavía estaba ejecutándose. Tenía dos opciones: detenerlo o cambiar el puerto de Apache. Elegí cambiar el puerto - cambié \`Listen 80\` a \`Listen 8080\` en \`/etc/apache2/ports.conf\`.
+
+## Segundo error: ¡Error tipográfico!
+
+Cuando inicié Apache, un nuevo error:
+
+\`\`\`
+AH02297: Cannot access directory "/etc/apache2/\${APACHE_LOG_DIR]"
+\`\`\`
+
+Mirando cuidadosamente, noté: \`\${APACHE_LOG_DIR]\` - ¡había usado un corchete en lugar de una llave! Un error de un carácter me tomó media hora. Aprendí el comando \`sudo apache2ctl configtest\` - la verificación de sintaxis después de cada cambio es imprescindible.
+
+## Creando el sitio web
+
+Una vez resueltos los errores, era hora del contenido. Creé la carpeta \`/var/www/mysite\` y escribí un archivo HTML simple. Luego la configuración de Virtual Host:
+
+\`\`\`bash
+sudo nano /etc/apache2/sites-available/mysite.conf
+\`\`\`
+
+Activé el sitio con \`a2ensite mysite.conf\`, desactivé el predeterminado con \`a2dissite 000-default.conf\`. \`sudo systemctl reload apache2\` y...
+
+Abrí \`http://192.0.2.100:8080\` en el navegador de Windows. Cuando vi "¡Hola Mundo!", estaba realmente feliz. Una simple página HTML pero un gran paso para mí.
+
+## Lecciones aprendidas
+
+Lecciones de esta experiencia:
+- Leer **realmente** los mensajes de error es importante
+- Siempre usa \`apache2ctl configtest\`
+- Verifica puertos con \`lsof -i :port\`
+- No olvides el firewall: \`sudo ufw allow 8080/tcp\`
+
+El siguiente es Nginx. Dicen que es más ligero y rápido. Veamos.
+
+**Enlaces útiles:** [Apache Docs](https://httpd.apache.org/docs/) | [Ubuntu Server Guide](https://ubuntu.com/server/docs)
+      `,
+    },
   },
-  {
-    id: "5",
-    slug: "socketio-chat-uygulamasi",
-    title: "Socket.io ile Gerçek Zamanlı Chat",
-    excerpt:
-      "Node.js kurulumu, GitHub'dan proje klonlama ve PM2 ile process yönetimi deneyimim.",
-    date: "2025-01-25",
-    readTime: "8 min",
-    tags: ["linux", "nodejs", "socketio"],
-    author: { name: "Azize" },
-    content: `
-Web sunucuları öğrendim ama hepsi "istek-yanıt" mantığında çalışıyordu. Gerçek zamanlı bir şey yapmak istedim - mesela chat uygulaması. [Socket.io](https://socket.io/) tam da bunun için var.
-
-## Node.js Kurulumu
-
-Socket.io bir JavaScript kütüphanesi, yani Node.js lazım:
-
-\`\`\`bash
-curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
-sudo apt install -y nodejs
-node --version
-npm --version
-\`\`\`
-
-\`npm\` (Node Package Manager) Python'daki \`pip\` gibi - paket yöneticisi.
-
-## GitHub'dan Proje Klonlama
-
-Socket.io'nun resmi chat örneği var. Onu klonladım:
-
-\`\`\`bash
-git clone https://github.com/socketio/chat-example.git
-cd chat-example
-npm install
-\`\`\`
-
-\`npm install\` komutu \`package.json\` dosyasındaki tüm bağımlılıkları yüklüyor. Python'daki \`pip install -r requirements.txt\` gibi.
-
-\`npm start\` ile uygulamayı başlattım. Ama bir sorun vardı: sadece localhost'tan erişilebiliyordu. \`index.js\` dosyasında \`app.listen(3000)\` satırını \`app.listen(3000, '0.0.0.0')\` olarak değiştirdim.
-
-## PM2: Process Yöneticisi
-
-Terminal'i kapatınca uygulama duruyordu. Bunu çözmek için birkaç yol var:
-- \`nohup npm start &\` - basit ama kaba
-- \`screen\` - terminal multiplexer
-- \`pm2\` - profesyonel çözüm
-
-PM2'yi tercih ettim:
-
-\`\`\`bash
-sudo npm install -g pm2
-pm2 start index.js --name "chat-app"
-pm2 status
-\`\`\`
-
-Artık uygulama arka planda çalışıyor. \`pm2 logs chat-app\` ile logları görebiliyorum, \`pm2 restart chat-app\` ile yeniden başlatabiliyorum. Sunucu yeniden başlasa bile \`pm2 startup\` ile otomatik başlatmayı ayarlayabiliyorum.
-
-## Chat Uygulamasını Test Etmek
-
-İki farklı tarayıcı sekmesi açtım. Birinden mesaj yazdığımda diğerinde anında göründü! WebSocket'in gücü bu - sunucu client'a veri "push" edebiliyor, client'ın sürekli sormasına gerek yok.
-
-## Öğrendiklerim
-
-- \`npm install\` bağımlılıkları yükler
-- \`0.0.0.0\` ile dış erişime açarsın
-- PM2 production'da Node.js uygulamaları için standart
-- WebSocket, HTTP'den farklı - çift yönlü iletişim
-
-Son görev: tüm bu uygulamaları Nginx reverse proxy ile birleştirmek.
-
-**Faydalı linkler:** [Socket.io Docs](https://socket.io/docs/) | [PM2 Docs](https://pm2.keymetrics.io/docs/)
-    `,
-  },
-  {
-    id: "6",
-    slug: "nginx-reverse-proxy",
-    title: "Nginx Reverse Proxy: Her Şeyi Birleştirmek",
-    excerpt:
-      "Apache, Streamlit, Socket.io - hepsini tek bir noktadan yönetmek. Reverse proxy nedir, nasıl yapılandırılır?",
-    date: "2025-01-26",
-    readTime: "10 min",
-    tags: ["linux", "nginx", "reverse-proxy"],
-    author: { name: "Azize" },
-    content: `
-Son üç haftada birçok uygulama kurdum: Apache'de web sitesi, Streamlit uygulaması, Socket.io chat, Nginx health check... Ama hepsi farklı portlarda çalışıyordu. Kullanıcıya "8080'e git, 8501'e git, 3000'e git" demek mantıklı değil. İşte burada reverse proxy devreye giriyor.
-
-## Reverse Proxy Nedir?
-
-Düşünün: kullanıcı tek bir adrese (port 80) istek atıyor, Nginx bu isteği URL'e göre farklı uygulamalara yönlendiriyor:
-
-- \`/healtz\` → Nginx kendisi yanıt veriyor
-- \`/chat\` → Socket.io uygulaması (port 3001)
-- \`/app\` → Streamlit (port 8501)
-- \`/web\` → Apache (port 8080)
-
-Kullanıcı arka planda kaç uygulama olduğunu bilmiyor bile.
-
-## Yapılandırma
-
-Nginx config dosyasını düzenledim:
-
-\`\`\`nginx
-server {
-    listen 80;
-
-    location /healtz {
-        return 200 "OK\\n";
-    }
-
-    location /chat {
-        proxy_pass http://localhost:3001;
-        proxy_http_version 1.1;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection "upgrade";
-    }
-
-    location /app {
-        proxy_pass http://localhost:8501;
-        proxy_set_header Host $host;
-    }
-
-    location /web {
-        proxy_pass http://localhost:8080;
-    }
-}
-\`\`\`
-
-\`proxy_pass\` direktifi isteği belirtilen adrese yönlendiriyor. Socket.io için ekstra header'lar gerekiyor çünkü WebSocket kullanıyor - \`Upgrade\` ve \`Connection\` header'ları olmadan WebSocket bağlantısı kurulamıyor.
-
-## Sorun Giderme
-
-İlk denemede 502 Bad Gateway hatası aldım. Sebep: Streamlit uygulaması çalışmıyordu. \`sudo lsof -i :8501\` ile kontrol ettim - gerçekten de port boştu. Uygulamayı başlatınca düzeldi.
-
-Bir diğer sorun: WebSocket bağlantısı kurulamıyordu. Header'ları eklemeyi unutmuştum. Hata mesajları her zaman ipucu veriyor - log dosyalarını okumak önemli: \`sudo tail -f /var/log/nginx/error.log\`
-
-## Sonuç
-
-Üç haftalık Linux yolculuğumun sonunda:
-- Bandit ile komutları öğrendim
-- VirtualBox ile VM yönetimini deneyimledim
-- Apache ve Nginx ile web sunucusu kurdum
-- Python ve Node.js uygulamaları çalıştırdım
-- Reverse proxy ile hepsini birleştirdim
-
-En önemli öğrendiğim şey: hata mesajlarını okumak. Çoğu sorunun cevabı log dosyalarında yazıyor.
-
-Şimdi sırada Docker ve Kubernetes var. Container dünyasına adım atma zamanı!
-
-**Faydalı linkler:** [Nginx Reverse Proxy](https://docs.nginx.com/nginx/admin-guide/web-server/reverse-proxy/) | [WebSocket Proxying](https://nginx.org/en/docs/http/websocket.html)
-    `,
-  },
-  {
-    id: "7",
-    slug: "docker-container-nedir",
-    title: "Docker Container Nedir?",
-    excerpt:
-      "Container teknolojisi neden bu kadar popüler? Docker ile ilk container deneyimim.",
-    date: "2025-02-10",
-    readTime: "9 min",
-    tags: ["docker", "containers"],
-    author: { name: "Azize" },
-    content: `
-Linux öğrenirken Apache, Nginx, Python, Node.js kurdum. Her seferinde \`apt install\`, bağımlılıklar, versiyon uyumsuzlukları... Bir de bunu farklı sunucularda tekrarlamak gerekse? İşte [Docker](https://www.docker.com/) tam da bu sorunu çözüyor.
-
-## Container Nedir?
-
-Container, uygulamanızı ve tüm bağımlılıklarını bir "kutu" içinde paketliyor. Bu kutuyu herhangi bir yere taşıyabilirsiniz - kendi bilgisayarınız, sunucu, cloud... Her yerde aynı şekilde çalışıyor.
-
-Sanal makineden farkı ne? VM'de tam bir işletim sistemi var, GB'larca yer kaplıyor, dakikalar içinde başlıyor. Container ise host işletim sisteminin çekirdeğini paylaşıyor - MB'larca boyut, saniyeler içinde başlangıç.
-
-## İlk Container
-
-Docker kurduktan sonra ilk denememde Nginx çalıştırdım:
-
-\`\`\`bash
-docker run -d -p 8080:80 nginx
-\`\`\`
-
-Bu kadar! \`-d\` arka planda çalıştır, \`-p 8080:80\` port yönlendirmesi (host'un 8080'i container'ın 80'ine). Tarayıcıda \`localhost:8080\` açtım, Nginx welcome sayfası geldi.
-
-Daha önce Apache için \`apt install\`, config dosyaları, servis başlatma... En az 10 dakika uğraşmıştım. Container ile 10 saniye.
-
-## Temel Komutlar
-
-\`docker ps\` ile çalışan container'ları görüyorum. \`docker ps -a\` durmuş olanları da gösteriyor. \`docker logs <id>\` ile logları okuyorum, \`docker exec -it <id> /bin/sh\` ile içine girip bakabiliyorum.
-
-Container durdurmak için \`docker stop <id>\`, silmek için \`docker rm <id>\`. Image'ları \`docker images\` ile listeliyorum, gereksizleri \`docker rmi\` ile siliyorum.
-
-## Dockerfile
-
-Kendi uygulamam için container yapmak istedim. Bunun için Dockerfile yazıyorsunuz:
-
-\`\`\`dockerfile
-FROM node:18-alpine
-WORKDIR /app
-COPY package*.json ./
-RUN npm install
-COPY . .
-EXPOSE 3000
-CMD ["npm", "start"]
-\`\`\`
-
-\`docker build -t myapp .\` ile image oluşturdum, \`docker run -p 3000:3000 myapp\` ile çalıştırdım. Artık bu image'ı istediğim yere taşıyabilirim.
-
-## Neden Önemli?
-
-Docker öğrenmeden önce "benim bilgisayarımda çalışıyor" klasik bir problem gibiydi. Artık anlıyorum: container ile uygulamanız her yerde aynı çalışıyor. Geliştirme ortamı = production ortamı.
-
-Kubernetes öğrenmeye başlayınca Docker'ın değerini daha iyi anlayacağım. Container'ları ölçeklendirmek, yönetmek... Ama önce Docker'ı iyi bilmek lazım.
-
-**Faydalı linkler:** [Docker Docs](https://docs.docker.com/) | [Docker Hub](https://hub.docker.com/)
-    `,
-  },
-  {
-    id: "8",
-    slug: "kubernetes-giris",
-    title: "Kubernetes'e Giriş",
-    excerpt:
-      "Pod, Deployment, Service - Kubernetes'in temel kavramları ve ilk cluster deneyimim.",
-    date: "2025-03-20",
-    readTime: "12 min",
-    tags: ["kubernetes", "containers"],
-    author: { name: "Azize" },
-    content: `
-Docker öğrendim, container'lar harika. Ama düşünün: 100 container'ınız var, birisi çökerse ne olacak? Yük artınca nasıl ölçeklenecek? Güncelleme nasıl yapılacak? İşte [Kubernetes](https://kubernetes.io/) (K8s) bu soruları cevaplıyor.
-
-## Kubernetes Nedir?
-
-Google'ın yıllarca container yönetmek için kullandığı internal sistemin (Borg) açık kaynak versiyonu. Container'ları orchestrate ediyor - yani onları yönetiyor, ölçeklendiriyor, sağlıklı tutmaya çalışıyor.
-
-## Temel Kavramlar
-
-**Pod:** En küçük birim. Bir veya daha fazla container içerir. Genelde bir pod = bir container.
-
-**Deployment:** Pod'ların nasıl çalışacağını tanımlar. "3 tane Nginx pod'u olsun" dersiniz, Kubernetes bunu sağlar. Biri ölürse otomatik yenisini açar.
-
-**Service:** Pod'lara erişim noktası. Pod'lar gelip gider (IP'leri değişir), Service sabit bir adres sağlar.
-
-## Minikube ile Başlangıç
-
-Gerçek cluster kurmak karmaşık. Minikube ile yerel makinede tek node'lu cluster çalıştırabilirsiniz:
-
-\`\`\`bash
-minikube start
-kubectl get nodes
-\`\`\`
-
-\`kubectl\` Kubernetes'in CLI aracı. Her şeyi bununla yapıyorsunuz.
-
-## İlk Deployment
-
-Nginx deployment'ı oluşturdum:
-
-\`\`\`bash
-kubectl create deployment nginx --image=nginx
-kubectl get pods
-\`\`\`
-
-Bir pod çalışmaya başladı. Sonra ölçekledim:
-
-\`\`\`bash
-kubectl scale deployment nginx --replicas=3
-kubectl get pods
-\`\`\`
-
-Artık 3 Nginx pod'u var. Birini özellikle öldürdüm (\`kubectl delete pod <name>\`) - Kubernetes anında yenisini oluşturdu. Self-healing denen şey bu!
-
-## Service ile Erişim
-
-Pod'lara dışarıdan erişmek için Service oluşturdum:
-
-\`\`\`bash
-kubectl expose deployment nginx --port=80 --type=NodePort
-kubectl get svc
-\`\`\`
-
-Minikube'da \`minikube service nginx\` ile tarayıcıda açtım. Çalışıyor!
-
-## YAML Dosyaları
-
-Gerçek hayatta komutlar yerine YAML dosyaları kullanılıyor. Daha okunabilir, version control'e atılabilir:
-
-\`\`\`yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: nginx
-spec:
-  replicas: 3
-  selector:
-    matchLabels:
-      app: nginx
-  template:
-    metadata:
-      labels:
-        app: nginx
-    spec:
-      containers:
-      - name: nginx
-        image: nginx:latest
-\`\`\`
-
-\`kubectl apply -f deployment.yaml\` ile uyguluyorsunuz. Değişiklik yapınca tekrar \`apply\` - Kubernetes farkı anlayıp gerekli değişiklikleri yapıyor.
-
-## İlk İzlenimler
-
-Kubernetes karmaşık ama güçlü. CKA ve CKAD sertifikalarına hazırlanmaya karar verdim. Pratik, pratik, pratik...
-
-**Faydalı linkler:** [Kubernetes Docs](https://kubernetes.io/docs/) | [Minikube](https://minikube.sigs.k8s.io/)
-    `,
-  },
-  {
-    id: "9",
-    slug: "cka-ckad-hazirlik",
-    title: "CKA ve CKAD Sınavlarına Hazırlık",
-    excerpt:
-      "Kubernetes sertifikasyonlarına nasıl hazırlandım? Kullandığım kaynaklar ve sınav günü ipuçları.",
-    date: "2026-01-10",
-    readTime: "10 min",
-    tags: ["kubernetes", "certifications"],
-    author: { name: "Azize" },
-    content: `
-Kubernetes öğrenmeye başlayınca bir hedef koydum: CKA (Certified Kubernetes Administrator) ve CKAD (Certified Kubernetes Application Developer) sertifikalarını almak. Ocak 2026'da her ikisini de aldım. İşte hazırlık sürecim.
-
-## Sınavlar Hakkında
-
-İki sınav da pratik - çoktan seçmeli değil. Gerçek bir Kubernetes cluster'ında görevler yapıyorsunuz. 2 saat süreniz var, ~15-20 soru, geçme notu %66.
-
-CKA daha çok cluster yönetimi odaklı: kurulum, yedekleme, networking, troubleshooting. CKAD ise uygulama geliştirici perspektifinden: pod'lar, deployment'lar, configmap'ler, probes...
-
-## Hazırlık Kaynakları
-
-**KodeKloud** kursları mükemmeldi. Mumshad Mannambeth'in anlatımı çok net. Ama asıl fark yaratan şey lab'lar - gerçek cluster'da pratik yapıyorsunuz.
-
-**killer.sh** sınav simülatörü. Sınavdan önce 2 deneme hakkınız var, mutlaka kullanın. Gerçek sınavdan bile zor, iyi bir hazırlık.
-
-**Kubernetes the Hard Way** - cluster'ı sıfırdan, elle kuruyorsunuz. Arka planda ne olduğunu anlamak için harika.
-
-## Hız Çok Önemli
-
-Sınavda zaman en büyük düşman. Alias'lar şart:
-
-\`\`\`bash
-alias k=kubectl
-alias kgp='kubectl get pods'
-alias kaf='kubectl apply -f'
-\`\`\`
-
-\`kubectl\` autocomplete'i de açın. YAML yazmak yerine \`--dry-run=client -o yaml\` ile şablon oluşturun:
-
-\`\`\`bash
-k run nginx --image=nginx --dry-run=client -o yaml > pod.yaml
-\`\`\`
-
-## Sınav Günü
-
-Sessiz bir oda, stabil internet, temiz masa (sadece su şişesi). Kimlik belgesi yanınızda olsun. Sınav ortamı web tabanlı - kendi bilgisayarınızda.
-
-Stratejim: önce kolay sorular, zor olanları bookmark'layıp sona bıraktım. Dokümantasyon açık (kubernetes.io/docs) - YAML şablonlarını oradan kopyaladım.
-
-## Sonuç
-
-Her iki sınavı da ilk denemede geçtim. Sır ne? Pratik. Teori okumak yetmiyor, elinizin klavyeye alışması lazım. \`kubectl\` komutları refleks olmalı.
-
-Bu sertifikalar DevOps kariyerinde gerçekten fark yaratıyor. Kubernetes bilen çok, kanıtlayabilen az.
-
-**Faydalı linkler:** [Linux Foundation Training](https://training.linuxfoundation.org/) | [killer.sh](https://killer.sh/)
-    `,
-  },
-  {
-    id: "10",
-    slug: "aws-ec2-baslangic",
-    title: "AWS EC2 ile Tanışma",
-    excerpt:
-      "Cloud yolculuğuma AWS ile başladım. İlk EC2 instance'ımı oluşturma ve SSH bağlantısı kurma.",
-    date: "2026-01-20",
-    readTime: "9 min",
-    tags: ["aws", "cloud"],
-    author: { name: "Azize" },
-    content: `
-Kubernetes öğrenirken hep yerel makinemde çalıştım. Ama gerçek dünyada uygulamalar cloud'da çalışıyor. AWS öğrenmeye karar verdim - pazar lideri, iş ilanlarının çoğunda isteniyor.
-
-## EC2 Nedir?
-
-Elastic Compute Cloud - yani sanal sunucu. İstediğiniz işletim sistemi, istediğiniz boyutta sunucu oluşturuyorsunuz. Kullandığınız kadar ödüyorsunuz.
-
-## İlk Instance
-
-AWS Console'a girdim, EC2 servisine gittim. "Launch Instance" dedim:
-- İsim: my-first-server
-- AMI: Amazon Linux 2023
-- Instance type: t2.micro (free tier!)
-- Key pair oluşturdum (SSH için)
-- Security group: SSH'a izin verdim
-
-Birkaç dakikada instance çalışmaya başladı. Public IP aldı.
-
-## SSH Bağlantısı
-
-Key pair dosyasını indirdim (\`.pem\` uzantılı). Linux/Mac'te:
-
-\`\`\`bash
-chmod 400 my-key.pem
-ssh -i my-key.pem ec2-user@<public-ip>
-\`\`\`
-
-Bağlandım! Gerçek bir sunucudayım, cloud'da!
-
-## Security Groups
-
-AWS'de firewall mantığı Security Groups ile çalışıyor. Varsayılan olarak hiçbir şeye izin yok. SSH için port 22'yi açtım, web sunucusu kuracaksam 80 ve 443'ü de açmam gerekecek.
-
-Inbound (gelen) ve Outbound (giden) kuralları ayrı. Outbound varsayılan olarak her şeye izin veriyor.
-
-## AWS CLI
-
-Console güzel ama her şeyi tıklamak yorucu. AWS CLI ile komut satırından yönetebiliyorsunuz:
-
-\`\`\`bash
-aws ec2 describe-instances
-aws ec2 stop-instances --instance-ids i-xxxxx
-aws ec2 start-instances --instance-ids i-xxxxx
-\`\`\`
-
-Terraform öğrenmeye başlayınca CLI daha da önemli olacak.
-
-## Maliyet Uyarısı
-
-AWS kullanmayı bitirince kaynakları **mutlaka** temizleyin. Çalışan instance para yakar. t2.micro bir yıl free tier'da ama sonra ücretli. Elastic IP de instance'a bağlı değilse ücretli.
-
-İlk ayım ücretsiz geçti ama bir keresinde test instance'ını açık unutmuştum - $3 geldi :)
-
-## Sonraki Adımlar
-
-EC2 temel, ama AWS'in 200+ servisi var. Sırada:
-- S3 (object storage)
-- RDS (managed database)
-- EKS (managed Kubernetes)
-
-Cloud yolculuğum daha yeni başlıyor.
-
-**Faydalı linkler:** [AWS Free Tier](https://aws.amazon.com/free/) | [EC2 User Guide](https://docs.aws.amazon.com/ec2/)
-    `,
-  },
-  {
-    id: "11",
-    slug: "dockerfile-best-practices",
-    title: "Dockerfile Best Practices",
-    excerpt:
-      "Image boyutunu küçültmek, build süresini azaltmak ve güvenliği artırmak için Dockerfile ipuçları.",
-    date: "2025-04-05",
-    readTime: "10 min",
-    tags: ["docker", "best-practices"],
-    author: { name: "Azize" },
-    content: `
-Docker kullanmaya başladığımda Dockerfile yazmak kolay görünüyordu. Ama production'a geçince fark ettim: 1 GB'lık image'lar, yavaş build'ler, güvenlik açıkları... İşte öğrendiğim best practice'ler.
-
-## Minimal Base Image
-
-İlk hatam: \`FROM ubuntu:22.04\` kullanmak. Ubuntu image'ı ~70 MB, içinde ihtiyacım olmayan bir sürü şey var.
-
-\`FROM node:18-alpine\` kullanınca image boyutum yarıya düştü. Alpine Linux minimal bir dağıtım - sadece 5 MB. Tabii bazı paketler olmayabiliyor, ama çoğu uygulama için yeterli.
-
-Daha da ileri gitmek isteyenler için \`distroless\` image'lar var. Shell bile yok - sadece uygulamanız çalışıyor.
-
-## Layer Cache
-
-Dockerfile'daki her satır bir layer oluşturuyor. Docker bu layer'ları cache'liyor. Ama bir layer değişirse ondan sonrakiler de yeniden build ediliyor.
-
-Yanlış:
-\`\`\`dockerfile
-COPY . .
-RUN npm install
-\`\`\`
-
-Doğru:
-\`\`\`dockerfile
-COPY package*.json ./
-RUN npm install
-COPY . .
-\`\`\`
-
-Neden? Kod değişince \`package.json\` değişmiyorsa \`npm install\` cache'den geliyor. Build süresi dramatik şekilde düşüyor.
-
-## Multi-Stage Build
-
-Build araçları production image'da olmamalı. Multi-stage build ile bunu çözüyoruz:
-
-\`\`\`dockerfile
-FROM node:18-alpine AS builder
-WORKDIR /app
-COPY . .
-RUN npm ci && npm run build
-
-FROM node:18-alpine
-COPY --from=builder /app/dist ./dist
-CMD ["node", "dist/index.js"]
-\`\`\`
-
-İlk stage'de build yapıyoruz, ikinci stage'e sadece sonucu kopyalıyoruz. Final image'da \`node_modules\`, source code, build araçları yok - sadece çalıştırılabilir dosyalar.
-
-## Root Kullanma
-
-Container'lar varsayılan olarak root olarak çalışıyor. Güvenlik açısından kötü. Non-root user oluşturun:
-
-\`\`\`dockerfile
-RUN adduser -D appuser
-USER appuser
-\`\`\`
-
-## .dockerignore
-
-\`node_modules\`, \`.git\`, test dosyaları... Bunlar image'a girmemeli. \`.dockerignore\` dosyası oluşturun:
-
-\`\`\`
-node_modules
-.git
-*.md
-.env
-\`\`\`
-
-Build context küçülür, build hızlanır, image boyutu düşer.
-
-## Sonuç
-
-Bu pratikleri uyguladığımda:
-- Image boyutu 1.2 GB → 150 MB
-- Build süresi 5 dakika → 30 saniye
-- Güvenlik taramalarında 0 kritik bulgu
-
-Docker kolay görünüyor ama production-ready image yapmak bilgi istiyor.
-
-**Faydalı linkler:** [Dockerfile Best Practices](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/) | [Trivy](https://trivy.dev/)
-    `,
-  },
+  // More posts will be added - for now using Turkish content as fallback
 ];
+
+// Helper function to get localized post
+function getLocalizedPost(post: BlogPostData, locale: Locale): BlogPost {
+  return {
+    id: post.id,
+    slug: post.slug,
+    title: post.title[locale] || post.title.en || post.title.tr,
+    excerpt: post.excerpt[locale] || post.excerpt.en || post.excerpt.tr,
+    content: post.content[locale] || post.content.en || post.content.tr,
+    date: post.date,
+    readTime: post.readTime[locale] || post.readTime.en || post.readTime.tr,
+    tags: post.tags,
+    author: post.author,
+  };
+}
+
+// Get all posts for a specific locale
+export function getBlogPosts(locale: Locale): BlogPost[] {
+  return blogPostsData.map((post) => getLocalizedPost(post, locale));
+}
+
+// Get post by slug for a specific locale
+export function getPostBySlug(
+  slug: string,
+  locale: Locale
+): BlogPost | undefined {
+  const post = blogPostsData.find((p) => p.slug === slug);
+  return post ? getLocalizedPost(post, locale) : undefined;
+}
+
+// Get posts by tag for a specific locale
+export function getPostsByTag(tag: string, locale: Locale): BlogPost[] {
+  return blogPostsData
+    .filter((post) => post.tags.includes(tag))
+    .map((post) => getLocalizedPost(post, locale));
+}
 
 // Get all unique tags
 export const allTags = Array.from(
-  new Set(blogPosts.flatMap((post) => post.tags))
+  new Set(blogPostsData.flatMap((post) => post.tags))
 );
 
-// Get post by slug
-export function getPostBySlug(slug: string): BlogPost | undefined {
-  return blogPosts.find((post) => post.slug === slug);
-}
-
-// Get posts by tag
-export function getPostsByTag(tag: string): BlogPost[] {
-  return blogPosts.filter((post) => post.tags.includes(tag));
-}
+// For backward compatibility - get posts in Turkish by default
+export const blogPosts = getBlogPosts("tr");
