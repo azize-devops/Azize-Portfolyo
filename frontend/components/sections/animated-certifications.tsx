@@ -53,7 +53,7 @@ const certifications = [
     date: "2025",
     color: "from-orange-500 to-orange-600",
     badge:
-      "https://images.credly.com/images/73e4a58b-a8ef-41a3-a7db-9183dd269882/blob",
+      "https://images.credly.com/size/680x680/images/e51a8579-188d-4363-8ed1-12ad164ef57b/blob",
     credlyUrl:
       "https://www.credly.com/badges/6f46a887-390e-49e3-9862-1e5f64eb1c55/public_url",
   },
