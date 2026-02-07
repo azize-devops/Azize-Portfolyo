@@ -39,6 +39,10 @@
     "awsGenai": {
       "fullName": "Üretken Yapay Zekaya Giriş",
       "issuer": "AWS Educate"
+    },
+    "awsCloud101": {
+      "fullName": "Bulut Bilişime Giriş 101",
+      "issuer": "AWS Educate"
     }
   },
   "skills": {

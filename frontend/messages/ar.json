@@ -39,6 +39,10 @@
     "awsGenai": {
       "fullName": "مقدمة في الذكاء الاصطناعي التوليدي",
       "issuer": "AWS Educate"
+    },
+    "awsCloud101": {
+      "fullName": "مقدمة في الحوسبة السحابية 101",
+      "issuer": "AWS Educate"
     }
   },
   "skills": {

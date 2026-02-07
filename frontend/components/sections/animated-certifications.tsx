@@ -47,6 +47,16 @@ const certifications = [
     credlyUrl:
       "https://www.credly.com/badges/09090929-953a-413c-88bf-712bd07fb375/public_url",
   },
+  {
+    name: "AWS Cloud 101",
+    key: "awsCloud101",
+    date: "2025",
+    color: "from-orange-500 to-orange-600",
+    badge:
+      "https://images.credly.com/images/73e4a58b-a8ef-41a3-a7db-9183dd269882/blob",
+    credlyUrl:
+      "https://www.credly.com/badges/6f46a887-390e-49e3-9862-1e5f64eb1c55/public_url",
+  },
 ];
 
 function CertificationCard({

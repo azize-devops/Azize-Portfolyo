@@ -39,6 +39,10 @@
     "awsGenai": {
       "fullName": "Introduction à l'IA Générative",
       "issuer": "AWS Educate"
+    },
+    "awsCloud101": {
+      "fullName": "Introduction au Cloud 101",
+      "issuer": "AWS Educate"
     }
   },
   "skills": {

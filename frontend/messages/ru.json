@@ -39,6 +39,10 @@
     "awsGenai": {
       "fullName": "Введение в генеративный ИИ",
       "issuer": "AWS Educate"
+    },
+    "awsCloud101": {
+      "fullName": "Введение в облачные вычисления 101",
+      "issuer": "AWS Educate"
     }
   },
   "skills": {

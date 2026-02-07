@@ -39,6 +39,10 @@
     "awsGenai": {
       "fullName": "生成式人工智能入门",
       "issuer": "AWS Educate"
+    },
+    "awsCloud101": {
+      "fullName": "云计算入门101",
+      "issuer": "AWS Educate"
     }
   },
   "skills": {
