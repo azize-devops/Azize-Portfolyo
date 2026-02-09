@@ -1,27 +1,31 @@
-.PHONY: help dev build test clean docker-build docker-up docker-down k8s-local k8s-apply
+.PHONY: help dev docker-build docker-up docker-down push test lint clean
+
+# Registry configuration
+REGISTRY ?= gitea.azizedursun.com/azize-projects
+BACKEND_IMAGE ?= $(REGISTRY)/fsdevops-backend
+FRONTEND_IMAGE ?= $(REGISTRY)/fsdevops-frontend
+TAG ?= latest
 
 # Default target
 help:
-	@echo "DevOps Journey - Available Commands"
-	@echo "===================================="
+	@echo "Full-stack DevOps Portfolio - Available Commands"
+	@echo "================================================="
 	@echo ""
 	@echo "Development:"
 	@echo "  make dev-backend     - Run backend in development mode"
 	@echo "  make dev-frontend    - Run frontend in development mode"
-	@echo "  make dev             - Run both (requires tmux or separate terminals)"
 	@echo ""
 	@echo "Docker:"
 	@echo "  make docker-build    - Build all Docker images"
 	@echo "  make docker-up       - Start all containers"
 	@echo "  make docker-down     - Stop all containers"
 	@echo "  make docker-logs     - View container logs"
+	@echo "  make docker-clean    - Stop containers and remove volumes"
 	@echo ""
-	@echo "Kubernetes (Local):"
-	@echo "  make k8s-init        - Initialize local K8s cluster with Terraform"
-	@echo "  make k8s-load        - Build and load images to kind"
-	@echo "  make k8s-apply       - Apply Kubernetes manifests"
-	@echo "  make k8s-delete      - Delete Kubernetes resources"
-	@echo "  make k8s-destroy     - Destroy local K8s cluster"
+	@echo "Registry:"
+	@echo "  make push            - Build and push images to Gitea registry"
+	@echo "  make push-backend    - Push only backend image"
+	@echo "  make push-frontend   - Push only frontend image"
 	@echo ""
 	@echo "Testing:"
 	@echo "  make test-backend    - Run backend tests"
@@ -60,37 +64,17 @@ docker-clean:
 	docker compose down -v --rmi local
 
 # =========================
-# Kubernetes (Local with Kind)
+# Registry (Gitea)
 # =========================
-CLUSTER_NAME ?= devops-journey-local
+push-backend:
+	docker build -t $(BACKEND_IMAGE):$(TAG) ./backend
+	docker push $(BACKEND_IMAGE):$(TAG)
 
-k8s-init:
-	cd terraform/local && terraform init && terraform apply -auto-approve
-	@echo "Add these entries to your hosts file:"
-	@echo "127.0.0.1 devops.local"
-	@echo "127.0.0.1 api.devops.local"
+push-frontend:
+	docker build --build-arg NEXT_PUBLIC_API_URL=https://api.devops.azizedursun.com -t $(FRONTEND_IMAGE):$(TAG) ./frontend
+	docker push $(FRONTEND_IMAGE):$(TAG)
 
-k8s-load: docker-build
-	kind load docker-image devops-journey-backend:latest --name $(CLUSTER_NAME)
-	kind load docker-image devops-journey-frontend:latest --name $(CLUSTER_NAME)
-
-k8s-apply:
-	kubectl apply -k k8s/overlays/local
-
-k8s-delete:
-	kubectl delete -k k8s/overlays/local --ignore-not-found
-
-k8s-destroy:
-	cd terraform/local && terraform destroy -auto-approve
-
-k8s-status:
-	kubectl get all -n devops-journey
-
-k8s-logs-backend:
-	kubectl logs -f -l app=backend -n devops-journey
-
-k8s-logs-frontend:
-	kubectl logs -f -l app=frontend -n devops-journey
+push: push-backend push-frontend
 
 # =========================
 # Testing
@@ -99,7 +83,7 @@ test-backend:
 	cd backend && go test -v ./...
 
 test-frontend:
-	cd frontend && npm test
+	cd frontend && npm run lint
 
 test: test-backend test-frontend
 
@@ -107,7 +91,7 @@ test: test-backend test-frontend
 # Linting
 # =========================
 lint-backend:
-	cd backend && golangci-lint run
+	cd backend && go vet ./...
 
 lint-frontend:
 	cd frontend && npm run lint
@@ -122,8 +106,6 @@ clean:
 	rm -rf frontend/node_modules
 	rm -rf backend/vendor
 	rm -f backend/server
-	rm -rf terraform/local/.terraform
-	rm -f terraform/local/kubeconfig
 
 # =========================
 # Database

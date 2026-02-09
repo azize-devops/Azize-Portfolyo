@@ -1,0 +1,40 @@
+apiVersion: stackgres.io/v1
+kind: SGScript
+metadata:
+  name: fsdevops-db-init
+  labels:
+    app.kubernetes.io/part-of: fsdevops-portfolio
+    app.kubernetes.io/component: database
+spec:
+  scripts:
+    - name: create-database-and-user
+      script: |
+        CREATE DATABASE fsdevops;
+        CREATE USER fsdevops WITH PASSWORD '<DB_PASSWORD>';
+        GRANT ALL PRIVILEGES ON DATABASE fsdevops TO fsdevops;
+        \c fsdevops
+        GRANT ALL ON SCHEMA public TO fsdevops;
+---
+apiVersion: stackgres.io/v1
+kind: SGCluster
+metadata:
+  name: fsdevops-db
+  labels:
+    app.kubernetes.io/part-of: fsdevops-portfolio
+    app.kubernetes.io/component: database
+spec:
+  instances: 1
+  postgres:
+    version: "16.4"
+  sgInstanceProfile: fsdevops-db-profile
+  configurations:
+    sgPostgresConfig: fsdevops-db-pgconfig
+  managedSql:
+    scripts:
+      - sgScript: fsdevops-db-init
+  pods:
+    persistentVolume:
+      size: 5Gi
+      storageClass: longhorn
+  nonProductionOptions:
+    disableClusterPodAntiAffinity: true

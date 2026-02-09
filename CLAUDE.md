@@ -1,142 +1,121 @@
-# DevOps Journey - Proje Context
+# Full-stack DevOps Portfolio - Proje Context
 
-Bu dosya Claude Code ile yapılan sohbetin özetini içerir. Proje hakkında hızlı bilgi edinmek için kullanılabilir.
+Bu dosya Claude Code ile calisirken proje hakkinda hizli bilgi edinmek icin kullanilir.
 
-## Proje Sahibi
-- **İsim:** Azize
-- **Yolculuk:** Ocak 2025'te Bandit Games ile Linux öğrenmeye başladı
-- **Sertifikalar:**
-  - CKA (Certified Kubernetes Administrator) - 4 Ocak 2026
-  - CKAD (Certified Kubernetes Application Developer) - 22 Ocak 2026
-  - AWS CCP (Cloud Practitioner) - Sınava hazırlanıyor (25 Ocak 2026)
-- **Arka Plan:** C# ve Unity ile oyun geliştirme, algoritma temelleri
-- **Notlar:** Notion'da tutuluyor
+## Proje Ozeti
 
-## Proje Amacı
-DevOps yolculuğunu belgeleyen portföy ve blog karışımı full-stack web sitesi.
+DevOps yolculugunu belgeleyen full-stack portfolyo ve blog platformu. Go backend + Next.js frontend, Ecosystem Kubernetes cluster uzerinde ArgoCD ile otomatik deploy edilir.
+
+## Mimari
+
+### Ecosystem Entegrasyonu
+Bu proje mevcut Ecosystem altyapisinin uzerine calisir:
+- **ArgoCD**: `azize-applicationset` SCM Provider ile Gitea'daki `azize-projects` org'unu tarar, `manifests/deployment.yaml` bulunan repo'lari otomatik deploy eder
+- **StackGres**: Izole PostgreSQL cluster (`fsdevops-db`) — Bitnami PostgreSQL degil
+- **Gitea Actions**: CI/CD pipeline (Act Runner + DinD)
+- **cert-manager**: Let's Encrypt TLS (Cloudflare DNS challenge)
+- **Ingress-Nginx**: HTTP routing
+- **Longhorn**: Persistent storage
+
+### Namespace
+| Namespace | Icerik |
+|-----------|--------|
+| `azize-apps` | Bu uygulamanin tum kaynaklari (ArgoCD tarafindan deploy edilir) |
+| `argocd` | ApplicationSet (azize-applicationset) |
+
+### Domain
+- Frontend: `devops.azizedursun.com`
+- Backend API: `api.devops.azizedursun.com`
+- IP: `<NODE_IP>` (MetalLB)
 
 ## Teknoloji Stack
 
 ### Frontend
-- Next.js 14 (App Router)
-- Tailwind CSS
-- TypeScript
-- Dark/Light mode (planlandı)
+- Next.js 14 (App Router) + TypeScript + Tailwind CSS
+- `NEXT_PUBLIC_API_URL` build-time arg (Docker ARG)
 
 ### Backend
-- Go (Golang) + Gin framework
-- PostgreSQL + GORM
-- JWT Authentication
-- Rate Limiting
+- Go 1.23 + Gin framework + GORM
+- PostgreSQL (StackGres) + JWT Authentication
+- Health check: `GET /health`
+- DB baglanti hatasi `log.Fatalf` ile sonlanir (init container gerekli)
 
-### DevOps
-- Docker & Docker Compose
-- Kubernetes (Kustomize)
-- Terraform (local Kind + AWS EKS)
+### Veritabani
+- StackGres SGCluster: `fsdevops-db` (PG 16.4, 1 instance, Longhorn 5Gi)
+- DB: `fsdevops`, User: `fsdevops`
 
-## Proje Yapısı
+## Proje Yapisi
 ```
-my-devops-journey/
-├── frontend/          # Next.js
-├── backend/           # Go API
-├── k8s/               # Kubernetes manifests
-│   ├── base/
-│   └── overlays/
-│       ├── local/
-│       └── production/
-├── terraform/
-│   ├── local/         # Kind cluster
-│   └── aws/           # EKS (cloud migration)
-├── docker-compose.yml
-└── Makefile
+Full-stack-DevOps-portfolio/
+├── backend/                    # Go REST API (degismez)
+├── frontend/                   # Next.js uygulamasi (degismez)
+├── manifests/                  # Kubernetes manifest'leri
+│   ├── deployment.yaml         # Backend + Frontend Deployment (ArgoCD trigger)
+│   ├── service.yaml            # ClusterIP Service'ler
+│   ├── ingress.yaml            # TLS + iki domain
+│   ├── configmap.yaml          # Backend environment config
+│   ├── secret.yaml             # DB_PASSWORD, JWT_SECRET (.gitignore'da)
+│   ├── secret.yaml.example     # Secret template
+│   ├── networkpolicy.yaml      # 6 network policy
+│   ├── sginstanceprofile.yaml  # StackGres instance profile
+│   ├── sgpgconfig.yaml         # StackGres PostgreSQL config
+│   └── sgcluster.yaml          # StackGres cluster + init script
+├── .gitea/workflows/ci.yaml    # Gitea Actions CI/CD
+├── docker-compose.yml          # Local development
+├── Makefile                    # Build/push/test komutlari
+└── .gitignore
 ```
+
+## Onemli Komutlar
+
+```bash
+# Local development
+docker compose up -d
+make dev-backend
+make dev-frontend
+
+# Image build & push (Gitea registry)
+make push
+
+# Test
+make test
+make lint
+
+# Kubernetes durum kontrolu
+kubectl get pods -n azize-apps -l app.kubernetes.io/part-of=fsdevops-portfolio
+kubectl get sgcluster -n azize-apps fsdevops-db
+```
+
+## GitOps Akisi
+1. Kod push → Gitea
+2. Gitea Actions: test → build → push image → rollout restart
+3. ArgoCD: manifests/ degisikliklerini otomatik sync eder
+
+## Onemli Detaylar
+- `manifests/deployment.yaml` ZORUNLU — ArgoCD bu dosyayi arar
+- Manifest'lerde namespace BELIRTILMEZ — ArgoCD `azize-apps` inject eder
+- `secret.yaml` Git'e commit edilmez, `secret.yaml.example` kullanilir
+- Credentials hardcoded (Ecosystem pattern ile uyumlu)
+- Backend init container (`wait-for-db`) StackGres hazir olana kadar bekler
+- Frontend `readOnlyRootFilesystem: false` — Next.js cache yazmasi gerekiyor
 
 ## API Endpoints
 
 ### Public
-- `GET /api/v1/projects` - Projeleri listele
-- `GET /api/v1/certifications` - Sertifikaları listele
-- `POST /api/v1/contact` - İletişim formu (rate limited)
+- `GET /health` — Health check
+- `GET /api/v1/projects` — Projeler
+- `GET /api/v1/certifications` — Sertifikalar
+- `POST /api/v1/contact` — Iletisim formu (rate limited)
 
-### Auth
-- `POST /api/v1/auth/login` - Giriş yap
-- `GET /api/v1/auth/me` - Kullanıcı bilgisi
-- `POST /api/v1/auth/refresh` - Token yenile
+### Protected (JWT)
+- `POST /api/v1/auth/login` — Giris
+- `GET /api/v1/auth/me` — Kullanici bilgisi
+- Admin CRUD: `/api/v1/admin/projects`, `/api/v1/admin/certifications`, `/api/v1/admin/messages`
 
-### Admin (Protected)
-- `POST/PUT/DELETE /api/v1/admin/projects/:id`
-- `POST/PUT/DELETE /api/v1/admin/certifications/:id`
-- `GET /api/v1/admin/messages` - İletişim mesajları
-
-## Özellikler (Planlanan)
-- [x] Backend API yapısı
-- [x] Frontend temel yapısı
-- [x] Docker & Docker Compose
-- [x] Kubernetes manifests
-- [x] Terraform (local + AWS)
-- [x] Güvenlik önlemleri
-- [ ] Blog sistemi (MDX)
-- [ ] Sertifika vitrini sayfası
-- [ ] Proje portföyü sayfası
-- [ ] İletişim formu
-- [ ] Admin panel
-- [ ] Dark/Light mode toggle
-
-## Güvenlik Önlemleri
-- JWT authentication
-- Bcrypt password hashing
-- Rate limiting (3 req/hour contact form)
-- CORS configuration
-- Security headers
-- Network Policies (K8s)
-- Non-root containers
-- Secrets management
-
-## Kullanıcı Tercihleri
-- GitHub'da collaborator/contributor olarak GÖRÜNMEME
-- Terraform ile önce local K8s, sonra cloud migration
-- Güvenlik önlemlerine özel dikkat
-- Blog yazıları MDX formatında (Git ile yönetim)
-- Admin panel ile proje/sertifika yönetimi
-- Dark/Light mode toggle
-
-## Çalıştırma
-
-### Local (Docker olmadan)
-```bash
-# PostgreSQL kurulu olmalı
-cd backend && go run ./cmd/server
-cd frontend && npm run dev
-```
-
-### Docker Compose
-```bash
-docker compose up
-```
-
-### Kubernetes (Local)
-```bash
-make k8s-init   # Kind cluster oluştur
-make k8s-load   # Image'ları yükle
-make k8s-apply  # Deploy
-```
-
-## Notlar
-- Go henüz kurulu değil (go mod tidy çalıştırılmalı)
-- Default admin: admin@example.com / __DEFAULT_PASSWORD__ (sadece development)
-- Hosts dosyasına ekle: `127.0.0.1 devops.local api.devops.local`
-
-## Sonraki Adımlar
-1. Go kurulumu
-2. Frontend sayfalarını geliştirme
-3. Blog sistemi (MDX entegrasyonu)
-4. Admin panel
-5. Dark/Light mode
-
-## CI/CD
-- GitHub Actions ile otomatik deployment
-- Her push'ta: Test → Build → Deploy
-- SSH ile sunucuya otomatik deploy
-
----
-*Son güncelleme: 25 Ocak 2026*
+## Guvenlik
+- JWT authentication + Bcrypt password hashing
+- Network Policy: default-deny + whitelist
+- Non-root containers (uid 1001)
+- Security headers (Ingress annotation)
+- Rate limiting (10 RPS, 5 connections)
+- StackGres operator erisimine izin (namespace: stackgres)

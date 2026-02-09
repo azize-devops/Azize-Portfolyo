@@ -1,10 +1,8 @@
-# 🚀 DevOps Journey - Portfolio & Blog
+# Full-stack DevOps Portfolio
 
-[![CI/CD Pipeline](https://github.com/azize-devops/Full-stack-DevOps-portfolio/actions/workflows/deploy.yml/badge.svg)](https://github.com/azize-devops/Full-stack-DevOps-portfolio/actions/workflows/deploy.yml)
 [![Go Version](https://img.shields.io/badge/Go-1.23-00ADD8?logo=go)](https://golang.org/)
 [![Next.js](https://img.shields.io/badge/Next.js-14-black?logo=next.js)](https://nextjs.org/)
 [![Kubernetes](https://img.shields.io/badge/Kubernetes-Ready-326CE5?logo=kubernetes)](https://kubernetes.io/)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 <p align="center">
   <img src="https://img.shields.io/badge/CKA-Certified-326CE5?style=for-the-badge&logo=kubernetes" alt="CKA"/>
@@ -14,210 +12,228 @@
 
 ---
 
-## 📖 Hakkında
+## Hakkinda
 
-Bu proje, **DevOps yolculuğumu** belgeleyen full-stack bir portfolyo ve blog platformudur. Ocak 2025'te Linux temelleriyle başlayan bu yolculuk, Kubernetes, Docker, CI/CD ve Cloud teknolojileriyle devam etmektedir.
+DevOps yolculugumu belgeleyen full-stack portfolyo ve blog platformu. Self-hosted Kubernetes Ecosystem uzerinde ArgoCD GitOps ile otomatik deploy edilir.
 
-### 🎯 Proje Amacı
-
-- DevOps öğrenme sürecimi belgelemek
-- Edindiğim sertifikaları sergilemek
-- Projelerimi ve teknik yazılarımı paylaşmak
-- Modern DevOps pratiklerini uygulamak
+- **Frontend**: `devops.azizedursun.com`
+- **Backend API**: `api.devops.azizedursun.com`
 
 ---
 
-## 🏆 Sertifikalar
+## Mimari
 
-| Sertifika | Kurum | Tarih |
-|-----------|-------|-------|
-| **CKA** - Certified Kubernetes Administrator | CNCF / Linux Foundation | Ocak 2026 |
-| **CKAD** - Certified Kubernetes Application Developer | CNCF / Linux Foundation | Ocak 2026 |
-| **AWS Cloud Practitioner** | Amazon Web Services | Ocak 2026 |
+```
+                    Gitea Push
+                        |
+                        v
+              ┌─────────────────┐
+              │  Gitea Actions  │
+              │  (Act Runner)   │
+              └────────┬────────┘
+                       │ Build & Push
+                       v
+              ┌─────────────────┐
+              │  Gitea Registry │
+              └────────┬────────┘
+                       │
+          ┌────────────┼────────────┐
+          v            v            v
+    ┌──────────┐ ┌──────────┐ ┌──────────┐
+    │ ArgoCD   │ │ Backend  │ │ Frontend │
+    │ Sync     │ │ Pod      │ │ Pod      │
+    └──────────┘ └─────┬────┘ └──────────┘
+                       │
+                       v
+              ┌─────────────────┐
+              │  StackGres DB   │
+              │  (fsdevops-db)  │
+              └─────────────────┘
+```
+
+### Ecosystem Entegrasyonu
+
+Bu proje mevcut Ecosystem altyapisi uzerine calisir:
+
+| Bilesen | Rol |
+|---------|-----|
+| **ArgoCD** | `azize-applicationset` ile otomatik deploy |
+| **StackGres** | Izole PostgreSQL cluster (`fsdevops-db`) |
+| **Gitea Actions** | CI/CD pipeline (Act Runner + DinD) |
+| **cert-manager** | Let's Encrypt TLS (Cloudflare DNS) |
+| **Ingress-Nginx** | HTTP/HTTPS routing |
+| **Longhorn** | Persistent storage |
+| **MetalLB** | LoadBalancer IP (<NODE_IP>) |
+
+### Namespace
+
+Tum kaynaklar ArgoCD tarafindan `azize-apps` namespace'ine deploy edilir.
 
 ---
 
-## 🛠️ Teknoloji Stack
+## Teknoloji Stack
 
 ### Frontend
-| Teknoloji | Açıklama |
+| Teknoloji | Aciklama |
 |-----------|----------|
-| ![Next.js](https://img.shields.io/badge/Next.js_14-black?logo=next.js) | React framework, App Router |
-| ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white) | Type-safe JavaScript |
-| ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?logo=tailwind-css&logoColor=white) | Utility-first CSS |
+| Next.js 14 | React framework, App Router |
+| TypeScript | Type-safe JavaScript |
+| Tailwind CSS | Utility-first CSS |
 
 ### Backend
-| Teknoloji | Açıklama |
+| Teknoloji | Aciklama |
 |-----------|----------|
-| ![Go](https://img.shields.io/badge/Go_1.23-00ADD8?logo=go&logoColor=white) | Backend API |
-| ![Gin](https://img.shields.io/badge/Gin-00ADD8?logo=go&logoColor=white) | HTTP web framework |
-| ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?logo=postgresql&logoColor=white) | Veritabanı |
-| ![JWT](https://img.shields.io/badge/JWT-000000?logo=json-web-tokens) | Authentication |
+| Go 1.23 | Backend API |
+| Gin | HTTP web framework |
+| GORM | ORM + auto migration |
+| PostgreSQL 16 | Veritabani (StackGres) |
+| JWT | Authentication |
 
-### DevOps & Infrastructure
-| Teknoloji | Açıklama |
+### DevOps
+| Teknoloji | Aciklama |
 |-----------|----------|
-| ![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white) | Containerization |
-| ![Kubernetes](https://img.shields.io/badge/Kubernetes-326CE5?logo=kubernetes&logoColor=white) | Container orchestration |
-| ![Terraform](https://img.shields.io/badge/Terraform-7B42BC?logo=terraform&logoColor=white) | Infrastructure as Code |
-| ![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?logo=github-actions&logoColor=white) | CI/CD Pipeline |
+| Docker | Containerization |
+| Kubernetes | Container orchestration |
+| ArgoCD | GitOps continuous delivery |
+| Gitea Actions | CI/CD pipeline |
+| StackGres | PostgreSQL operator |
 
 ---
 
-## 📁 Proje Yapısı
+## Proje Yapisi
 
 ```
-.
-├── frontend/                # Next.js 14 uygulaması
-│   ├── app/                 # App Router sayfaları
-│   ├── components/          # React bileşenleri
-│   └── Dockerfile
-│
-├── backend/                 # Go REST API
-│   ├── cmd/server/          # Ana uygulama
+Full-stack-DevOps-portfolio/
+├── backend/                    # Go REST API
+│   ├── cmd/server/             # Ana uygulama
 │   ├── internal/
-│   │   ├── handlers/        # HTTP handlers
-│   │   ├── middleware/      # Auth, CORS, Rate limiting
-│   │   └── models/          # Database modelleri
+│   │   ├── handlers/           # HTTP handlers
+│   │   ├── middleware/         # Auth, CORS, Rate limiting
+│   │   └── models/             # Database modelleri
 │   └── Dockerfile
 │
-├── k8s/                     # Kubernetes manifests
-│   ├── base/                # Temel kaynaklar
-│   └── overlays/            # Ortam-spesifik yapılandırmalar
-│       ├── local/           # Local development (Kind)
-│       └── production/      # Production
+├── frontend/                   # Next.js uygulamasi
+│   ├── app/                    # App Router sayfalari
+│   ├── components/             # React bilesenleri
+│   └── Dockerfile
 │
-├── terraform/               # Infrastructure as Code
-│   ├── local/               # Kind cluster
-│   └── aws/                 # AWS EKS
+├── manifests/                  # Kubernetes manifest'leri
+│   ├── deployment.yaml         # Backend + Frontend Deployment
+│   ├── service.yaml            # ClusterIP Service'ler
+│   ├── ingress.yaml            # TLS Ingress (iki domain)
+│   ├── configmap.yaml          # Backend environment config
+│   ├── secret.yaml.example     # Secret template
+│   ├── networkpolicy.yaml      # Network policy'ler
+│   ├── sginstanceprofile.yaml  # StackGres instance profile
+│   ├── sgpgconfig.yaml         # StackGres PG config
+│   └── sgcluster.yaml          # StackGres cluster + DB init
 │
-├── .github/workflows/       # CI/CD pipeline
-└── docker-compose.yml       # Local development
+├── .gitea/workflows/ci.yaml    # CI/CD pipeline
+├── docker-compose.yml          # Local development
+└── Makefile                    # Build/push/test komutlari
 ```
 
 ---
 
-## 🚀 Hızlı Başlangıç
+## Hizli Baslangic
 
-### Gereksinimler
-- Docker & Docker Compose
-- Git
-
-### Kurulum
+### Local Development
 
 ```bash
-# 1. Repo'yu klonla
-git clone https://github.com/azize-devops/Full-stack-DevOps-portfolio.git
-cd Full-stack-DevOps-portfolio
-
-# 2. Ortam değişkenlerini ayarla
+# 1. Ortam degiskenlerini ayarla
 cp .env.example .env
-# .env dosyasını düzenle
 
-# 3. Çalıştır
+# 2. Docker Compose ile calistir
 docker compose up -d
 
-# 4. Tarayıcıda aç
+# 3. Tarayicida ac
 # Frontend: http://localhost:3000
 # Backend:  http://localhost:8080
 ```
 
-### Kubernetes ile Çalıştırma (Local)
+### Kubernetes (Ecosystem)
+
+Bu proje ArgoCD tarafindan otomatik deploy edilir:
+
+1. Gitea'da (`gitea.azizedursun.com`) `azize-projects` org altinda repo olustur
+2. `manifests/secret.yaml` dosyasini `secret.yaml.example`'dan olustur
+3. Kodu push et
+4. ArgoCD (`azize-applicationset`) `manifests/deployment.yaml` dosyasini algilar ve deploy eder
 
 ```bash
-# Kind cluster oluştur
-cd terraform/local
-terraform init && terraform apply
-
-# Uygulamayı deploy et
-kubectl apply -k k8s/overlays/local
+# Durum kontrolu
+kubectl get pods -n azize-apps -l app.kubernetes.io/part-of=fsdevops-portfolio
+kubectl get sgcluster -n azize-apps fsdevops-db
 ```
 
 ---
 
-## 🔐 Güvenlik Özellikleri
+## CI/CD Pipeline
 
-- ✅ JWT tabanlı authentication
-- ✅ Bcrypt ile password hashing
-- ✅ Rate limiting (spam koruması)
-- ✅ CORS yapılandırması
-- ✅ Security headers (XSS, Clickjacking koruması)
-- ✅ Network Policies (K8s)
-- ✅ Non-root container users
-- ✅ Secrets management
+Her `main` branch'e push yapildiginda Gitea Actions calisirir:
+
+```
+┌─────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│    Test     │ -> │  Build & Push   │ -> │ Rollout Restart │
+│ (vet+lint)  │    │ (Gitea Registry)│    │  (azize-apps)   │
+└─────────────┘    └─────────────────┘    └─────────────────┘
+```
+
+**Gerekli Gitea Secrets:** `REGISTRY_USER`, `REGISTRY_PASSWORD`
 
 ---
 
-## 🔄 CI/CD Pipeline
-
-Her `main` branch'e push yapıldığında:
-
-```
-┌─────────────┐    ┌─────────────┐    ┌─────────────┐
-│   Test &    │ -> │   Docker    │ -> │   Deploy    │
-│    Lint     │    │    Build    │    │  (SSH/K8s)  │
-└─────────────┘    └─────────────┘    └─────────────┘
-```
-
-1. **Test & Lint**: Kod kalitesi kontrolü
-2. **Build**: Docker image oluşturma
-3. **Deploy**: Sunucuya otomatik deployment
-
----
-
-## 📊 API Endpoints
+## API Endpoints
 
 ### Public
-| Method | Endpoint | Açıklama |
+| Method | Endpoint | Aciklama |
 |--------|----------|----------|
-| GET | `/api/v1/projects` | Projeleri listele |
-| GET | `/api/v1/certifications` | Sertifikaları listele |
-| POST | `/api/v1/contact` | İletişim formu |
 | GET | `/health` | Health check |
+| GET | `/api/v1/projects` | Projeleri listele |
+| GET | `/api/v1/certifications` | Sertifikalari listele |
+| POST | `/api/v1/contact` | Iletisim formu (rate limited) |
 
-### Protected (Admin)
-| Method | Endpoint | Açıklama |
+### Protected (JWT)
+| Method | Endpoint | Aciklama |
 |--------|----------|----------|
-| POST | `/api/v1/auth/login` | Giriş |
-| GET | `/api/v1/admin/messages` | Mesajları görüntüle |
-| POST | `/api/v1/admin/projects` | Proje ekle |
-| POST | `/api/v1/admin/certifications` | Sertifika ekle |
+| POST | `/api/v1/auth/login` | Giris |
+| GET | `/api/v1/auth/me` | Kullanici bilgisi |
+| POST | `/api/v1/auth/refresh` | Token yenile |
+| CRUD | `/api/v1/admin/projects` | Proje yonetimi |
+| CRUD | `/api/v1/admin/certifications` | Sertifika yonetimi |
+| GET | `/api/v1/admin/messages` | Iletisim mesajlari |
 
 ---
 
-## 🗺️ Yol Haritası
+## Guvenlik
 
-- [x] Backend API (Go + Gin)
-- [x] Frontend (Next.js 14)
-- [x] Docker & Docker Compose
-- [x] CI/CD Pipeline (GitHub Actions)
-- [x] Kubernetes manifests
-- [x] Terraform (Local + AWS)
-- [ ] Blog sistemi (MDX)
-- [ ] Admin panel UI
-- [ ] Dark/Light mode
-- [ ] Monitoring (Prometheus + Grafana)
+- JWT authentication + Bcrypt password hashing
+- Network Policy: default-deny + whitelist
+- Non-root containers (uid 1001)
+- Security headers (X-Frame-Options, X-Content-Type-Options, X-XSS-Protection)
+- Rate limiting (10 RPS, 5 connections)
+- TLS (Let's Encrypt via cert-manager)
+- Read-only root filesystem (backend)
+- Dropped capabilities (ALL)
 
 ---
 
-## 📝 Lisans
+## DNS Gereksinimleri
 
-Bu proje MIT lisansı altında lisanslanmıştır. Detaylar için [LICENSE](LICENSE) dosyasına bakın.
-
----
-
-## 📬 İletişim
-
-- **GitHub**: [@azize-devops](https://github.com/azize-devops)
-- **LinkedIn**: [Profilim](#)
-- **Email**: [email@example.com](mailto:email@example.com)
+Cloudflare'da A kayitlari:
+- `devops.azizedursun.com` -> `<NODE_IP>`
+- `api.devops.azizedursun.com` -> `<NODE_IP>`
 
 ---
 
-<p align="center">
-  <b>DevOps yolculuğunda her gün yeni bir şey öğreniyorum. 🚀</b>
-</p>
+## Makefile Komutlari
 
-<p align="center">
-  <img src="https://komarev.com/ghpvc/?username=azize-devops&label=Profile%20views&color=0e75b6&style=flat" alt="profile views" />
-</p>
+```bash
+make help            # Tum komutlari goster
+make docker-up       # Local containers baslat
+make docker-down     # Containers durdur
+make push            # Image'lari Gitea registry'ye push et
+make test            # Testleri calistir
+make lint            # Linter'lari calistir
+make clean           # Build artifact'lari temizle
+```

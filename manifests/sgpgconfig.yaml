@@ -1,0 +1,16 @@
+apiVersion: stackgres.io/v1
+kind: SGPostgresConfig
+metadata:
+  name: fsdevops-db-pgconfig
+  labels:
+    app.kubernetes.io/part-of: fsdevops-portfolio
+    app.kubernetes.io/component: database
+spec:
+  postgresVersion: "16"
+  postgresql.conf:
+    shared_buffers: "64MB"
+    max_connections: "50"
+    effective_cache_size: "128MB"
+    work_mem: "4MB"
+    maintenance_work_mem: "32MB"
+    log_statement: "ddl"

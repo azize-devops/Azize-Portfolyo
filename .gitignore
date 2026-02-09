@@ -12,8 +12,8 @@
 *.pem
 *.key
 *.crt
-**/secret.yaml
-!**/secret.yaml.example
+manifests/secret.yaml
+!manifests/secret.yaml.example
 credentials.json
 secrets/
 
@@ -61,30 +61,6 @@ vendor/
 *.test
 *.out
 coverage.out
-
-# =========================
-# Terraform
-# =========================
-.terraform/
-.terraform.lock.hcl
-*.tfstate
-*.tfstate.*
-*.tfvars
-!*.tfvars.example
-crash.log
-override.tf
-override.tf.json
-*_override.tf
-*_override.tf.json
-kubeconfig
-terraform/local/kubeconfig
-
-# =========================
-# Kubernetes
-# =========================
-k8s/overlays/*/secret.yaml
-!k8s/overlays/*/secret.yaml.example
-kubeconfig*
 
 # =========================
 # Docker

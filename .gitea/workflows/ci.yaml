@@ -1,0 +1,78 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: "1.23"
+
+      - name: Backend - go vet
+        working-directory: ./backend
+        run: |
+          go mod tidy
+          go vet ./...
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Frontend - lint
+        working-directory: ./frontend
+        run: |
+          npm ci
+          npm run lint
+
+  build-and-push:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Login to Gitea Registry
+        uses: docker/login-action@v3
+        with:
+          registry: gitea.azizedursun.com
+          username: ${{ secrets.REGISTRY_USER }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
+
+      - name: Build and push backend
+        uses: docker/build-push-action@v5
+        with:
+          context: ./backend
+          push: true
+          tags: |
+            gitea.azizedursun.com/azize-projects/fsdevops-backend:${{ github.sha }}
+            gitea.azizedursun.com/azize-projects/fsdevops-backend:latest
+
+      - name: Build and push frontend
+        uses: docker/build-push-action@v5
+        with:
+          context: ./frontend
+          push: true
+          build-args: |
+            NEXT_PUBLIC_API_URL=https://api.devops.azizedursun.com
+          tags: |
+            gitea.azizedursun.com/azize-projects/fsdevops-frontend:${{ github.sha }}
+            gitea.azizedursun.com/azize-projects/fsdevops-frontend:latest
+
+  restart-pods:
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    steps:
+      - name: Restart deployments
+        run: |
+          kubectl rollout restart deployment/fsdevops-backend -n azize-apps
+          kubectl rollout restart deployment/fsdevops-frontend -n azize-apps

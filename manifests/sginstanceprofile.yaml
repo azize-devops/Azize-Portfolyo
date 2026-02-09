@@ -1,0 +1,10 @@
+apiVersion: stackgres.io/v1
+kind: SGInstanceProfile
+metadata:
+  name: fsdevops-db-profile
+  labels:
+    app.kubernetes.io/part-of: fsdevops-portfolio
+    app.kubernetes.io/component: database
+spec:
+  cpu: "250m"
+  memory: "256Mi"
