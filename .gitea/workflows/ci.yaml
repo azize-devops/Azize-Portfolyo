@@ -60,24 +60,27 @@ jobs:
         run: |
           export DOCKER_HOST=unix:///var/run/docker.sock
           SHORT_SHA=$(echo "${{ github.sha }}" | cut -c1-7)
-          docker run --rm \
-            -v $(pwd)/backend:/workspace \
-            -v /tmp/kaniko-config/config.json:/kaniko/.docker/config.json:ro \
+          # DinD'de -v mount calismaz (job container FS != DinD FS)
+          # docker create + docker cp ile dosyalari kopyaliyoruz
+          CID=$(docker create \
             gcr.io/kaniko-project/executor:v1.23.2 \
             --context=/workspace \
             --dockerfile=/workspace/Dockerfile \
             --destination=${{ env.IMAGE_PREFIX }}/fsdevops-backend:${SHORT_SHA} \
             --destination=${{ env.IMAGE_PREFIX }}/fsdevops-backend:latest \
             --insecure \
-            --cache=true
+            --cache=true)
+          docker cp ./backend/. ${CID}:/workspace
+          docker cp /tmp/kaniko-config/config.json ${CID}:/kaniko/.docker/config.json
+          docker start -a ${CID}; EXIT_CODE=$?
+          docker rm ${CID}
+          exit ${EXIT_CODE}
 
       - name: Build and push frontend (Kaniko)
         run: |
           export DOCKER_HOST=unix:///var/run/docker.sock
           SHORT_SHA=$(echo "${{ github.sha }}" | cut -c1-7)
-          docker run --rm \
-            -v $(pwd)/frontend:/workspace \
-            -v /tmp/kaniko-config/config.json:/kaniko/.docker/config.json:ro \
+          CID=$(docker create \
             gcr.io/kaniko-project/executor:v1.23.2 \
             --context=/workspace \
             --dockerfile=/workspace/Dockerfile \
@@ -85,7 +88,12 @@ jobs:
             --destination=${{ env.IMAGE_PREFIX }}/fsdevops-frontend:${SHORT_SHA} \
             --destination=${{ env.IMAGE_PREFIX }}/fsdevops-frontend:latest \
             --insecure \
-            --cache=true
+            --cache=true)
+          docker cp ./frontend/. ${CID}:/workspace
+          docker cp /tmp/kaniko-config/config.json ${CID}:/kaniko/.docker/config.json
+          docker start -a ${CID}; EXIT_CODE=$?
+          docker rm ${CID}
+          exit ${EXIT_CODE}
 
       # ===== UPDATE MANIFESTS (GitOps) =====
       - name: Update image tags in deployment manifest
