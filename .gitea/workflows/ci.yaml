@@ -43,6 +43,10 @@ jobs:
           npm run lint
 
       # ===== BUILD & PUSH (Kaniko) =====
+      - name: Install Docker CLI
+        run: |
+          curl -fsSL https://download.docker.com/linux/static/stable/x86_64/docker-27.4.1.tgz | tar xz --strip-components=1 -C /usr/local/bin docker/docker
+
       - name: Prepare Kaniko auth
         run: |
           export DOCKER_HOST=unix:///var/run/docker.sock
