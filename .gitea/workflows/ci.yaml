@@ -7,6 +7,11 @@ on:
     paths-ignore:
       - 'manifests/**'
 
+# Internal registry URL (Cloudflare hairpin bypass)
+env:
+  REGISTRY: gitea-http.azize-devops.svc.cluster.local:3000
+  IMAGE_PREFIX: gitea-http.azize-devops.svc.cluster.local:3000/azize-projects
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -38,10 +43,9 @@ jobs:
           npm run lint
 
       # ===== BUILD & PUSH =====
-      - name: Install Docker CLI and set DOCKER_HOST
+      - name: Install Docker CLI
         run: |
           curl -fsSL https://download.docker.com/linux/static/stable/x86_64/docker-27.4.1.tgz | tar xz --strip-components=1 -C /usr/local/bin docker/docker
-          echo "DOCKER_HOST=unix:///var/run/docker.sock" >> $GITHUB_ENV
 
       - name: Verify Docker connection
         run: |
@@ -52,28 +56,28 @@ jobs:
       - name: Login to Gitea Registry
         run: |
           export DOCKER_HOST=unix:///var/run/docker.sock
-          echo "${{ secrets.REGISTRY_PASSWORD }}" | docker login gitea.azizedursun.com -u "${{ secrets.REGISTRY_USER }}" --password-stdin
+          echo "${{ secrets.REGISTRY_PASSWORD }}" | docker login ${{ env.REGISTRY }} -u "${{ secrets.REGISTRY_USER }}" --password-stdin
 
       - name: Build and push backend
         run: |
           export DOCKER_HOST=unix:///var/run/docker.sock
           SHORT_SHA=$(echo "${{ github.sha }}" | cut -c1-7)
-          docker build -t gitea.azizedursun.com/azize-projects/fsdevops-backend:${SHORT_SHA} \
-                       -t gitea.azizedursun.com/azize-projects/fsdevops-backend:latest \
+          docker build -t ${{ env.IMAGE_PREFIX }}/fsdevops-backend:${SHORT_SHA} \
+                       -t ${{ env.IMAGE_PREFIX }}/fsdevops-backend:latest \
                        ./backend
-          docker push gitea.azizedursun.com/azize-projects/fsdevops-backend:${SHORT_SHA}
-          docker push gitea.azizedursun.com/azize-projects/fsdevops-backend:latest
+          docker push ${{ env.IMAGE_PREFIX }}/fsdevops-backend:${SHORT_SHA}
+          docker push ${{ env.IMAGE_PREFIX }}/fsdevops-backend:latest
 
       - name: Build and push frontend
         run: |
           export DOCKER_HOST=unix:///var/run/docker.sock
           SHORT_SHA=$(echo "${{ github.sha }}" | cut -c1-7)
           docker build --build-arg NEXT_PUBLIC_API_URL=https://api.devops.azizedursun.com \
-                       -t gitea.azizedursun.com/azize-projects/fsdevops-frontend:${SHORT_SHA} \
-                       -t gitea.azizedursun.com/azize-projects/fsdevops-frontend:latest \
+                       -t ${{ env.IMAGE_PREFIX }}/fsdevops-frontend:${SHORT_SHA} \
+                       -t ${{ env.IMAGE_PREFIX }}/fsdevops-frontend:latest \
                        ./frontend
-          docker push gitea.azizedursun.com/azize-projects/fsdevops-frontend:${SHORT_SHA}
-          docker push gitea.azizedursun.com/azize-projects/fsdevops-frontend:latest
+          docker push ${{ env.IMAGE_PREFIX }}/fsdevops-frontend:${SHORT_SHA}
+          docker push ${{ env.IMAGE_PREFIX }}/fsdevops-frontend:latest
 
       # ===== UPDATE MANIFESTS (GitOps) =====
       - name: Update image tags in deployment manifest
@@ -90,5 +94,3 @@ jobs:
           git diff --cached --quiet && echo "Manifest zaten guncel, degisiklik yok" && exit 0
           git commit -m "ci: image tag guncelle ($(echo ${{ github.sha }} | cut -c1-7))"
           git push origin main
-# trigger: socket wait fix
-
