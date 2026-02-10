@@ -12,8 +12,7 @@ const certifications = [
     key: "cka",
     date: "Ocak 2026",
     color: "from-blue-500 to-blue-600",
-    badge:
-      "https://images.credly.com/images/8b8ed108-e77d-4396-ac59-2504583b9d54/cka_from_cncfsite__281_29.png",
+    badge: "/badges/cka-badge.png",
     credlyUrl:
       "https://www.credly.com/badges/81a41ad1-87a9-47aa-a9cb-9dc2c87c3da9/public_url",
   },
@@ -22,8 +21,7 @@ const certifications = [
     key: "ckad",
     date: "Ocak 2026",
     color: "from-cyan-500 to-cyan-600",
-    badge:
-      "https://images.credly.com/images/cc8adc83-1dc6-4d57-8e20-22171247e052/blob",
+    badge: "/badges/ckad-badge.png",
     credlyUrl:
       "https://www.credly.com/badges/06c5a9b5-202c-4569-998d-e5f993ea28e4/public_url",
   },
@@ -32,28 +30,25 @@ const certifications = [
     key: "lfs158",
     date: "2025",
     color: "from-purple-500 to-purple-600",
-    badge:
-      "https://images.credly.com/images/4b5a8636-c554-482d-bbdc-7925fb3624c3/blob",
+    badge: "/badges/lfs158-badge.png",
     credlyUrl:
       "https://www.credly.com/badges/18921f02-d1cc-4922-a653-f1c071f6d0b7/public_url",
   },
   {
     name: "AWS GenAI",
     key: "awsGenai",
-    date: "2025",
+    date: "Şubat 2026",
     color: "from-green-500 to-green-600",
-    badge:
-      "https://images.credly.com/images/e50c657a-edd9-4c93-b1cf-2b6634b54abf/blob",
+    badge: "/badges/aws-genai-badge.png",
     credlyUrl:
       "https://www.credly.com/badges/09090929-953a-413c-88bf-712bd07fb375/public_url",
   },
   {
     name: "AWS Cloud 101",
     key: "awsCloud101",
-    date: "2025",
+    date: "Şubat 2026",
     color: "from-orange-500 to-orange-600",
-    badge:
-      "https://images.credly.com/size/680x680/images/e51a8579-188d-4363-8ed1-12ad164ef57b/blob",
+    badge: "/badges/aws-cloud101-badge.png",
     credlyUrl:
       "https://www.credly.com/badges/6f46a887-390e-49e3-9862-1e5f64eb1c55/public_url",
   },
