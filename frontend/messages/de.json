@@ -118,6 +118,7 @@
     "title": "Meine Projekte",
     "subtitle": "DevOps- und Infrastrukturprojekte",
     "backHome": "Zuruck zur Startseite",
+    "backToProjects": "Zuruck zu Projekten",
     "allCategories": "Alle",
     "totalProjects": "{count} Projekte",
     "viewRepo": "Quellcode",
@@ -125,9 +126,45 @@
     "statusActive": "Aktiv",
     "statusCompleted": "Abgeschlossen",
     "statusWip": "In Arbeit",
+    "about": "Uber das Projekt",
+    "keyFeatures": "Hauptmerkmale",
+    "techStack": "Technologie-Stack",
+    "categoryOrchestration": "Orchestrierung",
+    "categoryCicd": "CI/CD",
+    "categoryMonitoring": "Monitoring",
+    "categoryStorage": "Speicher",
+    "categoryNetworking": "Netzwerk",
+    "categoryDatabase": "Datenbank",
     "azizePortfolyo": {
       "name": "Azize Portfolio IaC",
-      "description": "Infrastructure-as-Code-Projekt, das Gitea, ArgoCD, Prometheus Stack, Longhorn und mehr auf einem Kubernetes-Einzelknoten-Cluster mit Helmfile bereitstellt."
+      "description": "Infrastructure-as-Code-Projekt, das Gitea, ArgoCD, Prometheus Stack, Longhorn und mehr auf einem Kubernetes-Einzelknoten-Cluster mit Helmfile bereitstellt.",
+      "longDescription": "Dieses Projekt automatisiert den Aufbau einer vollstandigen DevOps-Plattform auf einem Kubernetes-Einzelknoten-Cluster. Es bietet deklaratives Helm-Release-Management mit Helmfile, Manifest-Komposition mit Kustomize und GitOps-basiertes Continuous Deployment mit ArgoCD.",
+      "features": {
+        "helmfileIac": {
+          "title": "Deklaratives IaC mit Helmfile",
+          "description": "Alle Kubernetes-Ressourcen deklarativ mit Helmfile definiert. Automatisches Abhangigkeitsmanagement."
+        },
+        "gitopsArgocd": {
+          "title": "GitOps mit ArgoCD",
+          "description": "Continuous Deployment mit Auto-Sync, Prune und Self-Heal. Automatische Erkennung von Gitea-Repositories."
+        },
+        "monitoringStack": {
+          "title": "Vollstandiger Monitoring-Stack",
+          "description": "Umfassendes Monitoring mit Prometheus-Metriken, Grafana-Visualisierung und Loki-Log-Aggregation."
+        },
+        "distributedStorage": {
+          "title": "Longhorn Verteilter Speicher",
+          "description": "Kubernetes-nativer verteilter Blockspeicher. Als Standard-StorageClass konfiguriert."
+        },
+        "automatedTls": {
+          "title": "Automatische TLS-Zertifikate",
+          "description": "Automatische TLS-Zertifikatsausstellung und -erneuerung mit cert-manager und Let's Encrypt."
+        },
+        "selfHostedGit": {
+          "title": "Self-Hosted Git & CI/CD",
+          "description": "Gitea Git-Server mit integrierten Actions Runners fur CI/CD-Pipelines."
+        }
+      }
     }
   },
   "footer": {

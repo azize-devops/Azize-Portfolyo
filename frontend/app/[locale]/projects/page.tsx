@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useTranslations } from "next-intl";
+import { useRouter } from "next/navigation";
 import {
   ArrowLeft,
   ExternalLink,
@@ -54,6 +55,7 @@ function ProjectCard({
   index: number;
 }) {
   const t = useTranslations();
+  const router = useRouter();
   const { ref, isVisible } = useScrollAnimation<HTMLDivElement>({
     threshold: 0.1,
     triggerOnce: false,
@@ -64,10 +66,11 @@ function ProjectCard({
   return (
     <div
       ref={ref}
-      className={`transition-all duration-700 ease-out ${
+      className={`cursor-pointer transition-all duration-700 ease-out ${
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
       }`}
       style={{ transitionDelay: `${index * 100}ms` }}
+      onClick={() => router.push(`/projects/${project.slug}`)}
     >
       <div className="group relative overflow-hidden rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 hover:shadow-xl hover:scale-[1.02] transition-all duration-300 h-full">
         {/* Gradient top bar */}
@@ -113,6 +116,7 @@ function ProjectCard({
               href={project.repoUrl}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
               className="inline-flex items-center gap-1.5 text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
             >
               <GitBranch className="h-4 w-4" />
@@ -123,6 +127,7 @@ function ProjectCard({
                 href={project.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
                 className="inline-flex items-center gap-1.5 text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
               >
                 <ExternalLink className="h-4 w-4" />

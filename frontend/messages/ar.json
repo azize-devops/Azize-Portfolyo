@@ -118,6 +118,7 @@
     "title": "مشاريعي",
     "subtitle": "مشاريع DevOps والبنية التحتية",
     "backHome": "العودة للرئيسية",
+    "backToProjects": "العودة للمشاريع",
     "allCategories": "الكل",
     "totalProjects": "{count} مشاريع",
     "viewRepo": "الكود المصدري",
@@ -125,9 +126,45 @@
     "statusActive": "نشط",
     "statusCompleted": "مكتمل",
     "statusWip": "قيد التطوير",
+    "about": "حول المشروع",
+    "keyFeatures": "الميزات الرئيسية",
+    "techStack": "المكدس التقني",
+    "categoryOrchestration": "التنسيق",
+    "categoryCicd": "CI/CD",
+    "categoryMonitoring": "المراقبة",
+    "categoryStorage": "التخزين",
+    "categoryNetworking": "الشبكة",
+    "categoryDatabase": "قواعد البيانات",
     "azizePortfolyo": {
       "name": "Azize محفظة IaC",
-      "description": "مشروع Infrastructure-as-Code لنشر Gitea و ArgoCD و Prometheus Stack و Longhorn والمزيد على كتلة Kubernetes ذات عقدة واحدة باستخدام Helmfile."
+      "description": "مشروع Infrastructure-as-Code لنشر Gitea و ArgoCD و Prometheus Stack و Longhorn والمزيد على كتلة Kubernetes ذات عقدة واحدة باستخدام Helmfile.",
+      "longDescription": "يقوم هذا المشروع بأتمتة إعداد منصة DevOps كاملة على كتلة Kubernetes ذات عقدة واحدة. يوفر إدارة إصدارات Helm التصريحية باستخدام Helmfile، وتكوين المانيفست باستخدام Kustomize، والنشر المستمر القائم على GitOps باستخدام ArgoCD.",
+      "features": {
+        "helmfileIac": {
+          "title": "IaC تصريحي مع Helmfile",
+          "description": "جميع موارد Kubernetes معرفة بشكل تصريحي باستخدام Helmfile. إدارة تلقائية لترتيب التبعيات."
+        },
+        "gitopsArgocd": {
+          "title": "GitOps مع ArgoCD",
+          "description": "نشر مستمر مع المزامنة التلقائية والتنظيف والإصلاح الذاتي. اكتشاف تلقائي لمستودعات Gitea."
+        },
+        "monitoringStack": {
+          "title": "مكدس مراقبة كامل",
+          "description": "مراقبة شاملة مع مقاييس Prometheus وتصور Grafana وتجميع سجلات Loki."
+        },
+        "distributedStorage": {
+          "title": "تخزين موزع Longhorn",
+          "description": "تخزين كتلي موزع أصلي لـ Kubernetes. مهيأ كـ StorageClass افتراضي."
+        },
+        "automatedTls": {
+          "title": "شهادات TLS تلقائية",
+          "description": "إصدار وتجديد تلقائي لشهادات TLS باستخدام cert-manager و Let's Encrypt."
+        },
+        "selfHostedGit": {
+          "title": "Git و CI/CD مستضاف ذاتياً",
+          "description": "خادم Git Gitea مع منفذي Actions المدمجين لخطوط أنابيب CI/CD."
+        }
+      }
     }
   },
   "footer": {

@@ -118,6 +118,7 @@
     "title": "我的项目",
     "subtitle": "DevOps和基础设施项目",
     "backHome": "返回首页",
+    "backToProjects": "返回项目",
     "allCategories": "全部",
     "totalProjects": "{count} 个项目",
     "viewRepo": "源代码",
@@ -125,9 +126,45 @@
     "statusActive": "活跃",
     "statusCompleted": "已完成",
     "statusWip": "进行中",
+    "about": "关于",
+    "keyFeatures": "核心功能",
+    "techStack": "技术栈",
+    "categoryOrchestration": "编排",
+    "categoryCicd": "CI/CD",
+    "categoryMonitoring": "监控",
+    "categoryStorage": "存储",
+    "categoryNetworking": "网络",
+    "categoryDatabase": "数据库",
     "azizePortfolyo": {
       "name": "Azize 作品集 IaC",
-      "description": "使用Helmfile在Kubernetes单节点集群上部署Gitea、ArgoCD、Prometheus Stack、Longhorn等的Infrastructure-as-Code项目。"
+      "description": "使用Helmfile在Kubernetes单节点集群上部署Gitea、ArgoCD、Prometheus Stack、Longhorn等的Infrastructure-as-Code项目。",
+      "longDescription": "本项目自动化在单节点Kubernetes集群上搭建完整的DevOps平台。通过Helmfile提供声明式Helm发布管理，通过Kustomize进行清单组合，通过ArgoCD实现基于GitOps的持续部署。涵盖从Cilium CNI到Prometheus监控栈的所有组件。",
+      "features": {
+        "helmfileIac": {
+          "title": "Helmfile声明式IaC",
+          "description": "所有Kubernetes资源通过Helmfile声明式定义，自动管理依赖排序。"
+        },
+        "gitopsArgocd": {
+          "title": "ArgoCD GitOps",
+          "description": "自动同步、清理和自愈的持续部署。自动发现Gitea仓库。"
+        },
+        "monitoringStack": {
+          "title": "完整监控栈",
+          "description": "Prometheus指标采集、Grafana可视化和Loki日志聚合的全面监控。"
+        },
+        "distributedStorage": {
+          "title": "Longhorn分布式存储",
+          "description": "Kubernetes原生分布式块存储，配置为默认StorageClass。"
+        },
+        "automatedTls": {
+          "title": "自动TLS证书",
+          "description": "通过cert-manager和Let's Encrypt自动签发和续期TLS证书。"
+        },
+        "selfHostedGit": {
+          "title": "自托管Git与CI/CD",
+          "description": "Gitea Git服务器集成Actions运行器，提供CI/CD流水线。"
+        }
+      }
     }
   },
   "footer": {

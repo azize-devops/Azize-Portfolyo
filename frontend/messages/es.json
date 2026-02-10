@@ -118,6 +118,7 @@
     "title": "Mis proyectos",
     "subtitle": "Proyectos de DevOps e infraestructura",
     "backHome": "Volver al inicio",
+    "backToProjects": "Volver a proyectos",
     "allCategories": "Todos",
     "totalProjects": "{count} proyectos",
     "viewRepo": "Codigo fuente",
@@ -125,9 +126,45 @@
     "statusActive": "Activo",
     "statusCompleted": "Completado",
     "statusWip": "En progreso",
+    "about": "Acerca de",
+    "keyFeatures": "Caracteristicas principales",
+    "techStack": "Stack tecnologico",
+    "categoryOrchestration": "Orquestacion",
+    "categoryCicd": "CI/CD",
+    "categoryMonitoring": "Monitoreo",
+    "categoryStorage": "Almacenamiento",
+    "categoryNetworking": "Red",
+    "categoryDatabase": "Base de datos",
     "azizePortfolyo": {
       "name": "Azize Portafolio IaC",
-      "description": "Proyecto Infrastructure-as-Code que despliega Gitea, ArgoCD, Prometheus Stack, Longhorn y mas en un cluster Kubernetes de nodo unico usando Helmfile."
+      "description": "Proyecto Infrastructure-as-Code que despliega Gitea, ArgoCD, Prometheus Stack, Longhorn y mas en un cluster Kubernetes de nodo unico usando Helmfile.",
+      "longDescription": "Este proyecto automatiza la configuracion de una plataforma DevOps completa en un cluster Kubernetes de nodo unico. Proporciona gestion declarativa de releases Helm con Helmfile, composicion de manifiestos con Kustomize y despliegue continuo basado en GitOps con ArgoCD.",
+      "features": {
+        "helmfileIac": {
+          "title": "IaC declarativo con Helmfile",
+          "description": "Todos los recursos de Kubernetes definidos declarativamente con Helmfile. Gestion automatica del orden de dependencias."
+        },
+        "gitopsArgocd": {
+          "title": "GitOps con ArgoCD",
+          "description": "Despliegue continuo con auto-sync, prune y self-heal. Descubrimiento automatico de repositorios Gitea."
+        },
+        "monitoringStack": {
+          "title": "Stack de monitoreo completo",
+          "description": "Monitoreo integral con metricas Prometheus, visualizacion Grafana y agregacion de logs Loki."
+        },
+        "distributedStorage": {
+          "title": "Almacenamiento distribuido Longhorn",
+          "description": "Almacenamiento en bloque distribuido nativo de Kubernetes. Configurado como StorageClass predeterminado."
+        },
+        "automatedTls": {
+          "title": "Certificados TLS automaticos",
+          "description": "Emision y renovacion automatica de certificados TLS con cert-manager y Let's Encrypt."
+        },
+        "selfHostedGit": {
+          "title": "Git y CI/CD autoalojado",
+          "description": "Servidor Git Gitea con runners de Actions integrados para pipelines CI/CD."
+        }
+      }
     }
   },
   "footer": {

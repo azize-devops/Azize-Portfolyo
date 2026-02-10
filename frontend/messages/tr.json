@@ -118,6 +118,7 @@
     "title": "Projelerim",
     "subtitle": "DevOps ve altyapi projelerim",
     "backHome": "Ana Sayfaya Don",
+    "backToProjects": "Projelere Don",
     "allCategories": "Tumu",
     "totalProjects": "{count} proje",
     "viewRepo": "Kaynak Kodu",
@@ -125,9 +126,45 @@
     "statusActive": "Aktif",
     "statusCompleted": "Tamamlandi",
     "statusWip": "Devam Ediyor",
+    "about": "Hakkinda",
+    "keyFeatures": "Temel Ozellikler",
+    "techStack": "Teknoloji Yigini",
+    "categoryOrchestration": "Orkestrasyon",
+    "categoryCicd": "CI/CD",
+    "categoryMonitoring": "Izleme",
+    "categoryStorage": "Depolama",
+    "categoryNetworking": "Ag",
+    "categoryDatabase": "Veritabani",
     "azizePortfolyo": {
       "name": "Azize Portfolyo IaC",
-      "description": "Kubernetes single-node cluster uzerinde Gitea, ArgoCD, Prometheus Stack, Longhorn ve daha fazlasini Helmfile ile deploy eden Infrastructure-as-Code projesi."
+      "description": "Kubernetes single-node cluster uzerinde Gitea, ArgoCD, Prometheus Stack, Longhorn ve daha fazlasini Helmfile ile deploy eden Infrastructure-as-Code projesi.",
+      "longDescription": "Bu proje, tek node'lu bir Kubernetes cluster'i uzerinde tam bir DevOps platformu kurulumunu otomatize eder. Helmfile ile deklaratif Helm release yonetimi, Kustomize ile manifest kompozisyonu ve ArgoCD ile GitOps tabanli surekli dagitim saglar. Cilium CNI'dan Prometheus monitoring stack'ine kadar tum bilesenleri kapsar.",
+      "features": {
+        "helmfileIac": {
+          "title": "Helmfile ile Deklaratif IaC",
+          "description": "Tum Kubernetes kaynaklari Helmfile ile deklaratif olarak tanimlanir. Bagimlilik siralamasini otomatik yonetir."
+        },
+        "gitopsArgocd": {
+          "title": "ArgoCD ile GitOps",
+          "description": "Otomatik sync, prune ve self-heal ozellikleriyle surekli dagitim. Gitea repository'lerini otomatik kesfeder."
+        },
+        "monitoringStack": {
+          "title": "Tam Izleme Yigini",
+          "description": "Prometheus metrik toplama, Grafana gorsellistirme ve Loki log toplama ile kapsamli izleme."
+        },
+        "distributedStorage": {
+          "title": "Longhorn Dagitik Depolama",
+          "description": "Kubernetes-native dagitik blok depolama. Varsayilan StorageClass olarak yapilandirilmis."
+        },
+        "automatedTls": {
+          "title": "Otomatik TLS Sertifikalari",
+          "description": "Cert-manager ve Let's Encrypt ile otomatik TLS sertifika olusturma ve yenileme."
+        },
+        "selfHostedGit": {
+          "title": "Self-Hosted Git ve CI/CD",
+          "description": "Gitea git sunucusu ve Actions runner'lari ile entegre CI/CD pipeline'lari."
+        }
+      }
     }
   },
   "footer": {
