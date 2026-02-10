@@ -11,10 +11,18 @@ spec:
   scripts:
     - name: create-database-and-user
       script: |
-        CREATE DATABASE fsdevops;
-        CREATE USER fsdevops WITH PASSWORD '<DB_PASSWORD>';
+        DO $$
+        BEGIN
+          IF NOT EXISTS (SELECT FROM pg_catalog.pg_roles WHERE rolname = 'fsdevops') THEN
+            CREATE USER fsdevops WITH PASSWORD '<DB_PASSWORD>';
+          END IF;
+        END
+        $$;
+        SELECT 'CREATE DATABASE fsdevops' WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'fsdevops')\gexec
         GRANT ALL PRIVILEGES ON DATABASE fsdevops TO fsdevops;
-        \c fsdevops
+    - name: grant-schema-privileges
+      database: fsdevops
+      script: |
         GRANT ALL ON SCHEMA public TO fsdevops;
 ---
 apiVersion: stackgres.io/v1

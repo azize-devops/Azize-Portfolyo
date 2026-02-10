@@ -6,7 +6,7 @@ metadata:
     app.kubernetes.io/part-of: fsdevops-portfolio
     app.kubernetes.io/component: ingress
   annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-cloudflare
+    cert-manager.io/cluster-issuer: letsencrypt-cloudflare-azize
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
     nginx.ingress.kubernetes.io/proxy-body-size: "10m"
     nginx.ingress.kubernetes.io/proxy-read-timeout: "60"
