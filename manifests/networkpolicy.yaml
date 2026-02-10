@@ -74,6 +74,10 @@ spec:
       ports:
         - protocol: TCP
           port: 5432
+        - protocol: TCP
+          port: 7432
+        - protocol: TCP
+          port: 7433
     - to:
         - namespaceSelector: {}
           podSelector:
@@ -129,6 +133,10 @@ spec:
       ports:
         - protocol: TCP
           port: 5432
+        - protocol: TCP
+          port: 7432
+        - protocol: TCP
+          port: 7433
     - from:
         - namespaceSelector:
             matchLabels:
@@ -136,6 +144,10 @@ spec:
       ports:
         - protocol: TCP
           port: 5432
+        - protocol: TCP
+          port: 7432
+        - protocol: TCP
+          port: 7433
         - protocol: TCP
           port: 8443
         - protocol: TCP
