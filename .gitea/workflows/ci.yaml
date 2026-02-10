@@ -8,9 +8,12 @@ on:
       - 'manifests/**'
 
 jobs:
-  test:
+  build-and-deploy:
     runs-on: ubuntu-latest
+    env:
+      DOCKER_HOST: tcp://localhost:2375
     steps:
+      # ===== TEST =====
       - name: Checkout
         uses: actions/checkout@v4
 
@@ -36,20 +39,11 @@ jobs:
           npm ci
           npm run lint
 
-  build-and-push:
-    needs: test
-    runs-on: ubuntu-latest
-    env:
-      DOCKER_HOST: tcp://localhost:2375
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
+      # ===== BUILD & PUSH =====
       - name: Install Docker CLI
         run: |
-          echo "=== Docker CLI yukleniyor ==="
           curl -fsSL https://download.docker.com/linux/static/stable/x86_64/docker-27.4.1.tgz | tar xz --strip-components=1 -C /usr/local/bin docker/docker
-          docker version || echo "Docker daemon baglantisi basarisiz, DOCKER_HOST=$DOCKER_HOST"
+          docker version
 
       - name: Login to Gitea Registry
         run: |
@@ -74,13 +68,7 @@ jobs:
           docker push gitea.azizedursun.com/azize-projects/fsdevops-frontend:${SHORT_SHA}
           docker push gitea.azizedursun.com/azize-projects/fsdevops-frontend:latest
 
-  update-manifests:
-    needs: build-and-push
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
+      # ===== UPDATE MANIFESTS (GitOps) =====
       - name: Update image tags in deployment manifest
         run: |
           SHORT_SHA=$(echo "${{ github.sha }}" | cut -c1-7)
