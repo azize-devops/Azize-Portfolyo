@@ -138,7 +138,7 @@
     "azizePortfolyo": {
       "name": "Azize Portfolyo IaC",
       "description": "Kubernetes single-node cluster uzerinde Gitea, ArgoCD, Prometheus Stack, Longhorn ve daha fazlasini Helmfile ile deploy eden Infrastructure-as-Code projesi.",
-      "longDescription": "Bu proje, tek node'lu bir Kubernetes cluster'i uzerinde tam bir DevOps platformu kurulumunu otomatize eder. Helmfile ile deklaratif Helm release yonetimi, Kustomize ile manifest kompozisyonu ve ArgoCD ile GitOps tabanli surekli dagitim saglar. Gitea Actions CI/CD pipeline'i ile kod degisiklikleri otomatik olarak test edilir, container image'lari build edilir ve manifest'ler commit SHA tag'leri ile guncellenerek ArgoCD uzerinden deploy edilir. Cilium CNI'dan Prometheus monitoring stack'ine kadar tum bilesenleri kapsar.",
+      "longDescription": "Bu proje, tek node'lu bir Kubernetes cluster'i uzerinde tam bir DevOps platformu kurulumunu otomatize eder. Helmfile ile deklaratif Helm release yonetimi, Kustomize ile manifest kompozisyonu ve ArgoCD ile GitOps tabanli surekli dagitim saglar. Gitea Actions CI/CD pipeline'i ile kod degisiklikleri otomatik olarak test edilir, Kaniko ile daemon'siz container image build yapilir ve manifest'ler commit SHA tag'leri ile guncellenerek ArgoCD uzerinden deploy edilir. Cilium CNI'dan Prometheus monitoring stack'ine kadar tum bilesenleri kapsar.",
       "features": {
         "helmfileIac": {
           "title": "Helmfile ile Deklaratif IaC",
@@ -162,7 +162,7 @@
         },
         "selfHostedGit": {
           "title": "Tam Otomatik CI/CD Pipeline",
-          "description": "git push → test → build → manifest guncelleme → ArgoCD deploy. Gitea Actions ile sifir manuel mudahale."
+          "description": "git push → test → Kaniko ile daemonless build → manifest guncelleme → ArgoCD deploy. Gitea Actions ile sifir manuel mudahale."
         }
       }
     }

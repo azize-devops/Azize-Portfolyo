@@ -24,7 +24,7 @@ export const projects: Project[] = [
   {
     slug: "azize-portfolyo",
     key: "azizePortfolyo",
-    tags: ["kubernetes", "helmfile", "argocd", "gitea", "docker"],
+    tags: ["kubernetes", "helmfile", "argocd", "gitea", "kaniko"],
     color: "from-blue-500 to-cyan-600",
     repoUrl: "https://gitea.azizedursun.com/azize-projects/full-stack-devops-portfolio",
     liveUrl: "https://devops.azizedursun.com",

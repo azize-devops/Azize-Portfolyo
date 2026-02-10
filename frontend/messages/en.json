@@ -138,7 +138,7 @@
     "azizePortfolyo": {
       "name": "Azize Portfolio IaC",
       "description": "Infrastructure-as-Code project deploying Gitea, ArgoCD, Prometheus Stack, Longhorn and more on a Kubernetes single-node cluster using Helmfile.",
-      "longDescription": "This project automates the setup of a complete DevOps platform on a single-node Kubernetes cluster. It provides declarative Helm release management with Helmfile, manifest composition with Kustomize, and GitOps-based continuous deployment with ArgoCD. The Gitea Actions CI/CD pipeline automatically tests code changes, builds container images, and updates manifests with commit SHA tags for ArgoCD to deploy. Covers all components from Cilium CNI to Prometheus monitoring stack.",
+      "longDescription": "This project automates the setup of a complete DevOps platform on a single-node Kubernetes cluster. It provides declarative Helm release management with Helmfile, manifest composition with Kustomize, and GitOps-based continuous deployment with ArgoCD. The Gitea Actions CI/CD pipeline automatically tests code changes, builds container images daemonlessly with Kaniko, and updates manifests with commit SHA tags for ArgoCD to deploy. Covers all components from Cilium CNI to Prometheus monitoring stack.",
       "features": {
         "helmfileIac": {
           "title": "Declarative IaC with Helmfile",
@@ -162,7 +162,7 @@
         },
         "selfHostedGit": {
           "title": "Fully Automated CI/CD Pipeline",
-          "description": "git push → test → build → manifest update → ArgoCD deploy. Zero manual intervention with Gitea Actions."
+          "description": "git push → test → daemonless build with Kaniko → manifest update → ArgoCD deploy. Zero manual intervention with Gitea Actions."
         }
       }
     }

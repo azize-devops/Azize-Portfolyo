@@ -42,42 +42,46 @@ jobs:
           npm ci
           npm run lint
 
-      # ===== BUILD & PUSH =====
-      - name: Install Docker CLI
-        run: |
-          curl -fsSL https://download.docker.com/linux/static/stable/x86_64/docker-27.4.1.tgz | tar xz --strip-components=1 -C /usr/local/bin docker/docker
-
-      - name: Verify Docker connection
+      # ===== BUILD & PUSH (Kaniko) =====
+      - name: Prepare Kaniko auth
         run: |
           export DOCKER_HOST=unix:///var/run/docker.sock
-          docker version
-          docker info --format '{{.ServerVersion}}'
+          AUTH=$(echo -n "${{ secrets.REGISTRY_USER }}:${{ secrets.REGISTRY_PASSWORD }}" | base64)
+          mkdir -p /tmp/kaniko-config
+          cat > /tmp/kaniko-config/config.json <<EOF
+          {"auths":{"${{ env.REGISTRY }}":{"auth":"${AUTH}"}}}
+          EOF
 
-      - name: Login to Gitea Registry
-        run: |
-          export DOCKER_HOST=unix:///var/run/docker.sock
-          echo "${{ secrets.REGISTRY_PASSWORD }}" | docker login ${{ env.REGISTRY }} -u "${{ secrets.REGISTRY_USER }}" --password-stdin
-
-      - name: Build and push backend
+      - name: Build and push backend (Kaniko)
         run: |
           export DOCKER_HOST=unix:///var/run/docker.sock
           SHORT_SHA=$(echo "${{ github.sha }}" | cut -c1-7)
-          docker build -t ${{ env.IMAGE_PREFIX }}/fsdevops-backend:${SHORT_SHA} \
-                       -t ${{ env.IMAGE_PREFIX }}/fsdevops-backend:latest \
-                       ./backend
-          docker push ${{ env.IMAGE_PREFIX }}/fsdevops-backend:${SHORT_SHA}
-          docker push ${{ env.IMAGE_PREFIX }}/fsdevops-backend:latest
+          docker run --rm \
+            -v $(pwd)/backend:/workspace \
+            -v /tmp/kaniko-config/config.json:/kaniko/.docker/config.json:ro \
+            gcr.io/kaniko-project/executor:v1.23.2 \
+            --context=/workspace \
+            --dockerfile=/workspace/Dockerfile \
+            --destination=${{ env.IMAGE_PREFIX }}/fsdevops-backend:${SHORT_SHA} \
+            --destination=${{ env.IMAGE_PREFIX }}/fsdevops-backend:latest \
+            --insecure \
+            --cache=true
 
-      - name: Build and push frontend
+      - name: Build and push frontend (Kaniko)
         run: |
           export DOCKER_HOST=unix:///var/run/docker.sock
           SHORT_SHA=$(echo "${{ github.sha }}" | cut -c1-7)
-          docker build --build-arg NEXT_PUBLIC_API_URL=https://api.devops.azizedursun.com \
-                       -t ${{ env.IMAGE_PREFIX }}/fsdevops-frontend:${SHORT_SHA} \
-                       -t ${{ env.IMAGE_PREFIX }}/fsdevops-frontend:latest \
-                       ./frontend
-          docker push ${{ env.IMAGE_PREFIX }}/fsdevops-frontend:${SHORT_SHA}
-          docker push ${{ env.IMAGE_PREFIX }}/fsdevops-frontend:latest
+          docker run --rm \
+            -v $(pwd)/frontend:/workspace \
+            -v /tmp/kaniko-config/config.json:/kaniko/.docker/config.json:ro \
+            gcr.io/kaniko-project/executor:v1.23.2 \
+            --context=/workspace \
+            --dockerfile=/workspace/Dockerfile \
+            --build-arg=NEXT_PUBLIC_API_URL=https://api.devops.azizedursun.com \
+            --destination=${{ env.IMAGE_PREFIX }}/fsdevops-frontend:${SHORT_SHA} \
+            --destination=${{ env.IMAGE_PREFIX }}/fsdevops-frontend:latest \
+            --insecure \
+            --cache=true
 
       # ===== UPDATE MANIFESTS (GitOps) =====
       - name: Update image tags in deployment manifest
@@ -94,4 +98,3 @@ jobs:
           git diff --cached --quiet && echo "Manifest zaten guncel, degisiklik yok" && exit 0
           git commit -m "ci: image tag guncelle ($(echo ${{ github.sha }} | cut -c1-7))"
           git push origin main
-# docker wait fix: wget health check
