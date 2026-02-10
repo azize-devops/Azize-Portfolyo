@@ -39,13 +39,17 @@ jobs:
   build-and-push:
     needs: test
     runs-on: ubuntu-latest
+    env:
+      DOCKER_HOST: tcp://localhost:2375
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
       - name: Install Docker CLI
         run: |
-          apt-get update && apt-get install -y docker.io
+          echo "=== Docker CLI yukleniyor ==="
+          curl -fsSL https://download.docker.com/linux/static/stable/x86_64/docker-27.4.1.tgz | tar xz --strip-components=1 -C /usr/local/bin docker/docker
+          docker version || echo "Docker daemon baglantisi basarisiz, DOCKER_HOST=$DOCKER_HOST"
 
       - name: Login to Gitea Registry
         run: |
