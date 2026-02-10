@@ -4,6 +4,7 @@ import { useLocale } from "next-intl";
 import { useRouter, usePathname } from "@/i18n/navigation";
 import { useState, useRef, useEffect } from "react";
 import { Globe } from "lucide-react";
+import Image from "next/image";
 import { localeNames, localeFlags, locales, type Locale } from "@/i18n/config";
 
 export function LanguageSelector() {
@@ -53,7 +54,7 @@ export function LanguageSelector() {
                   : ""
               }`}
             >
-              <span className="text-lg">{localeFlags[loc]}</span>
+              <Image src={localeFlags[loc]} alt={localeNames[loc]} width={24} height={16} className="rounded-sm object-cover" />
               <span>{localeNames[loc]}</span>
             </button>
           ))}

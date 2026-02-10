@@ -15,14 +15,14 @@ export const localeNames: Record<Locale, string> = {
 };
 
 export const localeFlags: Record<Locale, string> = {
-  tr: "🇹🇷",
-  en: "🇬🇧",
-  ru: "🇷🇺",
-  zh: "🇨🇳",
-  de: "🇩🇪",
-  fr: "🇫🇷",
-  ar: "🇸🇦",
-  es: "🇪🇸",
+  tr: "/flags/tr.svg",
+  en: "/flags/gb.svg",
+  ru: "/flags/ru.svg",
+  zh: "/flags/cn.svg",
+  de: "/flags/de.svg",
+  fr: "/flags/fr.svg",
+  ar: "/flags/sa.svg",
+  es: "/flags/es.svg",
 };
 
 export const rtlLocales: Locale[] = ["ar"];
