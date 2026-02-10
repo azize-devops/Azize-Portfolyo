@@ -138,7 +138,7 @@
     "azizePortfolyo": {
       "name": "Azize Portfolio IaC",
       "description": "Infrastructure-as-Code-Projekt, das Gitea, ArgoCD, Prometheus Stack, Longhorn und mehr auf einem Kubernetes-Einzelknoten-Cluster mit Helmfile bereitstellt.",
-      "longDescription": "Dieses Projekt automatisiert den Aufbau einer vollstandigen DevOps-Plattform auf einem Kubernetes-Einzelknoten-Cluster. Es bietet deklaratives Helm-Release-Management mit Helmfile, Manifest-Komposition mit Kustomize und GitOps-basiertes Continuous Deployment mit ArgoCD.",
+      "longDescription": "Dieses Projekt automatisiert den Aufbau einer vollstandigen DevOps-Plattform auf einem Kubernetes-Einzelknoten-Cluster. Es bietet deklaratives Helm-Release-Management mit Helmfile, Manifest-Komposition mit Kustomize und GitOps-basiertes Continuous Deployment mit ArgoCD. Die Gitea Actions CI/CD-Pipeline testet Codeaenderungen automatisch, erstellt Container-Images und aktualisiert Manifeste mit Commit-SHA-Tags fuer das Deployment durch ArgoCD.",
       "features": {
         "helmfileIac": {
           "title": "Deklaratives IaC mit Helmfile",
@@ -146,7 +146,7 @@
         },
         "gitopsArgocd": {
           "title": "GitOps mit ArgoCD",
-          "description": "Continuous Deployment mit Auto-Sync, Prune und Self-Heal. Automatische Erkennung von Gitea-Repositories."
+          "description": "CI-Pipeline aktualisiert Image-Tags in Manifesten automatisch mit Commit-SHA. ArgoCD erkennt Aenderungen und deployt mit Auto-Sync, Prune und Self-Heal."
         },
         "monitoringStack": {
           "title": "Vollstandiger Monitoring-Stack",
@@ -161,8 +161,8 @@
           "description": "Automatische TLS-Zertifikatsausstellung und -erneuerung mit cert-manager und Let's Encrypt."
         },
         "selfHostedGit": {
-          "title": "Self-Hosted Git & CI/CD",
-          "description": "Gitea Git-Server mit integrierten Actions Runners fur CI/CD-Pipelines."
+          "title": "Vollautomatische CI/CD-Pipeline",
+          "description": "git push → Test → Build → Manifest-Update → ArgoCD-Deploy. Null manuelle Eingriffe mit Gitea Actions."
         }
       }
     }

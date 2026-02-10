@@ -138,7 +138,7 @@
     "azizePortfolyo": {
       "name": "Azize محفظة IaC",
       "description": "مشروع Infrastructure-as-Code لنشر Gitea و ArgoCD و Prometheus Stack و Longhorn والمزيد على كتلة Kubernetes ذات عقدة واحدة باستخدام Helmfile.",
-      "longDescription": "يقوم هذا المشروع بأتمتة إعداد منصة DevOps كاملة على كتلة Kubernetes ذات عقدة واحدة. يوفر إدارة إصدارات Helm التصريحية باستخدام Helmfile، وتكوين المانيفست باستخدام Kustomize، والنشر المستمر القائم على GitOps باستخدام ArgoCD.",
+      "longDescription": "يقوم هذا المشروع بأتمتة إعداد منصة DevOps كاملة على كتلة Kubernetes ذات عقدة واحدة. يوفر إدارة إصدارات Helm التصريحية باستخدام Helmfile، وتكوين المانيفست باستخدام Kustomize، والنشر المستمر القائم على GitOps باستخدام ArgoCD. يقوم خط أنابيب Gitea Actions CI/CD تلقائياً باختبار تغييرات الكود وبناء صور الحاويات وتحديث المانيفست بعلامات commit SHA لنشرها عبر ArgoCD.",
       "features": {
         "helmfileIac": {
           "title": "IaC تصريحي مع Helmfile",
@@ -146,7 +146,7 @@
         },
         "gitopsArgocd": {
           "title": "GitOps مع ArgoCD",
-          "description": "نشر مستمر مع المزامنة التلقائية والتنظيف والإصلاح الذاتي. اكتشاف تلقائي لمستودعات Gitea."
+          "description": "يقوم خط أنابيب CI تلقائياً بتحديث علامات الصور في المانيفست باستخدام commit SHA. يكتشف ArgoCD التغييرات وينشر مع المزامنة التلقائية والتنظيف والإصلاح الذاتي."
         },
         "monitoringStack": {
           "title": "مكدس مراقبة كامل",
@@ -161,8 +161,8 @@
           "description": "إصدار وتجديد تلقائي لشهادات TLS باستخدام cert-manager و Let's Encrypt."
         },
         "selfHostedGit": {
-          "title": "Git و CI/CD مستضاف ذاتياً",
-          "description": "خادم Git Gitea مع منفذي Actions المدمجين لخطوط أنابيب CI/CD."
+          "title": "خط أنابيب CI/CD مؤتمت بالكامل",
+          "description": "git push → اختبار → بناء → تحديث المانيفست → نشر ArgoCD. بدون تدخل يدوي مع Gitea Actions."
         }
       }
     }

@@ -138,7 +138,7 @@
     "azizePortfolyo": {
       "name": "Azize Portfolio IaC",
       "description": "Projet Infrastructure-as-Code deployant Gitea, ArgoCD, Prometheus Stack, Longhorn et plus sur un cluster Kubernetes mono-noeud avec Helmfile.",
-      "longDescription": "Ce projet automatise la mise en place d'une plateforme DevOps complete sur un cluster Kubernetes mono-noeud. Il fournit une gestion declarative des releases Helm avec Helmfile, la composition de manifestes avec Kustomize et le deploiement continu base sur GitOps avec ArgoCD.",
+      "longDescription": "Ce projet automatise la mise en place d'une plateforme DevOps complete sur un cluster Kubernetes mono-noeud. Il fournit une gestion declarative des releases Helm avec Helmfile, la composition de manifestes avec Kustomize et le deploiement continu base sur GitOps avec ArgoCD. Le pipeline CI/CD Gitea Actions teste automatiquement les modifications de code, construit les images de conteneurs et met a jour les manifestes avec des tags commit SHA pour le deploiement par ArgoCD.",
       "features": {
         "helmfileIac": {
           "title": "IaC declaratif avec Helmfile",
@@ -146,7 +146,7 @@
         },
         "gitopsArgocd": {
           "title": "GitOps avec ArgoCD",
-          "description": "Deploiement continu avec auto-sync, prune et self-heal. Decouverte automatique des depots Gitea."
+          "description": "Le pipeline CI met automatiquement a jour les tags d'images dans les manifestes avec le commit SHA. ArgoCD detecte les changements et deploie avec auto-sync, prune et self-heal."
         },
         "monitoringStack": {
           "title": "Stack de surveillance complet",
@@ -161,8 +161,8 @@
           "description": "Emission et renouvellement automatiques de certificats TLS avec cert-manager et Let's Encrypt."
         },
         "selfHostedGit": {
-          "title": "Git et CI/CD auto-heberge",
-          "description": "Serveur Git Gitea avec runners Actions integres pour les pipelines CI/CD."
+          "title": "Pipeline CI/CD entierement automatise",
+          "description": "git push → test → build → mise a jour du manifeste → deploiement ArgoCD. Zero intervention manuelle avec Gitea Actions."
         }
       }
     }

@@ -138,7 +138,7 @@
     "azizePortfolyo": {
       "name": "Azize 作品集 IaC",
       "description": "使用Helmfile在Kubernetes单节点集群上部署Gitea、ArgoCD、Prometheus Stack、Longhorn等的Infrastructure-as-Code项目。",
-      "longDescription": "本项目自动化在单节点Kubernetes集群上搭建完整的DevOps平台。通过Helmfile提供声明式Helm发布管理，通过Kustomize进行清单组合，通过ArgoCD实现基于GitOps的持续部署。涵盖从Cilium CNI到Prometheus监控栈的所有组件。",
+      "longDescription": "本项目自动化在单节点Kubernetes集群上搭建完整的DevOps平台。通过Helmfile提供声明式Helm发布管理，通过Kustomize进行清单组合，通过ArgoCD实现基于GitOps的持续部署。Gitea Actions CI/CD流水线自动测试代码变更、构建容器镜像，并使用commit SHA标签更新清单，由ArgoCD自动部署。涵盖从Cilium CNI到Prometheus监控栈的所有组件。",
       "features": {
         "helmfileIac": {
           "title": "Helmfile声明式IaC",
@@ -146,7 +146,7 @@
         },
         "gitopsArgocd": {
           "title": "ArgoCD GitOps",
-          "description": "自动同步、清理和自愈的持续部署。自动发现Gitea仓库。"
+          "description": "CI流水线自动使用commit SHA更新清单中的镜像标签。ArgoCD检测变更并通过自动同步、清理和自愈进行部署。"
         },
         "monitoringStack": {
           "title": "完整监控栈",
@@ -161,8 +161,8 @@
           "description": "通过cert-manager和Let's Encrypt自动签发和续期TLS证书。"
         },
         "selfHostedGit": {
-          "title": "自托管Git与CI/CD",
-          "description": "Gitea Git服务器集成Actions运行器，提供CI/CD流水线。"
+          "title": "全自动CI/CD流水线",
+          "description": "git push → 测试 → 构建 → 清单更新 → ArgoCD部署。通过Gitea Actions实现零手动干预。"
         }
       }
     }

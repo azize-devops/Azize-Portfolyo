@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+    paths-ignore:
+      - 'manifests/**'
 
 jobs:
   test:
@@ -68,11 +70,24 @@ jobs:
             gitea.azizedursun.com/azize-projects/fsdevops-frontend:${{ github.sha }}
             gitea.azizedursun.com/azize-projects/fsdevops-frontend:latest
 
-  restart-pods:
+  update-manifests:
     needs: build-and-push
     runs-on: ubuntu-latest
     steps:
-      - name: Restart deployments
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Update image tags in deployment manifest
         run: |
-          kubectl rollout restart deployment/fsdevops-backend -n azize-apps
-          kubectl rollout restart deployment/fsdevops-frontend -n azize-apps
+          SHORT_SHA=$(echo "${{ github.sha }}" | cut -c1-7)
+          sed -i "s|gitea.azizedursun.com/azize-projects/fsdevops-backend:.*|gitea.azizedursun.com/azize-projects/fsdevops-backend:${SHORT_SHA}|" manifests/deployment.yaml
+          sed -i "s|gitea.azizedursun.com/azize-projects/fsdevops-frontend:.*|gitea.azizedursun.com/azize-projects/fsdevops-frontend:${SHORT_SHA}|" manifests/deployment.yaml
+
+      - name: Commit and push manifest update
+        run: |
+          git config user.name "Gitea Actions"
+          git config user.email "actions@gitea.azizedursun.com"
+          git add manifests/deployment.yaml
+          git diff --cached --quiet && echo "Manifest zaten guncel, degisiklik yok" && exit 0
+          git commit -m "ci: image tag guncelle ($(echo ${{ github.sha }} | cut -c1-7))"
+          git push origin main
