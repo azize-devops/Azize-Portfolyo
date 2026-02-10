@@ -10,8 +10,6 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    env:
-      DOCKER_HOST: tcp://localhost:2375
     steps:
       # ===== TEST =====
       - name: Checkout
@@ -40,17 +38,25 @@ jobs:
           npm run lint
 
       # ===== BUILD & PUSH =====
-      - name: Install Docker CLI
+      - name: Install Docker CLI and set DOCKER_HOST
         run: |
           curl -fsSL https://download.docker.com/linux/static/stable/x86_64/docker-27.4.1.tgz | tar xz --strip-components=1 -C /usr/local/bin docker/docker
+          echo "DOCKER_HOST=tcp://localhost:2375" >> $GITHUB_ENV
+
+      - name: Verify Docker connection
+        run: |
+          export DOCKER_HOST=tcp://localhost:2375
           docker version
+          docker info --format '{{.ServerVersion}}'
 
       - name: Login to Gitea Registry
         run: |
+          export DOCKER_HOST=tcp://localhost:2375
           echo "${{ secrets.REGISTRY_PASSWORD }}" | docker login gitea.azizedursun.com -u "${{ secrets.REGISTRY_USER }}" --password-stdin
 
       - name: Build and push backend
         run: |
+          export DOCKER_HOST=tcp://localhost:2375
           SHORT_SHA=$(echo "${{ github.sha }}" | cut -c1-7)
           docker build -t gitea.azizedursun.com/azize-projects/fsdevops-backend:${SHORT_SHA} \
                        -t gitea.azizedursun.com/azize-projects/fsdevops-backend:latest \
@@ -60,6 +66,7 @@ jobs:
 
       - name: Build and push frontend
         run: |
+          export DOCKER_HOST=tcp://localhost:2375
           SHORT_SHA=$(echo "${{ github.sha }}" | cut -c1-7)
           docker build --build-arg NEXT_PUBLIC_API_URL=https://api.devops.azizedursun.com \
                        -t gitea.azizedursun.com/azize-projects/fsdevops-frontend:${SHORT_SHA} \
