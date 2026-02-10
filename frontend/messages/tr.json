@@ -114,6 +114,22 @@
     "copyLink": "Linki kopyala",
     "relatedPosts": "İlgili Yazılar"
   },
+  "projects": {
+    "title": "Projelerim",
+    "subtitle": "DevOps ve altyapi projelerim",
+    "backHome": "Ana Sayfaya Don",
+    "allCategories": "Tumu",
+    "totalProjects": "{count} proje",
+    "viewRepo": "Kaynak Kodu",
+    "viewLive": "Canli Demo",
+    "statusActive": "Aktif",
+    "statusCompleted": "Tamamlandi",
+    "statusWip": "Devam Ediyor",
+    "azizePortfolyo": {
+      "name": "Azize Portfolyo IaC",
+      "description": "Kubernetes single-node cluster uzerinde Gitea, ArgoCD, Prometheus Stack, Longhorn ve daha fazlasini Helmfile ile deploy eden Infrastructure-as-Code projesi."
+    }
+  },
   "footer": {
     "description": "DevOps Engineer | CKA & CKAD Certified",
     "techStack": "Kubernetes, Docker, AWS, CI/CD"

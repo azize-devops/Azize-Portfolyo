@@ -114,6 +114,22 @@
     "copyLink": "复制链接",
     "relatedPosts": "相关文章"
   },
+  "projects": {
+    "title": "我的项目",
+    "subtitle": "DevOps和基础设施项目",
+    "backHome": "返回首页",
+    "allCategories": "全部",
+    "totalProjects": "{count} 个项目",
+    "viewRepo": "源代码",
+    "viewLive": "在线演示",
+    "statusActive": "活跃",
+    "statusCompleted": "已完成",
+    "statusWip": "进行中",
+    "azizePortfolyo": {
+      "name": "Azize 作品集 IaC",
+      "description": "使用Helmfile在Kubernetes单节点集群上部署Gitea、ArgoCD、Prometheus Stack、Longhorn等的Infrastructure-as-Code项目。"
+    }
+  },
   "footer": {
     "description": "DevOps工程师 | CKA & CKAD认证",
     "techStack": "Kubernetes, Docker, AWS, CI/CD"

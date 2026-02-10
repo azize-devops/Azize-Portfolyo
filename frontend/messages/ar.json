@@ -114,6 +114,22 @@
     "copyLink": "نسخ الرابط",
     "relatedPosts": "مقالات ذات صلة"
   },
+  "projects": {
+    "title": "مشاريعي",
+    "subtitle": "مشاريع DevOps والبنية التحتية",
+    "backHome": "العودة للرئيسية",
+    "allCategories": "الكل",
+    "totalProjects": "{count} مشاريع",
+    "viewRepo": "الكود المصدري",
+    "viewLive": "عرض مباشر",
+    "statusActive": "نشط",
+    "statusCompleted": "مكتمل",
+    "statusWip": "قيد التطوير",
+    "azizePortfolyo": {
+      "name": "Azize محفظة IaC",
+      "description": "مشروع Infrastructure-as-Code لنشر Gitea و ArgoCD و Prometheus Stack و Longhorn والمزيد على كتلة Kubernetes ذات عقدة واحدة باستخدام Helmfile."
+    }
+  },
   "footer": {
     "description": "مهندس DevOps | معتمد CKA & CKAD",
     "techStack": "Kubernetes, Docker, AWS, CI/CD"

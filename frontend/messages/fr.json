@@ -114,6 +114,22 @@
     "copyLink": "Copier le lien",
     "relatedPosts": "Articles Similaires"
   },
+  "projects": {
+    "title": "Mes projets",
+    "subtitle": "Projets DevOps et infrastructure",
+    "backHome": "Retour a l'accueil",
+    "allCategories": "Tous",
+    "totalProjects": "{count} projets",
+    "viewRepo": "Code source",
+    "viewLive": "Demo en ligne",
+    "statusActive": "Actif",
+    "statusCompleted": "Termine",
+    "statusWip": "En cours",
+    "azizePortfolyo": {
+      "name": "Azize Portfolio IaC",
+      "description": "Projet Infrastructure-as-Code deployant Gitea, ArgoCD, Prometheus Stack, Longhorn et plus sur un cluster Kubernetes mono-noeud avec Helmfile."
+    }
+  },
   "footer": {
     "description": "Ingénieur DevOps | Certifié CKA & CKAD",
     "techStack": "Kubernetes, Docker, AWS, CI/CD"
