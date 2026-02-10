@@ -22,13 +22,13 @@ const skills = [
   {
     name: "AWS",
     logo: "/logos/aws.svg",
-    level: 75,
+    level: 35,
     docUrl: "https://docs.aws.amazon.com/",
   },
   {
     name: "Terraform",
     logo: "/logos/terraform.svg",
-    level: 70,
+    level: 30,
     docUrl: "https://developer.hashicorp.com/terraform/docs",
   },
   {
