@@ -90,4 +90,5 @@ jobs:
           git diff --cached --quiet && echo "Manifest zaten guncel, degisiklik yok" && exit 0
           git commit -m "ci: image tag guncelle ($(echo ${{ github.sha }} | cut -c1-7))"
           git push origin main
+# trigger: duplicate mount fix
 
