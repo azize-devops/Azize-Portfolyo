@@ -24,6 +24,14 @@
     "title": "Sertifikalarım",
     "subtitle": "Aldığım profesyonel sertifikalar",
     "viewAll": "Tüm sertifikalar",
+    "pageSubtitle": "Kubernetes, Cloud ve Linux alanlarında aldığım profesyonel sertifikalar",
+    "backHome": "Ana Sayfaya Dön",
+    "allCategories": "Tümü",
+    "categoryKubernetes": "Kubernetes",
+    "categoryCloud": "Cloud",
+    "categoryLinux": "Linux",
+    "totalCerts": "{count} sertifika",
+    "earnedOn": "Alınma Tarihi",
     "cka": {
       "fullName": "Certified Kubernetes Administrator",
       "issuer": "CNCF / Linux Foundation"

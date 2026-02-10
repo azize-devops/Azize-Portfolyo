@@ -24,6 +24,14 @@
     "title": "Мои сертификаты",
     "subtitle": "Полученные профессиональные сертификаты",
     "viewAll": "Все сертификаты",
+    "pageSubtitle": "Профессиональные сертификаты в области Kubernetes, Cloud и Linux",
+    "backHome": "На главную",
+    "allCategories": "Все",
+    "categoryKubernetes": "Kubernetes",
+    "categoryCloud": "Cloud",
+    "categoryLinux": "Linux",
+    "totalCerts": "{count} сертификатов",
+    "earnedOn": "Получен",
     "cka": {
       "fullName": "Certified Kubernetes Administrator",
       "issuer": "CNCF / Linux Foundation"

@@ -24,6 +24,14 @@
     "title": "شهاداتي",
     "subtitle": "الشهادات المهنية التي حصلت عليها",
     "viewAll": "جميع الشهادات",
+    "pageSubtitle": "شهادات مهنية في Kubernetes و Cloud و Linux",
+    "backHome": "العودة للرئيسية",
+    "allCategories": "الكل",
+    "categoryKubernetes": "Kubernetes",
+    "categoryCloud": "Cloud",
+    "categoryLinux": "Linux",
+    "totalCerts": "{count} شهادات",
+    "earnedOn": "تاريخ الحصول",
     "cka": {
       "fullName": "مدير Kubernetes معتمد",
       "issuer": "CNCF / Linux Foundation"

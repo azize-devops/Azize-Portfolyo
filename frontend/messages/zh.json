@@ -24,6 +24,14 @@
     "title": "我的证书",
     "subtitle": "获得的专业证书",
     "viewAll": "所有证书",
+    "pageSubtitle": "Kubernetes、Cloud 和 Linux 领域的专业认证",
+    "backHome": "返回首页",
+    "allCategories": "全部",
+    "categoryKubernetes": "Kubernetes",
+    "categoryCloud": "Cloud",
+    "categoryLinux": "Linux",
+    "totalCerts": "{count} 个认证",
+    "earnedOn": "获得时间",
     "cka": {
       "fullName": "Kubernetes管理员认证",
       "issuer": "CNCF / Linux基金会"
