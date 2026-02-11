@@ -178,16 +178,20 @@ func createDefaultAdmin(db *gorm.DB, cfg *config.Config) {
 	if count == 0 {
 		// Only create default admin in development
 		if cfg.Server.Environment != "production" {
+			adminPassword := os.Getenv("DEFAULT_ADMIN_PASSWORD")
+			if adminPassword == "" {
+				adminPassword = "admin-" + fmt.Sprintf("%d", time.Now().UnixNano()%100000)
+			}
 			admin := models.User{
 				Email:    "admin@example.com",
-				Password: "__DEFAULT_PASSWORD__", // Will be hashed by BeforeCreate hook
+				Password: adminPassword, // Will be hashed by BeforeCreate hook
 				Name:     "Admin",
 				Role:     "admin",
 			}
 			if err := db.Create(&admin).Error; err != nil {
 				log.Printf("Failed to create default admin: %v", err)
 			} else {
-				log.Println("Default admin user created (email: admin@example.com, password: __DEFAULT_PASSWORD__)")
+				log.Printf("Default admin user created (email: admin@example.com)")
 				log.Println("WARNING: Change the default password immediately!")
 			}
 		}
