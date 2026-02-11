@@ -7,10 +7,9 @@ on:
     paths-ignore:
       - 'manifests/**'
 
-# Internal registry URL (Cloudflare hairpin bypass)
 env:
-  REGISTRY: gitea-http.azize-devops.svc.cluster.local:3000
-  IMAGE_PREFIX: gitea-http.azize-devops.svc.cluster.local:3000/azize-projects
+  REGISTRY: gitea.azizedursun.com
+  IMAGE_PREFIX: gitea.azizedursun.com/azize-projects
 
 jobs:
   build-and-deploy:
@@ -60,15 +59,13 @@ jobs:
         run: |
           export DOCKER_HOST=unix:///var/run/docker.sock
           SHORT_SHA=$(echo "${{ github.sha }}" | cut -c1-7)
-          # DinD'de -v mount calismaz (job container FS != DinD FS)
-          # docker create + docker cp ile dosyalari kopyaliyoruz
-          CID=$(docker create --network=host --dns=10.43.0.10 --dns=8.8.8.8 \
+          # docker create + docker cp: DinD'de -v mount calismaz
+          CID=$(docker create --dns=8.8.8.8 \
             gcr.io/kaniko-project/executor:v1.23.2 \
             --context=/workspace \
             --dockerfile=/workspace/Dockerfile \
             --destination=${{ env.IMAGE_PREFIX }}/fsdevops-backend:${SHORT_SHA} \
             --destination=${{ env.IMAGE_PREFIX }}/fsdevops-backend:latest \
-            --insecure \
             --cache=true)
           docker cp ./backend/. ${CID}:/workspace
           docker cp /tmp/kaniko-config/config.json ${CID}:/kaniko/.docker/config.json
@@ -80,14 +77,13 @@ jobs:
         run: |
           export DOCKER_HOST=unix:///var/run/docker.sock
           SHORT_SHA=$(echo "${{ github.sha }}" | cut -c1-7)
-          CID=$(docker create --network=host --dns=10.43.0.10 --dns=8.8.8.8 \
+          CID=$(docker create --dns=8.8.8.8 \
             gcr.io/kaniko-project/executor:v1.23.2 \
             --context=/workspace \
             --dockerfile=/workspace/Dockerfile \
             --build-arg=NEXT_PUBLIC_API_URL=https://api.devops.azizedursun.com \
             --destination=${{ env.IMAGE_PREFIX }}/fsdevops-frontend:${SHORT_SHA} \
             --destination=${{ env.IMAGE_PREFIX }}/fsdevops-frontend:latest \
-            --insecure \
             --cache=true)
           docker cp ./frontend/. ${CID}:/workspace
           docker cp /tmp/kaniko-config/config.json ${CID}:/kaniko/.docker/config.json
