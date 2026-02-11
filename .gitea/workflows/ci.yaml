@@ -62,7 +62,7 @@ jobs:
           SHORT_SHA=$(echo "${{ github.sha }}" | cut -c1-7)
           # DinD'de -v mount calismaz (job container FS != DinD FS)
           # docker create + docker cp ile dosyalari kopyaliyoruz
-          CID=$(docker create \
+          CID=$(docker create --dns=8.8.8.8 \
             gcr.io/kaniko-project/executor:v1.23.2 \
             --context=/workspace \
             --dockerfile=/workspace/Dockerfile \
@@ -80,7 +80,7 @@ jobs:
         run: |
           export DOCKER_HOST=unix:///var/run/docker.sock
           SHORT_SHA=$(echo "${{ github.sha }}" | cut -c1-7)
-          CID=$(docker create \
+          CID=$(docker create --dns=8.8.8.8 \
             gcr.io/kaniko-project/executor:v1.23.2 \
             --context=/workspace \
             --dockerfile=/workspace/Dockerfile \
