@@ -1,0 +1,47 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    ":semanticCommits"
+  ],
+  "labels": ["dependencies"],
+  "vulnerabilityAlerts": {
+    "enabled": true,
+    "labels": ["security"]
+  },
+  "packageRules": [
+    {
+      "description": "Go dependencies - group minor/patch",
+      "matchManagers": ["gomod"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "groupName": "go-dependencies",
+      "automerge": true
+    },
+    {
+      "description": "npm dependencies - group minor/patch",
+      "matchManagers": ["npm"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "groupName": "npm-dependencies",
+      "automerge": true
+    },
+    {
+      "description": "Major updates require manual review",
+      "matchUpdateTypes": ["major"],
+      "automerge": false
+    },
+    {
+      "description": "Docker image updates",
+      "matchManagers": ["dockerfile"],
+      "automerge": false
+    },
+    {
+      "description": "GitHub Actions",
+      "matchManagers": ["github-actions"],
+      "automerge": true,
+      "matchUpdateTypes": ["minor", "patch"]
+    }
+  ],
+  "schedule": ["before 6am on monday"],
+  "prConcurrentLimit": 5,
+  "prHourlyLimit": 2
+}

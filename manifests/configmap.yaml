@@ -12,5 +12,5 @@ data:
   DB_PORT: "5432"
   DB_NAME: "fsdevops"
   DB_USER: "fsdevops"
-  DB_SSLMODE: "disable"
+  DB_SSLMODE: "require"
   ALLOW_ORIGINS: "https://devops.azizedursun.com"

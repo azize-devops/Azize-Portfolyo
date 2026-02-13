@@ -7,7 +7,7 @@ import (
 )
 
 // SecurityHeaders adds security headers to all responses
-func SecurityHeaders() gin.HandlerFunc {
+func SecurityHeaders(environment string) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		// Prevent clickjacking
 		c.Writer.Header().Set("X-Frame-Options", "DENY")
@@ -24,8 +24,10 @@ func SecurityHeaders() gin.HandlerFunc {
 		// Content Security Policy
 		c.Writer.Header().Set("Content-Security-Policy", "default-src 'self'")
 
-		// Strict Transport Security (HSTS) - only enable in production with HTTPS
-		// c.Writer.Header().Set("Strict-Transport-Security", "max-age=31536000; includeSubDomains")
+		// Strict Transport Security (HSTS) - production only
+		if environment == "production" {
+			c.Writer.Header().Set("Strict-Transport-Security", "max-age=31536000; includeSubDomains; preload")
+		}
 
 		// Permissions Policy
 		c.Writer.Header().Set("Permissions-Policy", "geolocation=(), microphone=(), camera=()")

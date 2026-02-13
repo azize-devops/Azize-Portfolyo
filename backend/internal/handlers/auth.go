@@ -110,6 +110,18 @@ func (h *AuthHandler) Me(c *gin.Context) {
 	})
 }
 
+func (h *AuthHandler) Logout(c *gin.Context) {
+	tokenString, _ := c.Get("token_string")
+	tokenExpiry, _ := c.Get("token_expiry")
+
+	if token, ok := tokenString.(string); ok {
+		expiry, _ := tokenExpiry.(time.Time)
+		middleware.RevokeToken(token, expiry)
+	}
+
+	c.JSON(http.StatusOK, gin.H{"message": "Successfully logged out"})
+}
+
 func (h *AuthHandler) RefreshToken(c *gin.Context) {
 	userID, _ := c.Get("user_id")
 	email, _ := c.Get("user_email")

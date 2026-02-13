@@ -1,0 +1,24 @@
+apiVersion: stackgres.io/v1beta1
+kind: SGObjectStorage
+metadata:
+  name: fsdevops-db-backup-storage
+  annotations:
+    argocd.argoproj.io/sync-wave: "-2"
+  labels:
+    app.kubernetes.io/part-of: fsdevops-portfolio
+    app.kubernetes.io/component: database
+spec:
+  type: s3Compatible
+  s3Compatible:
+    bucket: fsdevops-db-backups
+    endpoint: http://minio.minio-system.svc:9000
+    enablePathStyleAddressing: true
+    region: us-east-1
+    awsCredentials:
+      secretKeySelectors:
+        accessKeyId:
+          name: fsdevops-backup-credentials
+          key: accessKeyId
+        secretAccessKey:
+          name: fsdevops-backup-credentials
+          key: secretAccessKey

@@ -1,0 +1,25 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: fsdevops-backend
+  labels:
+    app.kubernetes.io/part-of: fsdevops-portfolio
+    app.kubernetes.io/component: backend
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: fsdevops-backend
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: fsdevops-frontend
+  labels:
+    app.kubernetes.io/part-of: fsdevops-portfolio
+    app.kubernetes.io/component: frontend
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: fsdevops-frontend

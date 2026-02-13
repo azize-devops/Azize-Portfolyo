@@ -39,6 +39,12 @@ spec:
   sgInstanceProfile: fsdevops-db-profile
   configurations:
     sgPostgresConfig: fsdevops-db-pgconfig
+    backups:
+      - sgObjectStorage: fsdevops-db-backup-storage
+        cronSchedule: "0 2 * * *"
+        retention: 7
+        compression: lz4
+        path: /sgbackups
   managedSql:
     scripts:
       - sgScript: fsdevops-db-init

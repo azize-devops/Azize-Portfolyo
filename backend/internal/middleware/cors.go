@@ -36,7 +36,7 @@ func DefaultCORSConfig(allowOrigins string) CORSConfig {
 			"X-CSRF-Token",
 			"X-Requested-With",
 		},
-		ExposeHeaders:    []string{"Content-Length", "Content-Type"},
+		ExposeHeaders:    []string{"Content-Length", "Content-Type", "Set-Cookie"},
 		AllowCredentials: true,
 		MaxAge:           86400, // 24 hours
 	}

@@ -10,6 +10,7 @@ on:
 env:
   REGISTRY: gitea.azizedursun.com
   IMAGE_PREFIX: gitea.azizedursun.com/azize-projects
+  KANIKO_IMAGE: gcr.io/kaniko-project/executor:v1.23.2
 
 jobs:
   build-and-deploy:
@@ -30,6 +31,17 @@ jobs:
           go mod tidy
           go vet ./...
 
+      - name: Backend - unit tests
+        working-directory: ./backend
+        run: |
+          go test -race -v ./...
+
+      - name: Backend - vulnerability scan (govulncheck)
+        working-directory: ./backend
+        run: |
+          go install golang.org/x/vuln/cmd/govulncheck@latest
+          govulncheck ./...
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -40,6 +52,12 @@ jobs:
         run: |
           npm ci
           npm run lint
+
+      - name: Frontend - dependency audit
+        working-directory: ./frontend
+        run: |
+          npm audit --audit-level=high || true
+          npm audit --audit-level=critical
 
       # ===== BUILD & PUSH (Kaniko) =====
       - name: Install Docker CLI
@@ -61,7 +79,7 @@ jobs:
           SHORT_SHA=$(echo "${{ github.sha }}" | cut -c1-7)
           # docker create + docker cp: DinD'de -v mount calismaz
           CID=$(docker create --dns=8.8.8.8 \
-            gcr.io/kaniko-project/executor:v1.23.2 \
+            ${{ env.KANIKO_IMAGE }} \
             --context=/workspace \
             --dockerfile=/workspace/Dockerfile \
             --destination=${{ env.IMAGE_PREFIX }}/fsdevops-backend:${SHORT_SHA} \
@@ -78,7 +96,7 @@ jobs:
           export DOCKER_HOST=unix:///var/run/docker.sock
           SHORT_SHA=$(echo "${{ github.sha }}" | cut -c1-7)
           CID=$(docker create --dns=8.8.8.8 \
-            gcr.io/kaniko-project/executor:v1.23.2 \
+            ${{ env.KANIKO_IMAGE }} \
             --context=/workspace \
             --dockerfile=/workspace/Dockerfile \
             --build-arg=NEXT_PUBLIC_API_URL=https://api.devops.azizedursun.com \
@@ -90,6 +108,56 @@ jobs:
           docker start -a ${CID}; EXIT_CODE=$?
           docker rm ${CID}
           exit ${EXIT_CODE}
+
+      # ===== SECURITY SCAN (Trivy) =====
+      - name: Scan backend image (Trivy)
+        run: |
+          export DOCKER_HOST=unix:///var/run/docker.sock
+          SHORT_SHA=$(echo "${{ github.sha }}" | cut -c1-7)
+          docker run --rm \
+            -v /tmp/kaniko-config/config.json:/root/.docker/config.json \
+            aquasec/trivy:latest image \
+            --severity HIGH,CRITICAL \
+            --exit-code 1 \
+            --no-progress \
+            ${{ env.IMAGE_PREFIX }}/fsdevops-backend:${SHORT_SHA}
+
+      - name: Scan frontend image (Trivy)
+        run: |
+          export DOCKER_HOST=unix:///var/run/docker.sock
+          SHORT_SHA=$(echo "${{ github.sha }}" | cut -c1-7)
+          docker run --rm \
+            -v /tmp/kaniko-config/config.json:/root/.docker/config.json \
+            aquasec/trivy:latest image \
+            --severity HIGH,CRITICAL \
+            --exit-code 1 \
+            --no-progress \
+            ${{ env.IMAGE_PREFIX }}/fsdevops-frontend:${SHORT_SHA}
+
+      # ===== SBOM GENERATION (Syft) =====
+      - name: Generate SBOM for backend
+        run: |
+          export DOCKER_HOST=unix:///var/run/docker.sock
+          SHORT_SHA=$(echo "${{ github.sha }}" | cut -c1-7)
+          docker run --rm \
+            -v /tmp/kaniko-config/config.json:/root/.docker/config.json \
+            -v /tmp/sbom:/sbom \
+            anchore/syft:latest \
+            registry:${{ env.IMAGE_PREFIX }}/fsdevops-backend:${SHORT_SHA} \
+            -o cyclonedx-json=/sbom/backend-sbom.json
+          echo "Backend SBOM generated"
+
+      - name: Generate SBOM for frontend
+        run: |
+          export DOCKER_HOST=unix:///var/run/docker.sock
+          SHORT_SHA=$(echo "${{ github.sha }}" | cut -c1-7)
+          docker run --rm \
+            -v /tmp/kaniko-config/config.json:/root/.docker/config.json \
+            -v /tmp/sbom:/sbom \
+            anchore/syft:latest \
+            registry:${{ env.IMAGE_PREFIX }}/fsdevops-frontend:${SHORT_SHA} \
+            -o cyclonedx-json=/sbom/frontend-sbom.json
+          echo "Frontend SBOM generated"
 
       # ===== UPDATE MANIFESTS (GitOps) =====
       - name: Update image tags in deployment manifest

@@ -36,6 +36,14 @@ func AuthMiddleware(jwtSecret string) gin.HandlerFunc {
 
 		tokenString := parts[1]
 
+		// Check if token has been revoked (logout)
+		if IsTokenRevoked(tokenString) {
+			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{
+				"error": "Token has been revoked",
+			})
+			return
+		}
+
 		// Parse and validate token
 		token, err := jwt.ParseWithClaims(tokenString, &Claims{}, func(token *jwt.Token) (interface{}, error) {
 			// Validate signing method
@@ -64,6 +72,8 @@ func AuthMiddleware(jwtSecret string) gin.HandlerFunc {
 		c.Set("user_id", claims.UserID)
 		c.Set("user_email", claims.Email)
 		c.Set("user_role", claims.Role)
+		c.Set("token_string", tokenString)
+		c.Set("token_expiry", claims.ExpiresAt.Time)
 
 		c.Next()
 	}

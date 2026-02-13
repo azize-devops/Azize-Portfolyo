@@ -17,8 +17,18 @@ import type { BlogPost, BlogPostMeta } from "@/lib/blog";
 import { type Locale } from "@/i18n/config";
 import { useState, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
+import rehypeSanitize, { defaultSchema } from "rehype-sanitize";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
+
+// Allow className on code elements for syntax highlighting
+const sanitizeSchema = {
+  ...defaultSchema,
+  attributes: {
+    ...defaultSchema.attributes,
+    code: [...(defaultSchema.attributes?.code || []), "className"],
+  },
+};
 
 interface BlogPostClientProps {
   post: BlogPost;
@@ -169,6 +179,7 @@ export default function BlogPostClient({ post, relatedPosts, locale }: BlogPostC
             {/* Markdown content */}
             <div className="blog-content prose prose-lg dark:prose-invert max-w-none">
               <ReactMarkdown
+                rehypePlugins={[[rehypeSanitize, sanitizeSchema]]}
                 components={{
                   code({ node, className, children, ...props }) {
                     const match = /language-(\w+)/.exec(className || "");

@@ -98,3 +98,9 @@ func RateLimitMiddleware(rate int, window time.Duration) gin.HandlerFunc {
 func ContactFormRateLimiter() gin.HandlerFunc {
 	return RateLimitMiddleware(3, time.Hour)
 }
+
+// LoginRateLimiter prevents brute force attacks on login
+// Allows 5 attempts per 15 minutes per IP
+func LoginRateLimiter() gin.HandlerFunc {
+	return RateLimitMiddleware(5, 15*time.Minute)
+}
