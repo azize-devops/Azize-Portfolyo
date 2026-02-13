@@ -1,4 +1,4 @@
-.PHONY: help dev docker-build docker-up docker-down push test lint clean
+.PHONY: help dev docker-build docker-up docker-down push test lint clean security-check
 
 # Registry configuration
 REGISTRY ?= gitea.azizedursun.com/azize-projects
@@ -31,6 +31,9 @@ help:
 	@echo "  make test-backend    - Run backend tests"
 	@echo "  make test-frontend   - Run frontend tests"
 	@echo "  make test            - Run all tests"
+	@echo ""
+	@echo "Security:"
+	@echo "  make security-check  - Run local security checks"
 	@echo ""
 	@echo "Utilities:"
 	@echo "  make clean           - Clean build artifacts"
@@ -106,6 +109,23 @@ clean:
 	rm -rf frontend/node_modules
 	rm -rf backend/vendor
 	rm -f backend/server
+
+# =========================
+# Security
+# =========================
+security-check:
+	@echo "Running security checks..."
+	@echo ""
+	@echo "--- Go vulnerability check ---"
+	cd backend && go install golang.org/x/vuln/cmd/govulncheck@latest && govulncheck ./...
+	@echo ""
+	@echo "--- npm audit ---"
+	cd frontend && npm audit --audit-level=high || true
+	@echo ""
+	@echo "--- Secret scan (staged files) ---"
+	@git diff --cached --name-only | xargs grep -lnE '(AKIA[0-9A-Z]{16}|-----BEGIN (RSA |EC )?PRIVATE KEY)' 2>/dev/null && echo "WARNING: Potential secrets found!" || echo "No secrets detected."
+	@echo ""
+	@echo "Security checks complete."
 
 # =========================
 # Database

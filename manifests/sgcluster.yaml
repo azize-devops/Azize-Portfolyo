@@ -10,6 +10,8 @@ metadata:
 spec:
   scripts:
     - name: create-database-and-user
+      # IMPORTANT: Replace <DB_PASSWORD> with the same value used in secret.yaml
+      # before applying this manifest. See: manifests/secret.yaml.example
       script: |
         DO $$
         BEGIN

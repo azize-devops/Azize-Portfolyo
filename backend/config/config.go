@@ -1,6 +1,7 @@
 package config
 
 import (
+	"fmt"
 	"os"
 	"strconv"
 )
@@ -87,11 +88,16 @@ func getEnvAsInt(key string, defaultValue int) int {
 
 // Validate checks if required environment variables are set
 func (c *Config) Validate() error {
-	if c.JWT.Secret == "" && c.Server.Environment == "production" {
-		panic("JWT_SECRET must be set in production")
-	}
-	if c.Database.Password == "" && c.Server.Environment == "production" {
-		panic("DB_PASSWORD must be set in production")
+	if c.Server.Environment == "production" {
+		if c.JWT.Secret == "" {
+			return fmt.Errorf("JWT_SECRET must be set in production")
+		}
+		if len(c.JWT.Secret) < 32 {
+			return fmt.Errorf("JWT_SECRET must be at least 32 characters in production")
+		}
+		if c.Database.Password == "" {
+			return fmt.Errorf("DB_PASSWORD must be set in production")
+		}
 	}
 	return nil
 }

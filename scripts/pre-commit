@@ -1,0 +1,39 @@
+#!/bin/bash
+# Pre-commit hook: block accidental secret commits
+# Install: cp scripts/pre-commit .git/hooks/pre-commit && chmod +x .git/hooks/pre-commit
+
+set -e
+
+# Block secret.yaml (only allow .example)
+BLOCKED_FILES=$(git diff --cached --name-only | grep -E '(^|/)secret\.yaml$' || true)
+if [ -n "$BLOCKED_FILES" ]; then
+    echo "ERROR: Attempting to commit secret file(s):"
+    echo "$BLOCKED_FILES"
+    echo "Use secret.yaml.example as a template instead."
+    exit 1
+fi
+
+# Block .env files (only allow .env.example)
+BLOCKED_ENV=$(git diff --cached --name-only | grep -E '(^|/)\.env$' | grep -v '\.example' || true)
+if [ -n "$BLOCKED_ENV" ]; then
+    echo "ERROR: Attempting to commit .env file(s):"
+    echo "$BLOCKED_ENV"
+    echo "Use .env.example as a template instead."
+    exit 1
+fi
+
+# Scan for potential secrets in staged files
+STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM)
+if [ -n "$STAGED_FILES" ]; then
+    # Check for common secret patterns (API keys, passwords, tokens)
+    SECRETS_FOUND=$(echo "$STAGED_FILES" | xargs grep -lnE '(AKIA[0-9A-Z]{16}|-----BEGIN (RSA |EC )?PRIVATE KEY-----|password\s*=\s*["\x27][^"\x27]{8,}["\x27])' 2>/dev/null || true)
+    if [ -n "$SECRETS_FOUND" ]; then
+        echo "WARNING: Potential secrets detected in:"
+        echo "$SECRETS_FOUND"
+        echo "Review these files before committing."
+        echo "To bypass: git commit --no-verify (not recommended)"
+        exit 1
+    fi
+fi
+
+echo "Pre-commit checks passed."

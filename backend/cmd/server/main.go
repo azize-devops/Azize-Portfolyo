@@ -2,6 +2,8 @@ package main
 
 import (
 	"context"
+	"crypto/rand"
+	"encoding/hex"
 	"fmt"
 	"log"
 	"net/http"
@@ -29,8 +31,11 @@ func main() {
 		}
 	}
 
-	// Load configuration
+	// Load and validate configuration
 	cfg := config.Load()
+	if err := cfg.Validate(); err != nil {
+		log.Fatalf("Configuration error: %v", err)
+	}
 
 	// Set Gin mode based on environment
 	if cfg.Server.Environment == "production" {
@@ -217,24 +222,32 @@ func createDefaultAdmin(db *gorm.DB, cfg *config.Config) {
 	db.Model(&models.User{}).Count(&count)
 
 	if count == 0 {
-		// Only create default admin in development
-		if cfg.Server.Environment != "production" {
-			adminPassword := os.Getenv("DEFAULT_ADMIN_PASSWORD")
-			if adminPassword == "" {
-				adminPassword = "admin-" + fmt.Sprintf("%d", time.Now().UnixNano()%100000)
+		if cfg.Server.Environment == "production" {
+			log.Println("No admin user found. Set DEFAULT_ADMIN_PASSWORD env var and restart to create one.")
+			return
+		}
+
+		adminPassword := os.Getenv("DEFAULT_ADMIN_PASSWORD")
+		if adminPassword == "" {
+			b := make([]byte, 16)
+			if _, err := rand.Read(b); err != nil {
+				log.Printf("Failed to generate secure password: %v", err)
+				return
 			}
-			admin := models.User{
-				Email:    "admin@example.com",
-				Password: adminPassword, // Will be hashed by BeforeCreate hook
-				Name:     "Admin",
-				Role:     "admin",
-			}
-			if err := db.Create(&admin).Error; err != nil {
-				log.Printf("Failed to create default admin: %v", err)
-			} else {
-				log.Printf("Default admin user created (email: admin@example.com)")
-				log.Println("WARNING: Change the default password immediately!")
-			}
+			adminPassword = hex.EncodeToString(b)
+		}
+
+		admin := models.User{
+			Email:    "admin@example.com",
+			Password: adminPassword,
+			Name:     "Admin",
+			Role:     "admin",
+		}
+		if err := db.Create(&admin).Error; err != nil {
+			log.Printf("Failed to create default admin: %v", err)
+		} else {
+			log.Printf("Default admin created (email: admin@example.com, password: %s)", adminPassword)
+			log.Println("WARNING: Change the default password immediately!")
 		}
 	}
 }

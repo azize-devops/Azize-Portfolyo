@@ -254,6 +254,7 @@ Test                    Build                Security              Deploy
 - Container image scanning (Trivy - HIGH/CRITICAL)
 - SBOM generation (Syft - CycloneDX format)
 - Otomatik dependency update (Renovate)
+- Pre-commit hook ile secret/credential commit engelleme
 
 ---
 
